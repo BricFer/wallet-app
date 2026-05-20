@@ -1,0 +1,141 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Archivos IDE
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+*.sublime-workspace
+*.sublime-project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+coverage/
+lib/generated_plugin_registrant.dart
+.fvm/
+.fvm/flutter_sdk
+
+# iOS/macOS
+ios/.symlinks/
+ios/.generated.xcconfig
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+ios/Flutter/app.flx
+ios/Flutter/app.zip
+ios/Flutter/flutter_assets/
+ios/Flutter/flutter_export_environment.sh
+ios/ServiceDefinitions.json
+ios/Runner/GeneratedPluginRegistrant.*
+ios/Pods/
+Podfile.lock
+
+# Android
+android/.gradle
+android/.gradle/
+android/app/debug
+android/app/profile
+android/app/release
+android/app/outputs
+android/local.properties
+android/.classpath
+android/.project
+android/.settings/
+android/gradle.properties
+android/gradlew
+android/gradlew.bat
+android/*.iml
+# Keystore Android
+*.jks
+# Certificados
+*.keystore
+*.pem
+*.p12
+# Propiedades de firma
+key.properties
+
+# Web
+web/plugins/url_strategy/
+
+# Otros
+*.log
+.env
+.env.*
+!.env.example
+*.apk
+*.ipa
+*.aar
+*.so
+*.zip
+
+# Archivos de configuración sensible
+firebase.json
+google-services.json
+GoogleService-Info.plist
+
+.metadata
+analysis_options.yaml
