@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:wallet_app/core/constants/dimens.dart';
+import 'package:wallet_app/core/theme/app_container_theme.dart';
 import 'package:wallet_app/core/theme/colors.dart';
 import 'package:wallet_app/core/theme/text_theme.dart';
 
 class AppTheme {
-  static ThemeData _base(ColorScheme scheme) {
+  static const double borderRadius = AppDimens.mdRadius;
+
+  static ThemeData _base(ColorScheme scheme, AppContainerTheme containerTheme) {
     return ThemeData(
       useMaterial3: true, // Para que se usa esto?
       colorScheme: scheme,
       textTheme: AppTextTheme.textTheme,
+      extensions: [containerTheme],
     );
   }
 
@@ -17,6 +22,12 @@ class AppTheme {
       secondary: AppColors.secondaryLight,
       tertiary: AppColors.tertiaryLight,
       surface: AppColors.surfaceLight,
+      onSurface: AppColors.fontColorLight,
+    ),
+    AppContainerTheme(
+      background: AppColors.secondaryLight,
+      borderColor: AppColors.secondaryLight,
+      borderRadius: borderRadius,
     ),
   );
 
@@ -26,6 +37,12 @@ class AppTheme {
       secondary: AppColors.secondaryDark,
       tertiary: AppColors.tertiaryDark,
       surface: AppColors.surfaceDark,
+      onSurface: AppColors.fontColorDark,
+    ),
+    AppContainerTheme(
+      background: AppColors.primaryDark,
+      borderColor: AppColors.primaryDark,
+      borderRadius: borderRadius,
     ),
   );
 
@@ -35,7 +52,14 @@ class AppTheme {
       primary: AppColors.primaryVibrant,
       secondary: AppColors.secondaryVibrant,
       tertiary: AppColors.tertiaryVibrant,
-      surface: AppColors.surfaceDark,
+      surface: AppColors.surfaceVibrant,
+      onSurface: AppColors.fontConlorVibrant,
+    
+    ),
+    AppContainerTheme(
+      background: AppColors.primaryVibrant,
+      borderColor: AppColors.primaryVibrant,
+      borderRadius: borderRadius,
     ),
   );
 
@@ -46,6 +70,12 @@ class AppTheme {
       secondary: AppColors.secondaryNeutral,
       tertiary: AppColors.tertiaryNeutral,
       surface: AppColors.surfaceNeutral,
+      onSurface: AppColors.fontColorNeutral,
+    ),
+    AppContainerTheme(
+      background: AppColors.secondaryNeutral,
+      borderColor: AppColors.secondaryNeutral,
+      borderRadius: borderRadius,
     ),
   );
 }

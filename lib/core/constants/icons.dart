@@ -12,6 +12,7 @@ class AppIcons {
   static const IconData profile = Icons.account_circle;
   // static const IconData profile = Icons.account_box;
   static const IconData settings = Icons.settings_outlined;
+  static const currency = Icons.attach_money_outlined;
 
   // Actions
   // static const IconData edit= Icons.edit;
@@ -22,6 +23,7 @@ class AppIcons {
   static const IconData save = Icons.check_box_outlined;
   static const IconData cancel = Icons.close;
   static const IconData back = Icons.arrow_back;
+  static const IconData themeIcon = Icons.style_outlined;
 
   // Status
   static const IconData success = Icons.check_circle_outline;
@@ -170,7 +172,8 @@ class AppIcons {
 
   // EDUCACIÓN Y SALUD
   // Actividades extraescolares
-  static const IconData extracurricularActivities = Icons.sports_cricket_outlined;
+  static const IconData extracurricularActivities =
+      Icons.sports_cricket_outlined;
   // Dentista, médico
   static const IconData dentist = Icons.medication_outlined;
   // Deporte y gimnasio
@@ -207,7 +210,7 @@ class AppIcons {
   // Acciones
   static const shares = FontAwesomeIcons.chartLine;
   // Fondos de inversión
-  static const  investmentFund = FontAwesomeIcons.moneyBillTrendUp;
+  static const investmentFund = FontAwesomeIcons.moneyBillTrendUp;
   // Otras inversiones
   static const otherInvestments = FontAwesomeIcons.handHoldingDollar;
   // Planes de pensiones

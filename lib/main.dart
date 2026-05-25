@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wallet_app/core/constants/icons.dart';
 import 'package:wallet_app/core/constants/strings.dart';
 import 'package:wallet_app/core/theme/theme_provider.dart';
-import 'package:wallet_app/screens/about_us.dart';
+import 'package:wallet_app/widgets/custom_app_bar.dart';
+import 'package:wallet_app/widgets/custom_drawer.dart';
 
 void main() {
   runApp(
@@ -22,7 +24,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: Strings.appNameEn,
       theme: provider.themeData,
-      home: const AboutUsPage(),
+      home: Scaffold(
+        appBar: CustomAppBar(pageName: "Test App Bar", icon: AppIcons.settings),
+        drawer: CustomDrawer(),
+      ),
     );
   }
 }
