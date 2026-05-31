@@ -39,9 +39,9 @@ class Strings {
   static const String regionEn = "Region";
   static const String birthEn = "Bith";
   static const String portfolioEn = "Portfolio";
-  static const String transactionEn = "Transaction"; // TODO: agregar la string de los otros idiomas
-  static const String languageEn = "Language"; // TODO: agregar la string de los otros idiomas
-  static const String themeEn = "Theme"; // TODO: agregar la string de los otros idiomas y decidir si agregarlo en settings o dejarlo en el appbar
+  static const String transactionEn = "Transaction";
+  static const String languageEn = "Language";
+  static const String themeEn = "Theme"; // TODO: Decidir si agregarlo en settings o dejarlo en el appbar
 
   // ==================== Navigation ====================
   static const String currencyEn = "Currency";
@@ -79,6 +79,9 @@ class Strings {
   static const String regionEs = "Región";
   static const String birthEs = "Bith";
   static const String portfolioEs = "Portafolio";
+  static const String transactionEs = "Transacción";
+  static const String languageEs = "Idioma";
+  static const String themeEs = "Apariencia";
 
   // ==================== Navegación ====================
   static const String currencyEs = "Moneda";
@@ -116,6 +119,9 @@ class Strings {
   static const String regionFr = "Région";
   static const String birthFr = "Date de naissance";
   static const String portfolioFr = 'Portefeuille';
+  static const String transactionFr = "Transaction";
+  static const String languageFr = "Langue";
+  static const String themeFr = "Thème";
 
   // ==================== Navigation ====================
   static const String currencyFr = "Devise";
@@ -153,6 +159,9 @@ class Strings {
   static const String regionDe = "Region";
   static const String birthDe = "Geburtsdatum";
   static const String portfolioDe = 'Portfolio';
+  static const String transactionDe = "Transaktion";
+  static const String languageDe = "Sprachen";
+  static const String themeDe = "Design";
 
   // ==================== Navigation ====================
   static const String currencyDe = "Währung";

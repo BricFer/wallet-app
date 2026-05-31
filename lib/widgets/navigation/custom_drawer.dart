@@ -5,7 +5,7 @@ import 'package:wallet_app/screens/dashboard.dart';
 import 'package:wallet_app/screens/expenses.dart';
 import 'package:wallet_app/screens/profile.dart';
 import 'package:wallet_app/screens/settings.dart';
-import 'package:wallet_app/widgets/list_tile_drawer.dart';
+import 'package:wallet_app/widgets/navigation/listtile_drawer.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});

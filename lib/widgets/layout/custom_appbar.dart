@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/core/constants/constants.dart';
-import 'package:wallet_app/widgets/theme_widget.dart';
+import 'package:wallet_app/widgets/theme/theme_widget.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({this.pageName, super.key});
+class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
+  const CustomAppBar({super.key, this.pageName});
 
   final String? pageName;
 
   @override
+  State<CustomAppBar> createState() => _CustomAppBarState();
+
+  @override
+  Size get preferredSize => const Size.fromHeight(80.0);
+}
+
+class _CustomAppBarState extends State<CustomAppBar> {
+  @override
   PreferredSizeWidget build(BuildContext context) {
     return AppBar(
-      // // backgroundColor: Theme.of(context).colorScheme.primary,
-      // foregroundColor: Theme.of(context).colorScheme.onSurface,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       toolbarHeight: 85,
       title: Row(
-        spacing: AppDimens.smSpacing,
+        spacing: AppDimens.mdSpacing,
         children: [
           ClipRRect(
             borderRadius: BorderRadiusGeometry.all(
@@ -33,8 +40,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 TextSpan(
-                  text:
-                      "\nPepito Perez", // TODO: Acá ha de ir el nombre del usuario que se recupera de la base de datos al hacer el login
+                  text: "\nPepito Perez",
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
               ],
@@ -50,9 +56,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: ThemeWidget(),
         ),
       ],
+      scrolledUnderElevation: AppDimens.mdElevation,
+      shadowColor: Theme.of(context).colorScheme.shadow,
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(80.0);
 }

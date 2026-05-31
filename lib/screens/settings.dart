@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/core/constants/constants.dart';
-import 'package:wallet_app/core/theme/container_theme.dart';
+import 'package:wallet_app/core/themes/container_theme.dart';
 import 'package:wallet_app/widgets/widgets.dart';
 
 class SettingsScreen extends StatelessWidget {

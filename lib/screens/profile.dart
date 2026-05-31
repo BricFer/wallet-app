@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/core/constants/constants.dart';
-import 'package:wallet_app/widgets/profile_row.dart';
+import 'package:wallet_app/widgets/profile/profile_row.dart';
 import 'package:wallet_app/widgets/widgets.dart';
 
 // TODO: Como la información se pretende que se edite on the spot, hay que convertirlo a StatefulWidget

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/core/theme/app_decoration.dart';
+import 'package:wallet_app/core/themes/app_decoration.dart';
 
 class CustomContainer extends StatelessWidget {
   const CustomContainer({

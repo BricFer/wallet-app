@@ -16,6 +16,7 @@ class AppDimens {
   static const double smPadding = 16.0;
   static const double mdPadding = 24.0;
 
+  static const double xsSpacing = 4.0;
   static const double smSpacing = 8.0;
   static const double mdSpacing = 16.0;
   static const double lgSpacing = 24.0;

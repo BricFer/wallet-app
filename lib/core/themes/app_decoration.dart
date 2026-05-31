@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/core/constants/dimens.dart';
-import 'package:wallet_app/core/theme/container_theme.dart';
+import 'package:wallet_app/core/themes/container_theme.dart';
 
 class AppDecoration {
   static BoxDecoration container(BuildContext context) {

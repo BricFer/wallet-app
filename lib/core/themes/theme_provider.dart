@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/core/theme/app_theme.dart';
+import 'package:wallet_app/core/themes/app_theme.dart';
 
 enum AppThemeType { light, dark, vibrant, neutral }
 

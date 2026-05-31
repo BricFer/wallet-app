@@ -18,5 +18,7 @@ class AppTextTheme {
     bodyMedium: GoogleFonts.hind(fontSize: 18.0), // Esta se aplica al body
     bodySmall: GoogleFonts.hind(fontSize: 14.0),
     labelLarge: GoogleFonts.hind(fontSize: 16.0, fontWeight: FontWeight.w600),
+    labelMedium: GoogleFonts.hind(fontSize: 14.0),
+    labelSmall: GoogleFonts.hind(fontSize: 12.0),
   );
 }

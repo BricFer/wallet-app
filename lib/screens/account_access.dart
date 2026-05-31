@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/widgets/custom_appbar.dart';
+import 'package:wallet_app/widgets/layout/custom_appbar.dart';
 
 class AccountAccessScreen extends StatelessWidget {
   const AccountAccessScreen({super.key});

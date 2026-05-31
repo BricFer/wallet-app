@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/widgets/custom_appbar.dart';
+import 'package:wallet_app/widgets/layout/custom_appbar.dart';
 
 class EditExpensedScreen extends StatelessWidget {
   const EditExpensedScreen({super.key});

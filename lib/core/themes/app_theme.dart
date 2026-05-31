@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/core/constants/dimens.dart';
-import 'package:wallet_app/core/theme/app_gradient.dart';
-import 'package:wallet_app/core/theme/container_theme.dart';
-import 'package:wallet_app/core/theme/colors.dart';
-import 'package:wallet_app/core/theme/text_theme.dart';
+import 'package:wallet_app/core/themes/app_gradient.dart';
+import 'package:wallet_app/core/themes/container_theme.dart';
+import 'package:wallet_app/core/themes/colors.dart';
+import 'package:wallet_app/core/themes/text_theme.dart';
 
 class AppTheme {
   static const double borderRadius = AppDimens.mdRadius;
@@ -16,6 +16,7 @@ class AppTheme {
       extensions: [containerTheme],
     );
   }
+
   // TODO: Evaluar si agregar un lightTheme con colores planos en lugar de con gradient
   static final light = _base(
     const ColorScheme.light(
@@ -25,6 +26,7 @@ class AppTheme {
       tertiary: AppColors.tertiaryLight,
       surface: AppColors.surfaceLight,
       onSurface: AppColors.onSurfaceLight,
+      shadow: AppColors.shadowColor,
     ),
     AppContainerTheme(
       backgroundColor: AppColors.containerColorLight,
@@ -46,6 +48,7 @@ class AppTheme {
       tertiary: AppColors.tertiaryDark,
       surface: AppColors.surfaceDark,
       onSurface: AppColors.onSurfaceDark,
+      shadow: AppColors.shadowColor,
     ),
     AppContainerTheme(
       backgroundColor: AppColors.containerColorDark,
@@ -68,6 +71,7 @@ class AppTheme {
       tertiary: AppColors.tertiaryVibrant,
       surface: AppColors.surfaceVibrant,
       onSurface: AppColors.onSurfaceVibrart,
+      shadow: AppColors.shadowColor,
     ),
     AppContainerTheme(
       backgroundColor: AppColors.containerColorVibrant,
@@ -90,6 +94,7 @@ class AppTheme {
       tertiary: AppColors.tertiaryNeutral,
       surface: AppColors.surfaceNeutral,
       onSurface: AppColors.onSurfaceNeutral,
+      shadow: AppColors.shadowColor,
     ),
     AppContainerTheme(
       backgroundColor: AppColors.containerColorNeutral,

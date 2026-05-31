@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/core/constants/constants.dart';
-import 'package:wallet_app/widgets/custom_appbar.dart';
+import 'package:wallet_app/widgets/layout/custom_appbar.dart';
 
 class AboutUsInfoPage extends StatelessWidget {
   const AboutUsInfoPage({super.key});

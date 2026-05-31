@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
-import 'package:wallet_app/core/theme/colors.dart';
-import 'package:wallet_app/core/theme/theme_provider.dart';
+import 'package:wallet_app/core/themes/colors.dart';
+import 'package:wallet_app/core/themes/theme_provider.dart';
 
 class ThemeWidget extends StatelessWidget {
   const ThemeWidget({super.key});

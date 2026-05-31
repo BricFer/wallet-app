@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wallet_app/core/constants/icons.dart';
-import 'package:wallet_app/core/theme/container_theme.dart';
+import 'package:wallet_app/core/themes/container_theme.dart';
 
 class CustomProfileRow extends StatelessWidget {
   const CustomProfileRow({super.key, required this.text});
