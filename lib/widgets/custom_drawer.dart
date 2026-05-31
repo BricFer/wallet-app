@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/core/constants/barrel_file.dart';
+import 'package:wallet_app/core/constants/constants.dart';
+import 'package:wallet_app/screens/about_us.dart';
 import 'package:wallet_app/screens/dashboard.dart';
 import 'package:wallet_app/screens/expenses.dart';
+import 'package:wallet_app/screens/profile.dart';
 import 'package:wallet_app/screens/settings.dart';
 import 'package:wallet_app/widgets/list_tile_drawer.dart';
 
@@ -15,6 +17,7 @@ class CustomDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
+          // TODO: Agregar imagen de perfil en el drawer en caso de que se mantega el drawer
           DrawerHeader(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary,
@@ -41,13 +44,28 @@ class CustomDrawer extends StatelessWidget {
             ),
           ),
 
+          // TODO: Eliminar este elemento, ya que la imagen debe conducir al profile
+          GestureDetector(
+            child: ListTileDrawer(
+              icon: AppIcons.profile,
+              text: Strings.profileEn,
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileScreen()),
+              );
+            },
+          ),
+
           GestureDetector(
             child: ListTileDrawer(icon: AppIcons.home, text: Strings.homeEn),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => DashboardPage()),
+                MaterialPageRoute(builder: (context) => DashboardScreen()),
               );
             },
           ),
@@ -60,21 +78,33 @@ class CustomDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ExpensesPage()),
+                MaterialPageRoute(builder: (context) => ExpensesScreen()),
               );
             },
           ),
           GestureDetector(
             child: ListTileDrawer(
-              // TODO: Comprobar como puedo usar uno de FontAwesome
               icon: AppIcons.currency,
-              text: Strings.expensesEn,
+              text: Strings.currencyEn,
             ),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ExpensesPage()),
+                MaterialPageRoute(builder: (context) => ExpensesScreen()),
+              );
+            },
+          ),
+          GestureDetector(
+            child: ListTileDrawer(
+              icon: AppIcons.aboutUs,
+              text: Strings.aboutUsEn,
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AboutUsScreen()),
               );
             },
           ),
@@ -87,7 +117,7 @@ class CustomDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SettingsPage()),
+                MaterialPageRoute(builder: (context) => SettingsScreen()),
               );
             },
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/core/constants/barrel_file.dart';
+import 'package:wallet_app/core/constants/constants.dart';
+import 'package:wallet_app/widgets/custom_appbar.dart';
 
 class AboutUsInfoPage extends StatelessWidget {
   const AboutUsInfoPage({super.key});
@@ -7,24 +8,13 @@ class AboutUsInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.onSurface,
-        foregroundColor: Theme.of(context).colorScheme.surface,
-        toolbarHeight: 85,
-        title: Text(Strings.aboutUsEn),
-        centerTitle: true,
-        leading: GestureDetector(
-          child: Icon(AppIcons.back),
-          onTap: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      appBar: CustomAppBar(pageName: "More about us"),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(AppDimens.smPadding),
           margin: EdgeInsets.all(AppDimens.smPadding),
           child: Column(
+            spacing: AppDimens.mdSpacing,
             children: [
               Container(
                 height: 245,
@@ -40,15 +30,15 @@ class AboutUsInfoPage extends StatelessWidget {
               SizedBox(height: AppDimens.lgSpacing),
               Text(
                 "Nunc blandit blandit justo nec feugiat. Fusce consectetur vulputate orci, ac viverra tellus ornare in. Vivamus laoreet finibus metus, sed lobortis ligula aliquam a. Etiam condimentum quam quis velit consequat, vitae pretium sem sollicitudin. Mauris placerat sem sed mi consectetur eleifend. Vestibulum imperdiet mollis feugiat. Quisque sed diam at augue cursus varius id at neque. Sed egestas quis leo faucibus fringilla. Praesent sagittis a eros in pellentesque. Vestibulum orci leo, pharetra nec dolor id, aliquam congue neque.",
+                textAlign: TextAlign.justify,
               ),
-              SizedBox(height: AppDimens.smSpacing),
               Text(
                 "Sed convallis, quam eu rutrum iaculis, nisi velit condimentum magna, vitae ultricies est massa sit amet lorem. Suspendisse potenti. Vivamus consequat interdum dolor non auctor. Ut eu ornare sapien. Aliquam porta luctus massa et porta. Phasellus sed scelerisque quam. Vestibulum lobortis urna sit amet urna maximus, sit amet mattis lectus tempor. Duis auctor pulvinar turpis ut consequat. Maecenas sit amet sodales mauris.",
+                textAlign: TextAlign.justify,
               ),
-
-              SizedBox(height: AppDimens.smSpacing),
               Text(
                 "Nunc quis quam aliquam, varius turpis mollis, vulputate magna. Mauris quis odio vel massa consectetur mollis at sed magna. Fusce semper mi est, at condimentum dolor pulvinar nec. Etiam scelerisque nisi mi. Mauris a mi justo. Duis non dui eu sapien faucibus condimentum. Nulla pretium aliquet turpis, in pretium risus commodo sit amet.",
+                textAlign: TextAlign.justify,
               ),
             ],
           ),

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/core/constants/icons.dart';
-import 'package:wallet_app/widgets/custom_app_bar.dart';
+import 'package:wallet_app/widgets/custom_appbar.dart';
 
-class EditProfilePage extends StatelessWidget {
-  const EditProfilePage({super.key});
+class EditProfileScreen extends StatelessWidget {
+  const EditProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(pageName: "Edit Profile", icon: AppIcons.home),
-      body: Text("Your are at the Edit Profile Page"),
+      appBar: CustomAppBar(pageName: "Edit Profile"),
+      body: Center(child: Text("Your are at the Edit Profile Page")),
     );
   }}

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/core/constants/icons.dart';
-import 'package:wallet_app/widgets/custom_app_bar.dart';
+import 'package:wallet_app/widgets/custom_appbar.dart';
 
-class ExpensesPage extends StatelessWidget {
-  const ExpensesPage({super.key});
+class ExpensesScreen extends StatelessWidget {
+  const ExpensesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(pageName: "Expenses", icon: AppIcons.home),
-      body: Text("Your are at the Expenses Page"),
+      appBar: CustomAppBar(pageName: "Expenses"),
+      body: Center(child: Text("Your are at the Expenses Page")),
     );
   }
 }

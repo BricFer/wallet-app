@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:wallet_app/core/constants/barrel_file.dart';
+import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/core/theme/colors.dart';
 import 'package:wallet_app/core/theme/theme_provider.dart';
 
@@ -12,8 +13,8 @@ class ThemeWidget extends StatelessWidget {
     final _selectedTheme = Provider.of<ThemeProvider>(context);
 
     return PopupMenuButton<AppThemeType>(
-      icon: const Icon(AppIcons.themeIcon, size: 25.0),
-      iconColor: Theme.of(context).colorScheme.surface,
+      icon: const FaIcon(AppIcons.themeIcon, size: AppDimens.mdIconSize),
+      iconColor: Theme.of(context).colorScheme.onSurface,
       color: Theme.of(context).colorScheme.primary,
       elevation: AppDimens.xlElevation,
       shadowColor: AppColors.shadowColor,
@@ -22,29 +23,29 @@ class ThemeWidget extends StatelessWidget {
         PopupMenuItem(
           value: AppThemeType.light,
           child: Text(
-            "Light",
-            style: TextStyle(color: Theme.of(context).colorScheme.surface),
+            Strings.lightTheme,
+            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
           ),
         ),
         PopupMenuItem(
           value: AppThemeType.dark,
           child: Text(
-            "Dark",
-            style: TextStyle(color: Theme.of(context).colorScheme.surface),
+            Strings.darkTheme,
+            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
           ),
         ),
         PopupMenuItem(
           value: AppThemeType.vibrant,
           child: Text(
-            "Vibrant",
-            style: TextStyle(color: Theme.of(context).colorScheme.surface),
+            Strings.vibrantTheme,
+            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
           ),
         ),
         PopupMenuItem(
           value: AppThemeType.neutral,
           child: Text(
-            "Neutral",
-            style: TextStyle(color: Theme.of(context).colorScheme.surface),
+            Strings.neutralTheme,
+            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
           ),
         ),
       ],

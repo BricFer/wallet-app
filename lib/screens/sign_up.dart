@@ -1,1 +1,1 @@
-class SignUpPage {}
+class SignUpScreen {}

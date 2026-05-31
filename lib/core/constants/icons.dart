@@ -8,22 +8,29 @@ class AppIcons {
   static const IconData portfolio = Icons.web;
 
   // Navegation
-  static const IconData home = Icons.home;
+  static const IconData home = Icons.home_outlined;
+  static const IconData selectedHome = Icons.home;
   static const IconData profile = Icons.account_circle;
   // static const IconData profile = Icons.account_box;
   static const IconData settings = Icons.settings_outlined;
+  static const IconData selectedSettings = Icons.settings;
   static const currency = Icons.attach_money_outlined;
+  static const aboutUs = Icons.people_outline;
+  static const IconData personalInformation = Icons.person_2_outlined;
+  static const IconData notifications = Icons.message_outlined;
+  static const IconData privacy = Icons.privacy_tip_outlined;
+  static const IconData logout = Icons.exit_to_app;
 
   // Actions
   // static const IconData edit= Icons.edit;
-  static const IconData edit = Icons.edit_square;
+  static const edit = FontAwesomeIcons.marker;
   // static const IconData delete = Icons.delete;
   static const IconData delete = Icons.delete_forever_outlined;
   // static const IconData save = Icons.save;
   static const IconData save = Icons.check_box_outlined;
   static const IconData cancel = Icons.close;
   static const IconData back = Icons.arrow_back;
-  static const IconData themeIcon = Icons.style_outlined;
+  static const themeIcon = FontAwesomeIcons.palette;
 
   // Status
   static const IconData success = Icons.check_circle_outline;
@@ -38,6 +45,7 @@ class AppIcons {
   static const IconData close = Icons.close_sharp;
   static const IconData calendar = Icons.calendar_month_outlined;
   static const IconData camera = Icons.camera_alt_outlined;
+  static const language = FontAwesomeIcons.language;
 
   /* APP ICONS */
   // HOGAR

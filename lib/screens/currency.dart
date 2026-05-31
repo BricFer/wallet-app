@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/core/constants/icons.dart';
-import 'package:wallet_app/widgets/custom_app_bar.dart';
+import 'package:wallet_app/widgets/custom_appbar.dart';
 
-class CurrencyPage extends StatelessWidget {
-  const CurrencyPage({super.key});
+class CurrencyScreen extends StatelessWidget {
+  const CurrencyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(pageName: "Currencies", icon: AppIcons.home),
-      body: Text("Your are at the Currencies Page"),
+      appBar: CustomAppBar(pageName: "Currencies"),
+      body: Center(child: Text("Your are at the Currencies Page")),
     );
   }}

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/core/constants/icons.dart';
-import 'package:wallet_app/widgets/custom_app_bar.dart';
+import 'package:wallet_app/widgets/custom_appbar.dart';
 
-class AccountAccessPage extends StatelessWidget {
-  const AccountAccessPage({super.key});
+class AccountAccessScreen extends StatelessWidget {
+  const AccountAccessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(pageName: "Account Access", icon: AppIcons.home),
-      body: Text("Your are at the Account Access Page"),
+      appBar: CustomAppBar(pageName: "Account Access"),
+      body: Center(child: Text("Your are at the Account Access Page")),
     );
   }
 }

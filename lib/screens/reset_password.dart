@@ -1,1 +1,1 @@
-class ResetPasswordPage {}
+class ResetPasswordScreen {}

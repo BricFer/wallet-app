@@ -1,94 +1,89 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/core/constants/barrel_file.dart';
-import 'package:wallet_app/core/theme/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:wallet_app/core/constants/constants.dart';
+import 'package:wallet_app/widgets/widgets.dart';
 import 'package:wallet_app/screens/about_us_info.dart';
-import 'package:wallet_app/widgets/custom_drawer.dart';
-import 'package:wallet_app/widgets/custom_row.dart';
 
-class AboutUsPage extends StatelessWidget {
-  const AboutUsPage({super.key});
+class AboutUsScreen extends StatelessWidget {
+  const AboutUsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // TODO: ya que todas las pantallas usan un AppBar, buscar como simplificar esto.
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.onSurface,
-        foregroundColor: Theme.of(context).colorScheme.surface,
-        toolbarHeight: 85,
-        title: Text(Strings.appNameEn),
-        centerTitle: true,
-        actions: [
-          // TODO: Resolver el problema de la imagen desbordada
-          Padding(
-            padding: const EdgeInsets.all(AppDimens.smPadding),
-            child: CircleAvatar(
-              maxRadius: 35.0,
-              child: Image.network(Strings.imageProfileUrl),
-            ),
-          ),
-        ],
-      ),
-      drawer: CustomDrawer(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: AppDimens.lgSpacing),
-          Container(
-            padding: EdgeInsets.all(AppDimens.smPadding),
-            margin: EdgeInsets.all(AppDimens.smSpacing),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(AppDimens.mdRadius),
-              ),
-              border: Border(
-                top: BorderSide(color: AppColors.surfaceVariantLight),
-                bottom: BorderSide(color: AppColors.surfaceVariantLight),
-                left: BorderSide(color: AppColors.surfaceVariantLight),
-                right: BorderSide(color: AppColors.surfaceVariantLight),
+      appBar: CustomAppBar(pageName: Strings.aboutUsEn),
+      body: Padding(
+        padding: const EdgeInsets.all(AppDimens.smPadding),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          spacing: AppDimens.lgSpacing,
+          children: [
+            CustomContainer(
+              height: 64.0,
+              padding: EdgeInsets.all(AppDimens.smPadding),
+              child: GestureDetector(
+                child: CustomRow(
+                  text: Strings.aboutUsEn,
+                  icon: AppIcons.aboutUs,
+                  haveIconColor: true,
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (_) => const AboutUsInfoPage(),
+                    ),
+                  );
+                },
               ),
             ),
-            child: GestureDetector(
-              child: CustomRow(text: Strings.aboutUsEn),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (_) => const AboutUsInfoPage(),
+            CustomContainer(
+              padding: EdgeInsets.all(AppDimens.smPadding),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                spacing: AppDimens.mdSpacing,
+                children: [
+                  GestureDetector(
+                    child: CustomRow(
+                      text: Strings.portfolioEn,
+                      icon: AppIcons.portfolio,
+                      haveIconColor: true,
+                    ),
+                    onTap: () => _launchURL(Strings.portfoliobUrl),
                   ),
-                );
-              },
-            ),
-          ),
-          SizedBox(height: AppDimens.smSpacing),
-          Container(
-            padding: EdgeInsets.all(AppDimens.smSpacing),
-            margin: EdgeInsets.all(AppDimens.smSpacing),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(AppDimens.mdRadius),
+                  GestureDetector(
+                    child: CustomRow(
+                      text: Strings.github,
+                      faIcon: AppIcons.github,
+                      haveIconColor: true,
+                    ),
+                    onTap: () => _launchURL(Strings.githubUrl),
+                  ),
+                  GestureDetector(
+                    child: CustomRow(
+                      text: Strings.linkedin,
+                      faIcon: AppIcons.linkedin,
+                      haveIconColor: true,
+                    ),
+                    onTap: () => _launchURL(Strings.linkedinUrl),
+                  ),
+                ],
               ),
-              border: Border(
-                top: BorderSide(color: AppColors.surfaceVariantLight),
-                bottom: BorderSide(color: AppColors.surfaceVariantLight),
-                left: BorderSide(color: AppColors.surfaceVariantLight),
-                right: BorderSide(color: AppColors.surfaceVariantLight),
-              ),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              spacing: 16,
-              children: [
-                CustomRow(text: Strings.portfolioEn, icon: AppIcons.portfolio),
-                CustomRow(text: Strings.github, faIcon: AppIcons.github),
-                CustomRow(text: Strings.linkedin, faIcon: AppIcons.linkedin),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
+  }
+
+  Future<void> _launchURL(String url) async {
+    final Uri _url = Uri.parse(url);
+
+    try {
+      launchUrl(_url);
+    } on Error catch (_, err) {
+      throw 'Could not launch $_url, due to $err';
+    }
   }
 }

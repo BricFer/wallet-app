@@ -9,7 +9,7 @@ class ListTileDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon),
+      leading: Icon(icon, color: Theme.of(context).colorScheme.onSurface),
       title: Text(
         text,
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
