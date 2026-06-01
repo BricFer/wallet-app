@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/widgets/layout/custom_appbar.dart';
 
-class AboutUsInfoPage extends StatelessWidget {
-  const AboutUsInfoPage({super.key});
+class InformationScreen extends StatelessWidget {
+  const InformationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(pageName: "More about us"),
+      appBar: CustomAppBar(pageName: Strings.aboutUsEn),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(AppDimens.smPadding),

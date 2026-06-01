@@ -10,6 +10,8 @@ class CustomRow extends StatelessWidget {
     this.faIcon,
     this.fontColor,
     this.haveIconColor = false,
+    this.mainAxisAlignment,
+    this.crossAxisAlignment,
   });
 
   final String text;
@@ -17,14 +19,16 @@ class CustomRow extends StatelessWidget {
   final FaIconData? faIcon;
   final Color? fontColor;
   final bool haveIconColor;
+  final MainAxisAlignment? mainAxisAlignment;
+  final CrossAxisAlignment? crossAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
     final containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
+      crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
       children: [
         if (icon != null)
           Icon(

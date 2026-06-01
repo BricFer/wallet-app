@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
+import 'package:wallet_app/screens/personal_info.dart';
+import 'package:wallet_app/widgets/layout/custom_column.dart';
 import 'package:wallet_app/widgets/widgets.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -14,9 +16,7 @@ class SettingsScreen extends StatelessWidget {
       appBar: CustomAppBar(pageName: Strings.settingsEn),
       body: Padding(
         padding: const EdgeInsets.all(AppDimens.mdPadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: AppDimens.mdSpacing,
+        child: CustomColumn(
           children: [
             SizedBox(height: AppDimens.mdSpacing),
             CircleAvatar(
@@ -51,10 +51,20 @@ class SettingsScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: AppDimens.mdSpacing),
-            CustomRow(
-              text: Strings.personalInformationEn,
-              icon: AppIcons.personalInformation,
-              fontColor: containerTheme.fontColor,
+            GestureDetector(
+              child: CustomRow(
+                text: Strings.personalInformationEn,
+                icon: AppIcons.personalInformation,
+                fontColor: containerTheme.fontColor,
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const PersonalInfoScreen(),
+                  ),
+                );
+              },
             ),
             CustomRow(
               text: "${Strings.inboxEn}/${Strings.notificationsEn}",

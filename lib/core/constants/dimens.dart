@@ -6,6 +6,7 @@ class AppDimens {
   static const double buttonHeight = 48.0;
   static const double appBarHeight = 56.0;
   static const double inputHeight = 48.0;
+  static const double minHeight = 64.0;
 
   static const double smElevation = 4.0;
   static const double mdElevation = 8.0;
@@ -23,4 +24,7 @@ class AppDimens {
 
   static const double mdIconSize = 36.0;
   static const double xsSize = 56.0;
+
+  static const double smBoxSize = 112.0;
+  static const double mdBoxSize = 176.0;
 }

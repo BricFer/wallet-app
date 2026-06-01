@@ -15,11 +15,10 @@ class AppColors {
   static const Color iconColorContainerLight = Color(0xFF100C08);
 
   // Dark
-  // static const Color primaryDark = Color(0xFF8B9EB7);
-  static const Color primaryDark = Color(0xFF1C4F75);
-  static const Color onPrimaryDark = Color(0xFFDCE2E9);
+  static const Color primaryDark = Color(0xFF2CC0B7);
+  static const Color onPrimaryDark = Color(0xFF000000);
   static const Color secondaryDark = Color(0xFFBB0A21);
-  static const Color tertiaryDark = Color(0xFFEDF67D);
+  static const Color tertiaryDark = Color(0xFF1C4F75);
   static const Color surfaceDark = Color(0xFF252627);
   static const Color onSurfaceDark = Color(0xFFDCE2E9);
   static const Color containerColorDark = Color(0xFFB3EFB2);

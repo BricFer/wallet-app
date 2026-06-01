@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wallet_app/core/constants/constants.dart';
+import 'package:wallet_app/widgets/layout/custom_column.dart';
 import 'package:wallet_app/widgets/widgets.dart';
-import 'package:wallet_app/screens/about_us_info.dart';
+import 'package:wallet_app/screens/information.dart';
 
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});
@@ -13,14 +14,10 @@ class AboutUsScreen extends StatelessWidget {
       appBar: CustomAppBar(pageName: Strings.aboutUsEn),
       body: Padding(
         padding: const EdgeInsets.all(AppDimens.smPadding),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: AppDimens.lgSpacing,
+        child: CustomColumn(
           children: [
             CustomContainer(
-              height: 64.0,
-              padding: EdgeInsets.all(AppDimens.smPadding),
+              height: AppDimens.minHeight,
               child: GestureDetector(
                 child: CustomRow(
                   text: Strings.aboutUsEn,
@@ -31,18 +28,14 @@ class AboutUsScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute<void>(
-                      builder: (_) => const AboutUsInfoPage(),
+                      builder: (_) => const InformationScreen(),
                     ),
                   );
                 },
               ),
             ),
             CustomContainer(
-              padding: EdgeInsets.all(AppDimens.smPadding),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                spacing: AppDimens.mdSpacing,
+              child: CustomColumn(
                 children: [
                   GestureDetector(
                     child: CustomRow(

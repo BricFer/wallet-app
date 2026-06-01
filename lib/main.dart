@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     final List<Widget> _pages = const <Widget>[
       DashboardScreen(),
       CurrencyScreen(),
-      ExpensesScreen(),
+      TransactionsScreen(),
       SettingsScreen(),
       AboutUsScreen(),
     ];

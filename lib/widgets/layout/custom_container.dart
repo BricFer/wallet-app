@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wallet_app/core/constants/dimens.dart';
 import 'package:wallet_app/core/themes/app_decoration.dart';
 
 class CustomContainer extends StatelessWidget {
@@ -22,7 +23,7 @@ class CustomContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding,
+      padding: padding ?? EdgeInsets.all(AppDimens.smPadding),
       margin: margin,
       decoration: AppDecoration.container(context),
       width: width,
