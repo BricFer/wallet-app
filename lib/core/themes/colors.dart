@@ -11,6 +11,7 @@ class AppColors {
   static const Color containerColorLight = Color(0xFFEDDEA4);
   static const Color fontColorContainerLight = Color(0xFF100C08);
   static const Color fontColorContainerVariantLight = Color(0xFF100C08);
+  static const Color fontColorTransactionLight = Color(0xFF100C08);
   static const Color iconColorLight = Color(0xFF100C08);
   static const Color iconColorContainerLight = Color(0xFF100C08);
 
@@ -24,6 +25,7 @@ class AppColors {
   static const Color containerColorDark = Color(0xFFB3EFB2);
   static const Color fontColorContainerDark = Color(0xFFFFFFFF);
   static const Color fontColorContainerVariantDark = Color(0xFF252627);
+  static const Color fontColorTransactionDark = Color(0xFFFFFFFF);
   static const Color iconColorDark = Color(0xFFFFFFFF);
   static const Color iconColorContainerDark = Color(0xFF252627);
 
@@ -38,6 +40,7 @@ class AppColors {
   static const Color containerColorVibrant = Color(0xFF73EEDC);
   static const Color fontColorContainerVibrant = Color(0xFFFFFFFF);
   static const Color fontColorContainerVariantVibrant = Color(0xFF100C08);
+  static const Color fontColorTransactionVibrant = Color(0xFF100C08);
   static const Color iconColorVibrant = Color(0xFFFFFFFF);
   static const Color iconColorContainerVibrant = Color(0xFF100C08);
 
@@ -51,6 +54,7 @@ class AppColors {
   static const Color containerColorNeutral = Color(0xFF504949);
   static const Color fontColorContainerNeutral = Color(0xFF100C08);
   static const Color fontColorContainerVariantNeutral = Color(0xFFFFFFFF);
+  static const Color fontColorTransactionNeutral = Color(0xFF100C08);
   static const Color iconColorNeutral = Color(0xFF100C08);
   static const Color iconColorContainerNeutral = Color(0xFFFFFFFF);
 
@@ -70,4 +74,6 @@ class AppColors {
 
   // Shadow
   static const Color shadowColor = Color(0xFF616283);
+
+  static const Color alertColor = Color(0xFFB5446E);
 }

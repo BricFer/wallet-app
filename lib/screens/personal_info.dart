@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/screens/account_access.dart';
 import 'package:wallet_app/screens/profile.dart';
-import 'package:wallet_app/widgets/layout/custom_column.dart';
 import 'package:wallet_app/widgets/widgets.dart';
 
 class PersonalInfoScreen extends StatelessWidget {
@@ -13,9 +12,9 @@ class PersonalInfoScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(),
       body: Padding(
-        padding: const EdgeInsets.all(AppDimens.smPadding),
+        padding: AppPaddings.paddingAll16,
         child: CustomColumn(
-          spacing: AppDimens.lgSpacing,
+          spacing: AppDimens.spacing24,
           children: [
             CustomContainer(
               child: CustomColumn(
@@ -46,7 +45,7 @@ class PersonalInfoScreen extends StatelessWidget {
               ),
             ),
             CustomContainer(
-              height: AppDimens.minHeight,
+              height: AppDimens.height64,
               child: CustomRow(text: "Account name"),
             ),
           ],

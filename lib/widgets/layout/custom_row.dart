@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wallet_app/core/constants/dimens.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
 
 class CustomRow extends StatelessWidget {
@@ -44,7 +45,7 @@ class CustomRow extends StatelessWidget {
                 ? containerTheme.iconContainerColor
                 : containerTheme.iconColor,
           ),
-        SizedBox(width: 12.0),
+        SizedBox(width: AppDimens.width12),
         Text(
           text,
           style: TextStyle(color: fontColor ?? containerTheme.fontColorVariant),

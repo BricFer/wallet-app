@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/core/constants/dimens.dart';
-import 'package:wallet_app/core/constants/strings.dart';
+import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/widgets/layout/custom_appbar.dart';
 import 'package:wallet_app/widgets/transactions/transaction_boxes.dart';
-import 'package:wallet_app/widgets/transactions/transaction_row.dart';
+import 'package:wallet_app/widgets/transactions/transaction_card.dart';
 
 class TransactionsScreen extends StatelessWidget {
   const TransactionsScreen({super.key});
@@ -13,10 +12,12 @@ class TransactionsScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(pageName: Strings.transactionEn),
       body: Padding(
-        padding: const EdgeInsets.all(AppDimens.smPadding),
+        padding: AppPaddings.paddingAll16,
         child: ListView(
+          padding: AppPaddings.paddingBottom106,
           children: [
             TransactionBoxes(),
+            SizedBox(height: AppDimens.elevation16),
             Text(
               Strings.transactionsListEn,
               style: Theme.of(context).textTheme.headlineMedium,
@@ -25,8 +26,11 @@ class TransactionsScreen extends StatelessWidget {
             for (int i = 1; i <= 10; i++)
               Row(
                 children: [
-                  SizedBox(height: AppDimens.mdSpacing),
-                  TransactionRow(amount: i as double, i: i),
+                  SizedBox(height: AppDimens.spacing16),
+                  TransactionCard(
+                    amount: i.toDouble(),
+                    i: i,
+                  ),
                 ],
               ),
           ],

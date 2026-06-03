@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/core/constants/constants.dart';
+import 'package:wallet_app/core/constants/paddings.dart';
 import 'package:wallet_app/widgets/layout/custom_appbar.dart';
 
 class InformationScreen extends StatelessWidget {
@@ -11,23 +12,23 @@ class InformationScreen extends StatelessWidget {
       appBar: CustomAppBar(pageName: Strings.aboutUsEn),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(AppDimens.smPadding),
-          margin: EdgeInsets.all(AppDimens.smPadding),
+          padding: AppPaddings.paddingAll16,
+          margin: EdgeInsets.all(AppDimens.margin16),
           child: Column(
-            spacing: AppDimens.mdSpacing,
+            spacing: AppDimens.spacing16,
             children: [
               Container(
-                height: 245,
-                width: 245,
+                height: AppDimens.height245,
+                width: AppDimens.width245,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                    image: NetworkImage(Strings.imageProfileUrl),
+                    image: AssetImage(Strings.imageProfileUrl),
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              SizedBox(height: AppDimens.lgSpacing),
+              SizedBox(height: AppDimens.height24),
               Text(
                 "Nunc blandit blandit justo nec feugiat. Fusce consectetur vulputate orci, ac viverra tellus ornare in. Vivamus laoreet finibus metus, sed lobortis ligula aliquam a. Etiam condimentum quam quis velit consequat, vitae pretium sem sollicitudin. Mauris placerat sem sed mi consectetur eleifend. Vestibulum imperdiet mollis feugiat. Quisque sed diam at augue cursus varius id at neque. Sed egestas quis leo faucibus fringilla. Praesent sagittis a eros in pellentesque. Vestibulum orci leo, pharetra nec dolor id, aliquam congue neque.",
                 textAlign: TextAlign.justify,

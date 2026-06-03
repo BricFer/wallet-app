@@ -51,6 +51,12 @@ class Strings {
   static const String transactionEn = "Transactions";
   static const String transactionsListEn = "Transactions list";
   static const String yourInfoEn = "Your Information";
+  static const String saveEn = "Save";
+  static const String editEn = "Edit";
+  static const String updateEn = "Update";
+  static const String cancelEn = "Cancel";
+  static const String backEn = "Back";
+  static const String deleteEn = "Delete";
 
   // ==================== Navigation ====================
   static const String aboutUsEn = "About us";
@@ -67,13 +73,12 @@ class Strings {
   static const String privacyEn = "Privacy";
   static const String profileEn = "Profile";
   static const String settingsEn = "Settings";
-
-  // ==================== Buttons ====================
-  static const String buttonSaveEn = "Save";
-  static const String buttonEditEn = "Edit";
-  static const String buttonUpdateEn = "Update";
-  static const String buttonCancelEn = "Cancel";
-  static const String buttonBackEn = "Back";
+  static const String saveEs = "Guardar";
+  static const String editEs = "Editar";
+  static const String updateEs = "Actualizar";
+  static const String cancelEs = "Cancelar";
+  static const String backEs = "Regresar";
+  static const String deleteEs = "Eliminar";
 
   // Spanish variables
   // ==================== App Strings ====================
@@ -116,16 +121,9 @@ class Strings {
   static const String profileEs = "Perfil";
   static const String settingsEs = "Configuración";
 
-  // ==================== Botones ====================
-  static const String buttonSaveEs = "Guardar";
-  static const String buttonEditEs = "Editar";
-  static const String buttonUpdateEs = "Actualizar";
-  static const String buttonCancelEs = "Cancelar";
-  static const String buttonBackEs = "Regresar";
-
   // French variables
   // ==================== App Strings ====================
-static const String accessMethodsFr = "Méthodes d'accès";
+  static const String accessMethodsFr = "Méthodes d'accès";
   static const String addressFr = "Adresse";
   static const String appDescriptionFr =
       "Vestibulum dolor metus, vestibulum non porttitor et, dapibus quis tellus. Ut ultricies auctor mi, vel dictum nibh bibendum non.";
@@ -144,9 +142,14 @@ static const String accessMethodsFr = "Méthodes d'accès";
   static const String portfolioFr = 'Portefeuille';
   static const String regionFr = "Région";
   static const String themeFr = "Thème";
-  static const String transactionFr = "Transaction";
   static const String transactionsListFr = "Liste des transactions";
   static const String yourInfoFr = "Tes informations";
+  static const String saveFr = "Enregistrer";
+  static const String editFr = "Modifier";
+  static const String updateFr = "Mettre à jour";
+  static const String cancelFr = "Annuler";
+  static const String backFr = "Retour";
+  static const String deleteFr = "Supprimer";
 
   // ==================== Navigation ====================
   static const String aboutUsFr = "À propos de nous";
@@ -163,13 +166,7 @@ static const String accessMethodsFr = "Méthodes d'accès";
   static const String privacyFr = "Confidentialité";
   static const String profileFr = 'Profil';
   static const String settingsFr = 'Paramètres';
-
-  // ==================== Boutons ====================
-  static const String buttonSaveFr = "Enregistrer";
-  static const String buttonEditFr = "Modifier";
-  static const String buttonUpdateFr = "Mettre à jour";
-  static const String buttonCancelFr = "Annuler";
-  static const String buttonBackFr = "Retour";
+  static const String transactionFr = "Transaction";
 
   // German variables
   // ==================== App Strings ====================
@@ -192,9 +189,14 @@ static const String accessMethodsFr = "Méthodes d'accès";
   static const String portfolioDe = 'Portfolio';
   static const String regionDe = "Region";
   static const String themeDe = "Design";
-  static const String transactionDe = "Transaktion";
   static const String transactionsListDe = "Transaktionsliste";
   static const String yourInfoDe = "Ihre Informationen";
+  static const String saveDe = "Speichern";
+  static const String editDe = "Bearbeiten";
+  static const String updateDe = "Aktualisieren";
+  static const String cancelDe = "Abbrechen";
+  static const String backDe = "Zurück";
+  static const String deleteDe = "Löschen";
 
   // ==================== Navigation ====================
   static const String aboutUsDe = "Über uns";
@@ -211,11 +213,5 @@ static const String accessMethodsFr = "Méthodes d'accès";
   static const String privacyDe = "Datenschutz";
   static const String profileDe = 'Profil';
   static const String settingsDe = 'Einstellungen';
-
-  // ==================== Schaltflächen ====================
-  static const String buttonSaveDe = "Speichern";
-  static const String buttonEditDe = "Bearbeiten";
-  static const String buttonUpdateDe = "Aktualisieren";
-  static const String buttonCancelDe = "Abbrechen";
-  static const String buttonBackDe = "Zurück";
+  static const String transactionDe = "Transaktion";
 }

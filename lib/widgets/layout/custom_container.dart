@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/core/constants/dimens.dart';
+import 'package:wallet_app/core/constants/paddings.dart';
 import 'package:wallet_app/core/themes/app_decoration.dart';
 
 class CustomContainer extends StatelessWidget {
@@ -7,6 +7,7 @@ class CustomContainer extends StatelessWidget {
     super.key,
     this.padding,
     this.margin,
+    this.decoration,
     this.width,
     this.height,
     this.alignment,
@@ -15,6 +16,7 @@ class CustomContainer extends StatelessWidget {
 
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
+  final Decoration? decoration;
   final double? width;
   final double? height;
   final AlignmentGeometry? alignment;
@@ -23,9 +25,9 @@ class CustomContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding ?? EdgeInsets.all(AppDimens.smPadding),
+      padding: padding ?? AppPaddings.paddingAll16,
       margin: margin,
-      decoration: AppDecoration.container(context),
+      decoration: decoration ?? AppDecoration.container(context),
       width: width,
       height: height,
       alignment: alignment,

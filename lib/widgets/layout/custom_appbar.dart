@@ -12,7 +12,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   State<CustomAppBar> createState() => _CustomAppBarState();
 
   @override
-  Size get preferredSize => const Size.fromHeight(80.0);
+  Size get preferredSize => const Size.fromHeight(AppDimens.height80);
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
@@ -28,20 +28,22 @@ class _CustomAppBarState extends State<CustomAppBar> {
 
   @override
   PreferredSizeWidget build(BuildContext context) {
+    final _colorScheme = Theme.of(context).colorScheme;
+
     return AppBar(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      toolbarHeight: 85,
+      backgroundColor: _colorScheme.surface,
+      toolbarHeight: AppDimens.height85,
       title: isDashboard
           ? Row(
-              spacing: AppDimens.mdSpacing,
+              spacing: AppDimens.spacing24,
               children: [
                 ClipRRect(
                   borderRadius: BorderRadiusGeometry.all(
-                    Radius.circular(AppDimens.smRadius),
+                    Radius.circular(AppDimens.radius8),
                   ),
                   child: Image(
                     image: AssetImage(Strings.profileUserImg),
-                    height: AppDimens.xsSize,
+                    height: AppDimens.size56,
                   ),
                 ),
                 RichText(
@@ -65,12 +67,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
       actions: [
         CircleAvatar(
           backgroundColor: Colors.transparent,
-          maxRadius: 35.0,
+          maxRadius: AppDimens.radius35,
           child: ThemeWidget(),
         ),
       ],
-      scrolledUnderElevation: AppDimens.smElevation,
-      shadowColor: Theme.of(context).colorScheme.shadow,
+      elevation: AppDimens.elevation0,
+      scrolledUnderElevation: AppDimens.elevation4,
+      shadowColor: _colorScheme.shadow,
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/core/constants/constants.dart';
-import 'package:wallet_app/widgets/layout/custom_column.dart';
 import 'package:wallet_app/widgets/widgets.dart';
 
 // TODO: Condicionar a que aunque sea un método de autenticación esté activo
@@ -12,7 +11,7 @@ class AccountAccessScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(pageName: "Account Access"),
       body: Padding(
-        padding: const EdgeInsets.all(AppDimens.smPadding),
+        padding: AppPaddings.paddingAll16,
         child: CustomColumn(
           children: [
             CustomContainer(

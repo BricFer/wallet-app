@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
 import 'package:wallet_app/screens/personal_info.dart';
-import 'package:wallet_app/widgets/layout/custom_column.dart';
 import 'package:wallet_app/widgets/widgets.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -15,46 +14,76 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(pageName: Strings.settingsEn),
       body: Padding(
-        padding: const EdgeInsets.all(AppDimens.mdPadding),
+        padding: AppPaddings.paddingAll24,
         child: CustomColumn(
           children: [
-            SizedBox(height: AppDimens.mdSpacing),
+            SizedBox(height: AppDimens.spacing16),
             CircleAvatar(
-              radius: AppDimens.xsSize,
+              radius: AppDimens.size56,
               child: Image(
                 image: AssetImage(Strings.imageProfileUrl),
-                height: 75.0,
+                height: AppDimens.height75,
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              spacing: AppDimens.mdSpacing,
+              spacing: AppDimens.spacing16,
               children: [
                 CustomContainer(
-                  width: 152.0,
-                  height: 56.0,
+                  width: AppDimens.width152,
                   alignment: Alignment.center,
-                  child: Text(
-                    "${Strings.incomesEn} €0.00", // TODO: Buscar cómo representar los ingresos más amigablemente
-                    style: TextStyle(color: containerTheme.fontColorVariant),
+                  child: RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: "€15.00\n",
+                          style: Theme.of(context).textTheme.bodyLarge
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: containerTheme.fontColorVariant,
+                              ),
+                        ),
+                        TextSpan(
+                          text: Strings.incomesEn,
+                          style: TextStyle(
+                            color: containerTheme.fontColorVariant,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 CustomContainer(
-                  width: 152.0,
-                  height: 56.0,
+                  width: AppDimens.width152,
                   alignment: Alignment.center,
-                  child: Text(
-                    "${Strings.expensesEn} €0.00", // TODO: buscar cómo representar los egresos más amigablemente
-                    style: TextStyle(color: containerTheme.fontColorVariant),
+                  child: RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: "€35.00\n",
+                          style: Theme.of(context).textTheme.bodyLarge
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: containerTheme.fontColorVariant,
+                              ),
+                        ),
+                        TextSpan(
+                          text: Strings.expensesEn,
+                          style: TextStyle(
+                            color: containerTheme.fontColorVariant,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: AppDimens.mdSpacing),
+            SizedBox(height: AppDimens.spacing16),
             GestureDetector(
               child: CustomRow(
                 text: Strings.personalInformationEn,
-                icon: AppIcons.personalInformation,
+                icon: AppIcons.personalInformationIcon,
                 fontColor: containerTheme.fontColor,
               ),
               onTap: () {
@@ -68,22 +97,22 @@ class SettingsScreen extends StatelessWidget {
             ),
             CustomRow(
               text: "${Strings.inboxEn}/${Strings.notificationsEn}",
-              icon: AppIcons.notifications,
+              icon: AppIcons.notificationsIcon,
               fontColor: containerTheme.fontColor,
             ),
             CustomRow(
               text: Strings.privacyEn,
-              icon: AppIcons.privacy,
+              icon: AppIcons.privacyIcon,
               fontColor: containerTheme.fontColor,
             ),
             CustomRow(
               text: Strings.languageEn,
-              faIcon: AppIcons.language,
+              faIcon: AppIcons.languageFaIcon,
               fontColor: containerTheme.fontColor,
             ),
             CustomRow(
               text: Strings.logoutEn,
-              icon: AppIcons.logout,
+              icon: AppIcons.logoutIcon,
               fontColor: containerTheme.fontColor,
             ),
           ],

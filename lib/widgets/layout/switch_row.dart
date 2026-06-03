@@ -34,6 +34,7 @@ class _SwitchRowState extends State<SwitchRow> {
   @override
   Widget build(BuildContext context) {
     final containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
+    final _colorScheme = Theme.of(context).colorScheme;
 
     return Row(
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.spaceBetween,
@@ -44,8 +45,8 @@ class _SwitchRowState extends State<SwitchRow> {
         ),
         Switch(
           value: isActive,
-          activeThumbColor: Theme.of(context).colorScheme.tertiary,
-          inactiveThumbColor: Theme.of(context).colorScheme.shadow,
+          activeThumbColor: _colorScheme.tertiary,
+          inactiveThumbColor: _colorScheme.shadow,
           trackColor: WidgetStateProperty.resolveWith<Color?>((
             Set<WidgetState> states,
           ) {

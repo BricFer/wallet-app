@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wallet_app/core/constants/strings.dart';
 import 'package:wallet_app/widgets/layout/custom_appbar.dart';
 
 class CurrencyScreen extends StatelessWidget {
@@ -7,7 +8,9 @@ class CurrencyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(pageName: "Currencies"),
-      body: Center(child: Text("Your are at the Currencies Page")),
+      appBar: CustomAppBar(pageName: Strings.currencyEn),
+      body: Column(children: [
+        
+      ],),
     );
   }}

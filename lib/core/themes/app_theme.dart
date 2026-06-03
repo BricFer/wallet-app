@@ -6,7 +6,7 @@ import 'package:wallet_app/core/themes/colors.dart';
 import 'package:wallet_app/core/themes/text_theme.dart';
 
 class AppTheme {
-  static const double borderRadius = AppDimens.mdRadius;
+  static const double borderRadius = AppDimens.radius12;
 
   static ThemeData _base(ColorScheme scheme, AppContainerTheme containerTheme) {
     return ThemeData(
@@ -35,6 +35,7 @@ class AppTheme {
       fontColorVariant: AppColors.fontColorContainerVariantLight,
       iconColor: AppColors.iconColorLight,
       iconContainerColor: AppColors.iconColorContainerLight,
+      fontColorTransaction: AppColors.fontColorTransactionLight,
       borderColor: AppColors.containerColorLight,
       borderRadius: borderRadius,
     ),
@@ -55,6 +56,7 @@ class AppTheme {
       gradientColor: AppGradient.linearGradientContainerDark,
       fontColor: AppColors.fontColorContainerDark,
       fontColorVariant: AppColors.fontColorContainerVariantDark,
+      fontColorTransaction: AppColors.fontColorTransactionDark,
       iconColor: AppColors.iconColorDark,
       iconContainerColor: AppColors.iconColorContainerDark,
       borderColor: AppColors.containerColorDark,
@@ -78,6 +80,7 @@ class AppTheme {
       gradientColor: AppGradient.linearGradientContainerVibrant,
       fontColor: AppColors.fontColorContainerVibrant,
       fontColorVariant: AppColors.fontColorContainerVariantVibrant,
+      fontColorTransaction: AppColors.fontColorTransactionVibrant,
       iconColor: AppColors.iconColorVibrant,
       iconContainerColor: AppColors.iconColorContainerVibrant,
       borderColor: AppColors.containerColorVibrant,
@@ -101,6 +104,7 @@ class AppTheme {
       gradientColor: AppGradient.linearGradientContainerNeutral,
       fontColor: AppColors.fontColorContainerNeutral,
       fontColorVariant: AppColors.fontColorContainerVariantNeutral,
+      fontColorTransaction: AppColors.fontColorTransactionNeutral,
       iconColor: AppColors.iconColorNeutral,
       iconContainerColor: AppColors.iconColorContainerNeutral,
       borderColor: AppColors.containerColorNeutral,

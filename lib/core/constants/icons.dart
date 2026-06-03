@@ -3,203 +3,205 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AppIcons {
   // Social media
-  static const github = FontAwesomeIcons.github;
-  static const linkedin = FontAwesomeIcons.linkedin;
-  static const IconData portfolio = Icons.web;
+  static const FaIconData githubFaIcon = FontAwesomeIcons.github;
+  static const FaIconData linkedinFaIcon = FontAwesomeIcons.linkedin;
+  static const IconData portfolioFaIcon = Icons.web;
 
   // Navegation
-  static const IconData home = Icons.home_outlined;
-  static const IconData selectedHome = Icons.home;
-  static const IconData profile = Icons.account_circle;
+  static const IconData homeIcon = Icons.home_outlined;
+  static const IconData selectedHomeIcon = Icons.home;
+  static const IconData profileIcon = Icons.account_circle;
   // static const IconData profile = Icons.account_box;
-  static const IconData settings = Icons.settings_outlined;
-  static const IconData selectedSettings = Icons.settings;
-  static const currency = Icons.attach_money_outlined;
-  static const aboutUs = Icons.people_outline;
-  static const IconData personalInformation = Icons.person_2_outlined;
-  static const IconData notifications = Icons.message_outlined;
-  static const IconData privacy = Icons.privacy_tip_outlined;
-  static const IconData logout = Icons.exit_to_app;
+  static const IconData settingsIcon = Icons.settings_outlined;
+  static const IconData selectedSettingsIcon = Icons.settings;
+  static const IconData currencyIcon = Icons.attach_money_outlined;
+  static const IconData aboutUsIcon = Icons.people_outline;
+  static const IconData personalInformationIcon = Icons.person_2_outlined;
+  static const IconData notificationsIcon = Icons.message_outlined;
+  static const IconData privacyIcon = Icons.privacy_tip_outlined;
+  static const IconData logoutIcon = Icons.exit_to_app;
 
+  static const FaIconData euroFaIcon = FontAwesomeIcons.euroSign;
   // Actions
   // static const IconData edit= Icons.edit;
-  static const edit = FontAwesomeIcons.marker;
+  static const FaIconData editFaIcon = FontAwesomeIcons.marker;
+  static const IconData editIcon = Icons.edit;
   // static const IconData delete = Icons.delete;
-  static const IconData delete = Icons.delete_forever_outlined;
+  static const IconData deleteIcon = Icons.delete_forever_outlined;
   // static const IconData save = Icons.save;
-  static const IconData save = Icons.check_box_outlined;
-  static const IconData cancel = Icons.close;
-  static const IconData back = Icons.arrow_back;
-  static const themeIcon = FontAwesomeIcons.palette;
+  static const IconData saveIcon = Icons.check_box_outlined;
+  static const IconData cancelIcon = Icons.close;
+  static const IconData backIcon = Icons.arrow_back;
+  static const FaIconData themeFaIcon = FontAwesomeIcons.palette;
 
   // Status
-  static const IconData success = Icons.check_circle_outline;
-  static const IconData error = Icons.error_outline_outlined;
-  static const IconData warning = Icons.warning_amber_rounded;
-  static const IconData info = Icons.info;
+  static const IconData successIcon = Icons.check_circle_outline;
+  static const IconData errorIcon = Icons.error_outline_outlined;
+  static const IconData warningIcon = Icons.warning_amber_rounded;
+  static const IconData infoIcon = Icons.info;
 
   // Utils
-  static const IconData search = Icons.search_outlined;
-  static const IconData menu = Icons.menu_outlined;
-  static const IconData more = Icons.more_vert_outlined;
-  static const IconData close = Icons.close_sharp;
-  static const IconData calendar = Icons.calendar_month_outlined;
-  static const IconData camera = Icons.camera_alt_outlined;
-  static const language = FontAwesomeIcons.language;
+  static const IconData searchIcon = Icons.search_outlined;
+  static const IconData menuIcon = Icons.menu_outlined;
+  static const IconData moreIcon = Icons.more_vert_outlined;
+  static const IconData closeIcon = Icons.close_sharp;
+  static const IconData calendarIcon = Icons.calendar_month_outlined;
+  static const IconData cameraIcon = Icons.camera_alt_outlined;
+  static const FaIconData languageFaIcon = FontAwesomeIcons.language;
 
   /* APP ICONS */
   // HOGAR
   // Agua
-  static const IconData water = Icons.water_drop_outlined;
+  static const IconData waterIcon = Icons.water_drop_outlined;
   // Trastero y garage
-  static const IconData garage = Icons.garage_outlined;
+  static const IconData garageIcon = Icons.garage_outlined;
   // Alquiler vivienda (ingreso y egreso)
-  static const IconData rent = Icons.home_work_outlined;
+  static const IconData rentIcon = Icons.home_work_outlined;
   // Comunidad
-  static const IconData community = Icons.people_outline;
+  static const IconData communityIcon = Icons.people_outline;
   // Decoracion y mobiliario
-  static const IconData decoration = Icons.chair_outlined;
+  static const IconData decorationIcon = Icons.chair_outlined;
   // Hipoteca
-  static const IconData mortgage = Icons.real_estate_agent_outlined;
+  static const IconData mortgageIcon = Icons.real_estate_agent_outlined;
   // Hogar (otros)
-  static const IconData homeOthers = Icons.home_outlined;
+  static const IconData homeOthersIcon = Icons.home_outlined;
   // Limpieza
-  static const IconData cleaning = Icons.cleaning_services_outlined;
+  static const IconData cleaningIcon = Icons.cleaning_services_outlined;
   // Luz
-  static const IconData electricity = Icons.electrical_services;
+  static const IconData electricityIcon = Icons.electrical_services;
   // Gas
-  static const IconData gas = Icons.gas_meter_outlined;
+  static const IconData gasIcon = Icons.gas_meter_outlined;
   // Mantenimiento del hogar
-  static const IconData maintenance = Icons.handyman_outlined;
+  static const IconData maintenanceIcon = Icons.handyman_outlined;
   // Seguridad y alarmas
-  static const IconData alarms = Icons.sensor_occupied_sharp;
+  static const IconData alarmsIcon = Icons.sensor_occupied_sharp;
   // Teléfono, TV e internet
-  static const IconData internet = Icons.signal_cellular_alt;
+  static const IconData internetIcon = Icons.signal_cellular_alt;
 
   // VEHICULO Y TRANSPORTE
   // Gasolina y combustible
-  static const IconData carGas = Icons.local_gas_station_rounded;
+  static const IconData carGasIcon = Icons.local_gas_station_rounded;
   // Mantenimiento de vehiculo
-  static const IconData mechanic = Icons.car_repair_outlined;
+  static const IconData mechanicIcon = Icons.car_repair_outlined;
   // Multas
-  static const IconData fine = Icons.local_police_outlined;
+  static const IconData fineIcon = Icons.local_police_outlined;
   // Parking y garaje
-  static const IconData parking = Icons.local_parking_rounded;
+  static const IconData parkingIcon = Icons.local_parking_rounded;
   // Peajes
-  static const IconData toll = Icons.toll_outlined;
+  static const IconData tollIcon = Icons.toll_outlined;
   // Recarga vehiculo electrico
-  static const IconData charging = Icons.electric_car_outlined;
+  static const IconData chargingIcon = Icons.electric_car_outlined;
   // Taxi y carsharing
-  static const IconData taxi = Icons.local_taxi_outlined;
+  static const IconData taxiIcon = Icons.local_taxi_outlined;
   //Transporte publico
-  static const IconData transport = Icons.train_outlined;
+  static const IconData transportIcon = Icons.train_outlined;
   // Vehiculo y trasnporte (otros)
-  static const IconData transportOthers = Icons.commute_outlined;
+  static const IconData transportOthersIcon = Icons.commute_outlined;
 
   // COMPRAS
   // Belleza, perfumeria y peluqueria
-  static const beauty = FontAwesomeIcons.sprayCanSparkles;
+  static const FaIconData beautyFaIcon = FontAwesomeIcons.sprayCanSparkles;
   // Compras (otros)
-  static const shoppingOthers = FontAwesomeIcons.bagShopping;
+  static const FaIconData shoppingOthersFaIcon = FontAwesomeIcons.bagShopping;
   // Electronica
-  static const electronic = FontAwesomeIcons.microchip;
+  static const FaIconData electronicFaIcon = FontAwesomeIcons.microchip;
   // Mascotas y veterinario
-  static const vet = FontAwesomeIcons.dog;
+  static const FaIconData vetFaIcon = FontAwesomeIcons.dog;
   // Ropa y complementos
-  static const IconData clothing = Icons.checkroom_sharp;
+  static const IconData clothingIcon = Icons.checkroom_sharp;
   // Tarjetas financieras y de credito
-  static const debts = FontAwesomeIcons.creditCard;
+  static const FaIconData debtsFaIcon = FontAwesomeIcons.creditCard;
 
   // OCIO Y VIAJES
   // Alquiler vehiculo
-  static const IconData carRental = Icons.car_rental_outlined;
+  static const IconData carRentalIcon = Icons.car_rental_outlined;
   // Billetes de viaje
-  static const IconData flightTicket = Icons.airplane_ticket_outlined;
+  static const IconData flightTicketIcon = Icons.airplane_ticket_outlined;
   // Cafeterias
-  static const IconData coffee = Icons.coffee_outlined;
+  static const IconData coffeeIcon = Icons.coffee_outlined;
   // Restaurantes
-  static const IconData restaurant = Icons.restaurant_outlined;
+  static const IconData restaurantIcon = Icons.restaurant_outlined;
   // Cine, teatro y espectaculos
-  static const IconData activities = Icons.theater_comedy_outlined;
+  static const IconData activitiesIcon = Icons.theater_comedy_outlined;
   // Estancos y tabaco
-  static const IconData smoking = Icons.smoking_rooms;
+  static const IconData smokingIcon = Icons.smoking_rooms;
   // Gastos desplazamiento
-  static const IconData transportExpenses = Icons.emoji_transportation_sharp;
+  static const IconData transportExpensesIcon = Icons.emoji_transportation_sharp;
   // Hotel y alojamiento
-  static const IconData hotel = Icons.hotel_outlined;
+  static const IconData hotelIcon = Icons.hotel_outlined;
   // Libros
-  static const book = FontAwesomeIcons.book;
+  static const FaIconData bookFaIcon = FontAwesomeIcons.book;
   // Musica
-  static const music = FontAwesomeIcons.guitar;
+  static const FaIconData musicFaIcon = FontAwesomeIcons.guitar;
   // Videojuegos
-  static const IconData videogames = Icons.videogame_asset_outlined;
+  static const IconData videogamesIcon = Icons.videogame_asset_outlined;
   // Loteria y apuestas
-  static const IconData lottery = Icons.casino_outlined;
+  static const IconData lotteryIcon = Icons.casino_outlined;
   // Ocio y viajes (otros)
-  static const IconData leisure = Icons.roller_skating_outlined;
+  static const IconData leisureIcon = Icons.roller_skating_outlined;
   // Parques y atracciones
-  static const IconData attractions = Icons.attractions_outlined;
+  static const IconData attractionsIcon = Icons.attractions_outlined;
   // Regalos y juguetes
-  static const souvenir = FontAwesomeIcons.gift;
+  static const FaIconData souvenirFaIcon = FontAwesomeIcons.gift;
 
   // OTROS GASTOS
   // Asociaciones y colegios profesionales
-  static const IconData college = Icons.school_outlined;
+  static const IconData collegeIcon = Icons.school_outlined;
   // Autonomos
-  static const IconData selfEmployed = Icons.business_center_outlined;
+  static const IconData selfEmployedIcon = Icons.business_center_outlined;
   // Cajeros
-  static const IconData atm = Icons.atm_outlined;
+  static const IconData atmIcon = Icons.atm_outlined;
   // Cheques (Ingresos y egresos)
-  static const paycheck = FontAwesomeIcons.moneyCheckDollar;
+  static const FaIconData paycheckFaIcon = FontAwesomeIcons.moneyCheckDollar;
   // Comisiones e intereses
-  static const IconData bankInterest = Icons.attach_money;
+  static const IconData bankInterestIcon = Icons.attach_money;
   // ONG
-  static const ong = FontAwesomeIcons.handHoldingHeart;
+  static const FaIconData ongFaIcon = FontAwesomeIcons.handHoldingHeart;
   // Otros gastos (otros)
-  static const IconData otherExpenses = Icons.currency_exchange_outlined;
+  static const IconData otherExpensesIcon = Icons.currency_exchange_outlined;
   // Pago de impuestos (ingresos y egresos)
-  static const IconData taxes = Icons.attach_money_sharp;
+  static const IconData taxesIcon = Icons.attach_money_sharp;
   // Pensión alimenticia (Egreso e ingreso)
-  static const IconData alimony = Icons.food_bank_outlined;
+  static const IconData alimonyIcon = Icons.food_bank_outlined;
   // Sindicatos
-  static const IconData union = Icons.handshake_outlined;
+  static const IconData unionIcon = Icons.handshake_outlined;
   // Suscripciones
-  static const IconData suscription = Icons.subscriptions_outlined;
+  static const IconData suscriptionIcon = Icons.subscriptions_outlined;
   // Transferencias - Movimientos excluidos > Traspaso entre cuentas - Bizum (ingreso y egresos)
-  static const IconData transfer = Icons.compare_arrows_outlined;
+  static const IconData transferIcon = Icons.compare_arrows_outlined;
 
   // ALIMENTACIÓN
   // Alimentación (otros)
-  static const IconData foodOthers = Icons.bakery_dining_rounded;
+  static const IconData foodOthersIcon = Icons.bakery_dining_rounded;
   // Bodega y gourmet
-  static const IconData gourmet = Icons.wine_bar_outlined;
+  static const IconData gourmetIcon = Icons.wine_bar_outlined;
   // Comida a domicilio
-  static const IconData delivery = Icons.delivery_dining_outlined;
+  static const IconData deliveryIcon = Icons.delivery_dining_outlined;
   // Supermercados y alimentación
-  static const IconData grocery = Icons.local_grocery_store_outlined;
+  static const FaIconData groceryFaIcon = FontAwesomeIcons.cartShopping;
 
   // EDUCACIÓN Y SALUD
   // Actividades extraescolares
-  static const IconData extracurricularActivities =
+  static const IconData extracurricularActivitiesIcon =
       Icons.sports_cricket_outlined;
   // Dentista, médico
-  static const IconData dentist = Icons.medication_outlined;
+  static const IconData dentistIcon = Icons.medication_outlined;
   // Deporte y gimnasio
-  static const IconData gym = Icons.sports_basketball_rounded;
+  static const IconData gymIcon = Icons.sports_basketball_rounded;
   // Educación
-  static const education = FontAwesomeIcons.bookOpenReader;
+  static const FaIconData educationFaIcon = FontAwesomeIcons.bookOpenReader;
   // Educación, salud y deporte (otros)
-  static const IconData health = Icons.healing_outlined;
+  static const IconData healthIcon = Icons.healing_outlined;
   // Farmacia, herbolario y nutrición
-  static const IconData pharmacy = Icons.local_pharmacy_outlined;
+  static const IconData pharmacyIcon = Icons.local_pharmacy_outlined;
   // Guardería y cuidado de niños
-  static const IconData daycare = Icons.child_friendly_outlined;
+  static const IconData daycareIcon = Icons.child_friendly_outlined;
   // Óptica
-  static const IconData optics = Icons.remove_red_eye_outlined;
+  static const IconData opticsIcon = Icons.remove_red_eye_outlined;
 
   // NÓMINA Y OTRAS PRESTACIONES
   // Nómina o pensión
-  static const payslip = FontAwesomeIcons.coins;
+  static const FaIconData payslipFaIcon = FontAwesomeIcons.coins;
   // Nónima o pensión (otros)
   // Pensión alimenticia
   // Prestación por desempleo
@@ -209,26 +211,26 @@ class AppIcons {
   // Ingreso Bizum
   // Ingresos de cheques
   // Ingresos de efectivo
-  static const cashIncome = FontAwesomeIcons.wallet;
+  static const FaIconData cashIncomeFaIcon = FontAwesomeIcons.wallet;
   // Ingresos de impuestos
   // Ingresos de otras entidades
   // Ingresos por alquiler
 
   // INVERSIÓN
   // Acciones
-  static const shares = FontAwesomeIcons.chartLine;
+  static const FaIconData sharesFaIcon = FontAwesomeIcons.chartLine;
   // Fondos de inversión
-  static const investmentFund = FontAwesomeIcons.moneyBillTrendUp;
+  static const FaIconData investmentFundFaIcon = FontAwesomeIcons.moneyBillTrendUp;
   // Otras inversiones
-  static const otherInvestments = FontAwesomeIcons.handHoldingDollar;
+  static const FaIconData otherInvestmentsFaIcon = FontAwesomeIcons.handHoldingDollar;
   // Planes de pensiones
-  static const pension = FontAwesomeIcons.sackDollar;
+  static const FaIconData pensionFaIcon = FontAwesomeIcons.sackDollar;
 
   // AHORRO
   // Otros ahorros
-  static const IconData savings = Icons.savings_outlined;
+  static const IconData savingsIcon = Icons.savings_outlined;
   // Productos de ahorro
-  static const savingProducts = FontAwesomeIcons.vault;
+  static const FaIconData savingProductsFaIcon = FontAwesomeIcons.vault;
 
   // INSURANCES
   // Otros seguros
@@ -243,10 +245,10 @@ class AppIcons {
   // Seguro deportivo
   // Seguro mascotas
   // Seguro proteccion impago
-  static const IconData insurance = Icons.business_outlined;
+  static const IconData insuranceIcon = Icons.business_outlined;
 
   // LOANS
   // Otros prestamos y avales
   // Prestamo de vehiculo
-  static const IconData carLoan = Icons.payments_outlined;
+  static const IconData carLoanIcon = Icons.payments_outlined;
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wallet_app/core/constants/constants.dart';
-import 'package:wallet_app/widgets/layout/custom_column.dart';
 import 'package:wallet_app/widgets/widgets.dart';
 import 'package:wallet_app/screens/information.dart';
 
@@ -13,15 +12,15 @@ class AboutUsScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(pageName: Strings.aboutUsEn),
       body: Padding(
-        padding: const EdgeInsets.all(AppDimens.smPadding),
+        padding: AppPaddings.paddingAll16,
         child: CustomColumn(
           children: [
             CustomContainer(
-              height: AppDimens.minHeight,
+              height: AppDimens.height64,
               child: GestureDetector(
                 child: CustomRow(
                   text: Strings.aboutUsEn,
-                  icon: AppIcons.aboutUs,
+                  icon: AppIcons.aboutUsIcon,
                   haveIconColor: true,
                 ),
                 onTap: () {
@@ -40,7 +39,7 @@ class AboutUsScreen extends StatelessWidget {
                   GestureDetector(
                     child: CustomRow(
                       text: Strings.portfolioEn,
-                      icon: AppIcons.portfolio,
+                      icon: AppIcons.portfolioFaIcon,
                       haveIconColor: true,
                     ),
                     onTap: () => _launchURL(Strings.portfoliobUrl),
@@ -48,7 +47,7 @@ class AboutUsScreen extends StatelessWidget {
                   GestureDetector(
                     child: CustomRow(
                       text: Strings.github,
-                      faIcon: AppIcons.github,
+                      faIcon: AppIcons.githubFaIcon,
                       haveIconColor: true,
                     ),
                     onTap: () => _launchURL(Strings.githubUrl),
@@ -56,7 +55,7 @@ class AboutUsScreen extends StatelessWidget {
                   GestureDetector(
                     child: CustomRow(
                       text: Strings.linkedin,
-                      faIcon: AppIcons.linkedin,
+                      faIcon: AppIcons.linkedinFaIcon,
                       haveIconColor: true,
                     ),
                     onTap: () => _launchURL(Strings.linkedinUrl),

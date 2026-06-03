@@ -7,6 +7,7 @@ class AppContainerTheme extends ThemeExtension<AppContainerTheme> {
   final LinearGradient? gradientColor;
   final Color fontColor;
   final Color fontColorVariant;
+  final Color fontColorTransaction;
   final Color iconColor;
   final Color? iconContainerColor;
   final Color borderColor;
@@ -18,6 +19,7 @@ class AppContainerTheme extends ThemeExtension<AppContainerTheme> {
     this.gradientColor,
     required this.fontColor,
     required this.fontColorVariant,
+    required this.fontColorTransaction,
     required this.iconColor,
     this.iconContainerColor,
     required this.borderColor,
@@ -31,6 +33,7 @@ class AppContainerTheme extends ThemeExtension<AppContainerTheme> {
     LinearGradient? gradientColor,
     Color? fontColor,
     Color? fontColorVariant,
+    Color? fontColorTransaction,
     Color? iconColor,
     Color? iconContainerColor,
     Color? borderColor,
@@ -42,6 +45,7 @@ class AppContainerTheme extends ThemeExtension<AppContainerTheme> {
       gradientColor: gradientColor ?? this.gradientColor,
       fontColor: fontColor ?? this.fontColor,
       fontColorVariant: fontColorVariant ?? this.fontColorVariant,
+      fontColorTransaction: fontColorTransaction ?? this.fontColorTransaction,
       iconColor: iconColor ?? this.iconColor,
       iconContainerColor: iconContainerColor ?? this.iconContainerColor,
       borderColor: borderColor ?? this.borderColor,
@@ -67,6 +71,11 @@ class AppContainerTheme extends ThemeExtension<AppContainerTheme> {
       fontColorVariant: Color.lerp(
         fontColorVariant,
         other.fontColorVariant,
+        t,
+      )!,
+      fontColorTransaction: Color.lerp(
+        fontColorTransaction,
+        other.fontColorTransaction,
         t,
       )!,
       iconColor: Color.lerp(iconColor, other.iconColor, t)!,

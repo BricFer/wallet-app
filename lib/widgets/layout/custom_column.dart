@@ -20,7 +20,7 @@ class CustomColumn extends StatelessWidget {
     return Column(
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
       crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
-      spacing: spacing ?? AppDimens.mdSpacing,
+      spacing: spacing ?? AppDimens.spacing24,
       children: children,
     );
   }

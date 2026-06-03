@@ -11,12 +11,13 @@ class ThemeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _selectedTheme = Provider.of<ThemeProvider>(context);
+    final _colorScheme = Theme.of(context).colorScheme;
 
     return PopupMenuButton<AppThemeType>(
-      icon: const FaIcon(AppIcons.themeIcon, size: AppDimens.mdIconSize),
-      iconColor: Theme.of(context).colorScheme.onSurface,
-      color: Theme.of(context).colorScheme.primary,
-      elevation: AppDimens.xlElevation,
+      icon: const FaIcon(AppIcons.themeFaIcon, size: AppDimens.iconSize36),
+      iconColor: _colorScheme.onSurface,
+      color: _colorScheme.primary,
+      elevation: AppDimens.elevation24,
       shadowColor: AppColors.shadowColor,
       onSelected: _selectedTheme.setTheme,
       itemBuilder: (context) => [
@@ -24,28 +25,28 @@ class ThemeWidget extends StatelessWidget {
           value: AppThemeType.light,
           child: Text(
             Strings.lightTheme,
-            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            style: TextStyle(color: _colorScheme.onPrimary),
           ),
         ),
         PopupMenuItem(
           value: AppThemeType.dark,
           child: Text(
             Strings.darkTheme,
-            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            style: TextStyle(color: _colorScheme.onPrimary),
           ),
         ),
         PopupMenuItem(
           value: AppThemeType.vibrant,
           child: Text(
             Strings.vibrantTheme,
-            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            style: TextStyle(color: _colorScheme.onPrimary),
           ),
         ),
         PopupMenuItem(
           value: AppThemeType.neutral,
           child: Text(
             Strings.neutralTheme,
-            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            style: TextStyle(color: _colorScheme.onPrimary),
           ),
         ),
       ],

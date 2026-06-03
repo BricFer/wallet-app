@@ -15,22 +15,23 @@ class _TransactionBoxesState extends State<TransactionBoxes> {
   @override
   Widget build(BuildContext context) {
     final containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
+    final _colorScheme = Theme.of(context).colorScheme;
 
     final double size1 = _firstContainerActive
-        ? AppDimens.mdBoxSize
-        : AppDimens.smBoxSize;
+        ? AppDimens.boxSize208
+        : AppDimens.boxSize144;
 
     final double size2 = _firstContainerActive
-        ? AppDimens.smBoxSize
-        : AppDimens.mdBoxSize;
+        ? AppDimens.boxSize144
+        : AppDimens.boxSize208;
 
     final Color color1 = _firstContainerActive
-        ? Theme.of(context).colorScheme.primary
-        : Theme.of(context).colorScheme.tertiary;
+        ? _colorScheme.primary
+        : _colorScheme.tertiary;
 
     final Color color2 = _firstContainerActive
-        ? Theme.of(context).colorScheme.tertiary
-        : Theme.of(context).colorScheme.primary;
+        ? _colorScheme.tertiary
+        : _colorScheme.primary;
 
     final TextStyle textStyle1 = _firstContainerActive
         ? TextStyle(
@@ -50,7 +51,7 @@ class _TransactionBoxesState extends State<TransactionBoxes> {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      spacing: 20.0,
+      spacing: AppDimens.spacing20,
       children: [
         GestureDetector(
           child: AnimatedContainer(
@@ -60,7 +61,7 @@ class _TransactionBoxesState extends State<TransactionBoxes> {
             height: size1,
             decoration: BoxDecoration(
               color: color1,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(AppDimens.radius20),
             ),
             child: Center(child: Text("€53.49+", style: textStyle1)),
           ),
@@ -78,7 +79,7 @@ class _TransactionBoxesState extends State<TransactionBoxes> {
             height: size2,
             decoration: BoxDecoration(
               color: color2,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(AppDimens.radius20),
             ),
             child: Center(child: Text("€93.25-", style: textStyle2)),
           ),

@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wallet_app/core/constants/dimens.dart';
 import 'package:wallet_app/core/constants/icons.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
+import 'package:wallet_app/widgets/profile/edit_dialog.dart';
 
 class CustomProfileRow extends StatelessWidget {
-  const CustomProfileRow({super.key, required this.text});
+  const CustomProfileRow({
+    super.key,
+    required this.label,
+    this.subtext,
+    required this.onSave,
+  });
 
-  final String text;
+  final String label;
+  final String? subtext;
+  final Future<void> Function(String value) onSave;
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +24,46 @@ class CustomProfileRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(text, style: TextStyle(color: containerTheme.fontColorVariant)),
-        FaIcon(AppIcons.edit),
+        RichText(
+          text: TextSpan(
+            children: <TextSpan>[
+              TextSpan(
+                text: label,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: containerTheme.fontColorVariant,
+                ),
+              ),
+              TextSpan(
+                text: subtext,
+                style: TextStyle(color: containerTheme.fontColorVariant),
+              ),
+            ],
+          ),
+        ),
+        GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () => _showEditDialog(context),
+          child: FaIcon(AppIcons.editFaIcon, size: AppDimens.iconSize10),
+        ),
       ],
+    );
+  }
+
+  void _showEditDialog(BuildContext context) {
+    TextEditingController controller = TextEditingController(text: subtext);
+
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (dialogContext) => EditDialog(
+        label: label,
+        controller: controller,
+        onSave: (value) async {
+          await onSave(value);
+          if(dialogContext.mounted) Navigator.pop(dialogContext);
+        },
+        onCancel: () => Navigator.pop(dialogContext)
+      ),
     );
   }
 }
