@@ -10,6 +10,7 @@ class AppDecoration {
   static BoxDecoration container(
     BuildContext context, {
     Color? containerBackgroud,
+    BorderRadiusGeometry? borderRadius,
     bool showGradient = true,
   }) {
     final containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
@@ -17,7 +18,8 @@ class AppDecoration {
     return BoxDecoration(
       color: containerBackgroud,
       gradient: showGradient ? containerTheme.gradientColor : null,
-      borderRadius: const BorderRadius.all(Radius.circular(AppDimens.radius12)),
+      borderRadius:
+          borderRadius ?? BorderRadius.all(Radius.circular(AppDimens.radius12)),
       boxShadow: [
         BoxShadow(
           color: Theme.of(context).colorScheme.primary,

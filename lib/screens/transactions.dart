@@ -10,7 +10,7 @@ class TransactionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(pageName: Strings.transactionEn),
+      appBar: CustomAppBar(title: Strings.transactionEn),
       body: Padding(
         padding: AppPaddings.paddingAll16,
         child: ListView(

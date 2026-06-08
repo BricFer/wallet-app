@@ -5,6 +5,7 @@ import 'package:wallet_app/core/themes/app_decoration.dart';
 class TransactionInput extends StatefulWidget {
   const TransactionInput({
     super.key,
+    this.initialValue,
     this.labelText,
     this.hintText,
     this.keyboardType,
@@ -13,6 +14,7 @@ class TransactionInput extends StatefulWidget {
     this.showCursor,
   });
 
+  final String? initialValue;
   final String? labelText;
   final String? hintText;
   final TextInputType? keyboardType;
@@ -26,6 +28,7 @@ class TransactionInput extends StatefulWidget {
 
 class _TransactionnInputState extends State<TransactionInput> {
   final _controller = TextEditingController();
+  late String? initialValue;
   late String? labelText;
   late String? hintText;
   late TextInputType? keyboardType;
@@ -37,6 +40,7 @@ class _TransactionnInputState extends State<TransactionInput> {
   void initState() {
     setState(() {
       super.initState();
+      labelText = widget.initialValue;
       labelText = widget.labelText;
       hintText = widget.hintText;
       keyboardType = widget.keyboardType;
@@ -63,7 +67,7 @@ class _TransactionnInputState extends State<TransactionInput> {
         hintText: hintText,
       ),
       style: Theme.of(context).textTheme.bodyMedium,
-      // initialValue: commerce,
+      initialValue: initialValue,
       onSaved: (String? value) {
         // TODO: Agregar validación para los valores que se agregan
       },

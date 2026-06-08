@@ -9,7 +9,7 @@ class AccountAccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(pageName: "Account Access"),
+      appBar: CustomAppBar(title: 'Account Access'),
       body: Padding(
         padding: AppPaddings.paddingAll16,
         child: CustomColumn(
@@ -17,7 +17,7 @@ class AccountAccessScreen extends StatelessWidget {
             CustomContainer(
               child: Column(
                 children: [
-                  SwitchRow(label: Strings.passwordEn),
+                  SwitchRow(label: Strings.passwordEn, isActive: true,),
                   SwitchRow(label: Strings.patternEn),
                   SwitchRow(label: Strings.emailCodeEn),
                   SwitchRow(label: Strings.phoneCodeEn),

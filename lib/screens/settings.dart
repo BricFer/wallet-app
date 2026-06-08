@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
+import 'package:wallet_app/core/providers/auth_provider.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
 import 'package:wallet_app/screens/personal_info.dart';
 import 'package:wallet_app/widgets/widgets.dart';
@@ -12,9 +14,9 @@ class SettingsScreen extends StatelessWidget {
     final containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
 
     return Scaffold(
-      appBar: CustomAppBar(pageName: Strings.settingsEn),
-      body: Padding(
-        padding: AppPaddings.paddingAll24,
+      appBar: CustomAppBar(title: Strings.settingsEn),
+      body: SingleChildScrollView(
+        padding: AppPaddings.paddingLTR16B106,
         child: CustomColumn(
           children: [
             SizedBox(height: AppDimens.spacing16),
@@ -36,7 +38,7 @@ class SettingsScreen extends StatelessWidget {
                     text: TextSpan(
                       children: <TextSpan>[
                         TextSpan(
-                          text: "€15.00\n",
+                          text: '€15.00\n',
                           style: Theme.of(context).textTheme.bodyLarge
                               ?.copyWith(
                                 fontWeight: FontWeight.bold,
@@ -60,7 +62,7 @@ class SettingsScreen extends StatelessWidget {
                     text: TextSpan(
                       children: <TextSpan>[
                         TextSpan(
-                          text: "€35.00\n",
+                          text: '€35.00\n',
                           style: Theme.of(context).textTheme.bodyLarge
                               ?.copyWith(
                                 fontWeight: FontWeight.bold,
@@ -96,7 +98,7 @@ class SettingsScreen extends StatelessWidget {
               },
             ),
             CustomRow(
-              text: "${Strings.inboxEn}/${Strings.notificationsEn}",
+              text: '${Strings.inboxEn}/${Strings.notificationsEn}',
               icon: AppIcons.notificationsIcon,
               fontColor: containerTheme.fontColor,
             ),
@@ -110,10 +112,15 @@ class SettingsScreen extends StatelessWidget {
               faIcon: AppIcons.languageFaIcon,
               fontColor: containerTheme.fontColor,
             ),
-            CustomRow(
-              text: Strings.logoutEn,
-              icon: AppIcons.logoutIcon,
-              fontColor: containerTheme.fontColor,
+            GestureDetector(
+              onTap: () async {
+                context.read<AuthProvider>().logout();
+              },
+              child: CustomRow(
+                text: Strings.logoutEn,
+                icon: AppIcons.logoutIcon,
+                fontColor: containerTheme.fontColor,
+              ),
             ),
           ],
         ),

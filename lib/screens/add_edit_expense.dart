@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/core/constants/dimens.dart';
 import 'package:wallet_app/core/constants/icons.dart';
+import 'package:wallet_app/core/constants/paddings.dart';
 import 'package:wallet_app/core/themes/app_decoration.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
 import 'package:wallet_app/widgets/widgets.dart';
@@ -19,34 +20,26 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
     final _colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: CustomAppBar(pageName: "Add Expense"),
+      appBar: CustomAppBar(title: 'Add Expense'),
       body: ListView(
-        padding: EdgeInsetsGeometry.fromLTRB(
-          AppDimens.spacing16,
-          AppDimens.spacing16,
-          AppDimens.spacing16,
-          AppDimens.padding106,
-        ),
+        padding: AppPaddings.paddingLTR16B106,
         children: [
           TransactionGroup(),
           TransactionInput(
-            labelText: "Commerce",
-            hintText: "Ex. Mercadona",
+            labelText: 'Commerce',
+            hintText: 'Ex. Mercadona',
             icon: AppIcons.groceryFaIcon,
           ),
-          // TODO: Corroborar que tiene sentido tener este campo
-          TransactionInput(labelText: "Concept", hintText: "Ex. Weekly buying"),
-          // TODO: Averiguar como traer el ícono que corresponde a la transacción y como pasarle un IconData o FaIconData
+          TransactionInput(labelText: 'Concept', hintText: 'Ex. Weekly buying'),
           TransactionInput(
-            labelText: "Amount",
-            hintText: "Ex. 0,00€",
+            labelText: 'Amount',
+            hintText: 'Ex. 0,00€',
             keyboardType: TextInputType.number,
             icon: AppIcons.euroFaIcon,
           ),
           //
           TransactionType(),
-          // Text("[Image] Subcategory"),
-          TransactionInput(labelText: "Note", maxLength: 150, showCursor: true),
+          TransactionInput(labelText: 'Note', maxLength: 150, showCursor: true),
           SizedBox(height: AppDimens.height48),
           CustomContainer(
             decoration: AppDecoration.container(
@@ -60,7 +53,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
               children: [
                 Icon(AppIcons.calendarIcon),
                 Text(
-                  "Payment Method",
+                  'Payment Method',
                   style: TextStyle(color: containerTheme.fontColorTransaction),
                 ),
                 Icon(AppIcons.cameraIcon),

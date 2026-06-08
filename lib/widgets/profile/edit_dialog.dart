@@ -4,6 +4,7 @@ import 'package:wallet_app/core/themes/app_decoration.dart';
 
 class EditDialog extends StatefulWidget {
   const EditDialog({
+    super.key,
     required this.label,
     required this.controller,
     required this.onSave,

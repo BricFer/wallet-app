@@ -8,7 +8,7 @@ class CurrencyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(pageName: Strings.currencyEn),
+      appBar: CustomAppBar(title: Strings.currencyEn),
       body: Column(children: [
         
       ],),

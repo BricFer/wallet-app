@@ -7,11 +7,13 @@ class SwitchRow extends StatefulWidget {
     required this.label,
     this.mainAxisAlignment,
     this.fontColor,
+    this.isActive,
   });
 
   final String label;
   final MainAxisAlignment? mainAxisAlignment;
   final Color? fontColor;
+  final bool? isActive;
 
   @override
   State<SwitchRow> createState() => _SwitchRowState();
@@ -21,7 +23,7 @@ class _SwitchRowState extends State<SwitchRow> {
   late String label;
   late MainAxisAlignment? mainAxisAlignment;
   late Color? fontColor;
-  bool isActive = true;
+  late bool? isActive;
 
   @override
   void initState() {
@@ -29,6 +31,7 @@ class _SwitchRowState extends State<SwitchRow> {
     label = widget.label;
     mainAxisAlignment = widget.mainAxisAlignment;
     fontColor = widget.fontColor;
+    isActive = widget.isActive;
   }
 
   @override
@@ -44,7 +47,7 @@ class _SwitchRowState extends State<SwitchRow> {
           style: TextStyle(color: fontColor ?? containerTheme.fontColorVariant),
         ),
         Switch(
-          value: isActive,
+          value: isActive ?? false,
           activeThumbColor: _colorScheme.tertiary,
           inactiveThumbColor: _colorScheme.shadow,
           trackColor: WidgetStateProperty.resolveWith<Color?>((

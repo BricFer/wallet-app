@@ -8,4 +8,10 @@ class AppPaddings {
   static const EdgeInsetsGeometry paddingBottom106 = EdgeInsets.only(
     bottom: 106.0,
   );
+  static const EdgeInsetsGeometry paddingLTR16B106 = EdgeInsets.fromLTRB(
+    16.0,
+    16.0,
+    16.0,
+    106.0,
+  );
 }

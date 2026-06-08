@@ -10,7 +10,7 @@ class AboutUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(pageName: Strings.aboutUsEn),
+      appBar: CustomAppBar(title: Strings.aboutUsEn),
       body: Padding(
         padding: AppPaddings.paddingAll16,
         child: CustomColumn(

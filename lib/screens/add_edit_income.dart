@@ -7,7 +7,7 @@ class AddEditIncomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(pageName: "Edit Income"),
-      body: Center(child: Text("Your are at the Add/Edit Income Page")),
+      appBar: CustomAppBar(title: 'Edit Income'),
+      body: Center(child: Text('Your are at the Add/Edit Income Page')),
     );
   }}

@@ -8,7 +8,7 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(pageName: Strings.homeEn, isDashboard: true),
+      appBar: CustomAppBar(title: Strings.homeEn, isDashboard: true),
       body: Center(child: Text("Este es el Dashboard Page")),
     );
   }

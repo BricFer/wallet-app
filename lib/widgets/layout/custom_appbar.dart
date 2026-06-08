@@ -1,12 +1,21 @@
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/widgets/theme/theme_widget.dart';
+import 'package:wallet_app/core/providers/auth_provider.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key, this.pageName, this.isDashboard});
+  const CustomAppBar({
+    super.key,
+    this.title,
+    this.isDashboard,
+    this.toolbarHeight,
+  });
 
-  final String? pageName;
+  final String? title;
   final bool? isDashboard;
+  final double? toolbarHeight;
 
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();
@@ -16,23 +25,26 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
-  late String pageName;
+  late String title;
   late bool isDashboard;
+  late double toolbarHeight;
 
   @override
   void initState() {
     super.initState();
-    pageName = widget.pageName ?? "";
+    title = widget.title ?? "";
     isDashboard = widget.isDashboard ?? false;
+    toolbarHeight = widget.toolbarHeight ?? AppDimens.height85;
   }
 
   @override
   PreferredSizeWidget build(BuildContext context) {
     final _colorScheme = Theme.of(context).colorScheme;
+    final _currentUser = context.read<AuthProvider>().user;
 
     return AppBar(
       backgroundColor: _colorScheme.surface,
-      toolbarHeight: AppDimens.height85,
+      toolbarHeight: toolbarHeight,
       title: isDashboard
           ? Row(
               spacing: AppDimens.spacing24,
@@ -54,7 +66,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       TextSpan(
-                        text: "\nPepito Perez",
+                        text: _currentUser?.displayName,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                     ],
@@ -62,7 +74,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                 ),
               ],
             )
-          : Text(pageName),
+          : Text(title),
       centerTitle: true,
       actions: [
         CircleAvatar(

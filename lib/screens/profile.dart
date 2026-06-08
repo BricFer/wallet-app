@@ -8,7 +8,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(pageName: Strings.profileEn),
+      appBar: CustomAppBar(title: Strings.profileEn),
       body: Padding(
         padding: AppPaddings.paddingAll16,
         child: Column(
@@ -17,13 +17,12 @@ class ProfileScreen extends StatelessWidget {
           children: [
             SizedBox(height: AppDimens.spacing16),
             CustomContainer(
-              padding: AppPaddings.paddingAll16,
               child: Column(
                 spacing: AppDimens.spacing16,
                 children: [
                   CustomProfileRow(
                     label: Strings.fullnameEn,
-                    subtext: "\nPepito Perez",
+                    subtext: '\nPepito Perez',
                     onSave: (value) async {
                       // TODO: Implementar al tener la base de datos
                       // TODO: Implementar el provider de usuario
@@ -32,27 +31,27 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   CustomProfileRow(
                     label: Strings.addressEn,
-                    subtext: "\nAv. del aprendizaje 1",
+                    subtext: '\nAv. del aprendizaje 1',
                     onSave: (value) async {},
                   ),
                   CustomProfileRow(
                     label: Strings.phoneNumberEn,
-                    subtext: "\n+34 123 456 789",
+                    subtext: '\n+34 123 456 789',
                     onSave: (value) async {},
                   ),
                   CustomProfileRow(
                     label: Strings.emailEn,
-                    subtext: "\naprendizaje@example.com",
+                    subtext: '\naprendizaje@example.com',
                     onSave: (value) async {},
                   ),
                   CustomProfileRow(
                     label: Strings.countryEn,
-                    subtext: "\nSpain",
+                    subtext: '\nSpain',
                     onSave: (value) async {},
                   ),
                   CustomProfileRow(
                     label: Strings.birthEn,
-                    subtext: "\n01-01-1991",
+                    subtext: '\n01-01-1991',
                     onSave: (value) async {},
                   ),
                 ],

@@ -46,7 +46,7 @@ class PersonalInfoScreen extends StatelessWidget {
             ),
             CustomContainer(
               height: AppDimens.height64,
-              child: CustomRow(text: "Account name"),
+              child: CustomRow(text: 'Account name'),
             ),
           ],
         ),

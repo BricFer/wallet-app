@@ -68,8 +68,8 @@ class AppColors {
   static const Color successFontColor = Color(0xFFE9FFDB);
 
   // Error
-  static const Color errorColor = Color(0xFFC42021);
-  static const Color errorFontColor = Color(0xFFF8D7D7);
+  static const Color errorColor = Color(0xFFF8D7D7);
+  static const Color errorFontColor = Color(0xFFC42021);
   // static const Color errorFontColor = Color(0xFFFFE4E1);
 
   // Shadow
