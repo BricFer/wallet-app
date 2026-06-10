@@ -19,7 +19,7 @@ class CustomProfileRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
+    final _containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -30,12 +30,12 @@ class CustomProfileRow extends StatelessWidget {
               TextSpan(
                 text: label,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: containerTheme.fontColorVariant,
+                  color: _containerTheme.fontColorVariant,
                 ),
               ),
               TextSpan(
                 text: subtext,
-                style: TextStyle(color: containerTheme.fontColorVariant),
+                style: TextStyle(color: _containerTheme.fontColorVariant),
               ),
             ],
           ),
@@ -43,7 +43,11 @@ class CustomProfileRow extends StatelessWidget {
         GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () => _showEditDialog(context),
-          child: FaIcon(AppIcons.editFaIcon, size: AppDimens.iconSize10),
+          child: FaIcon(
+            AppIcons.editFaIcon,
+            color: _containerTheme.iconContainerColor,
+            size: AppDimens.iconSize10,
+          ),
         ),
       ],
     );
@@ -60,9 +64,9 @@ class CustomProfileRow extends StatelessWidget {
         controller: controller,
         onSave: (value) async {
           await onSave(value);
-          if(dialogContext.mounted) Navigator.pop(dialogContext);
+          if (dialogContext.mounted) Navigator.pop(dialogContext);
         },
-        onCancel: () => Navigator.pop(dialogContext)
+        onCancel: () => Navigator.pop(dialogContext),
       ),
     );
   }

@@ -40,7 +40,7 @@ class _TransactionnInputState extends State<TransactionInput> {
   void initState() {
     setState(() {
       super.initState();
-      labelText = widget.initialValue;
+      initialValue = widget.initialValue;
       labelText = widget.labelText;
       hintText = widget.hintText;
       keyboardType = widget.keyboardType;

@@ -63,4 +63,18 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<void> updateUserPassword(String newPassword) async {
+    _errorMessage = null;
+
+    try {
+      await _user?.updatePassword(newPassword);
+    } on FirebaseAuthException catch (e) {
+      _errorMessage = switch (e.code) {
+        'weak-password' => 'The password provided is too weak.',
+        _ => e.message ?? 'An error occurred.',
+      };
+      notifyListeners();
+    }
+  }
 }

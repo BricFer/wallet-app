@@ -31,6 +31,7 @@ class AppTheme {
     AppContainerTheme(
       backgroundColor: AppColors.containerColorLight,
       gradientColor: AppGradient.linearGradientContainerLight,
+      containerShadow: AppColors.shadowContainerColorLight,
       fontColor: AppColors.fontColorContainerLight,
       fontColorVariant: AppColors.fontColorContainerVariantLight,
       iconColor: AppColors.iconColorLight,
@@ -54,6 +55,7 @@ class AppTheme {
     AppContainerTheme(
       backgroundColor: AppColors.containerColorDark,
       gradientColor: AppGradient.linearGradientContainerDark,
+      containerShadow: AppColors.shadowContainerColorLightDark,
       fontColor: AppColors.fontColorContainerDark,
       fontColorVariant: AppColors.fontColorContainerVariantDark,
       fontColorTransaction: AppColors.fontColorTransactionDark,
@@ -78,6 +80,7 @@ class AppTheme {
     AppContainerTheme(
       backgroundColor: AppColors.containerColorVibrant,
       gradientColor: AppGradient.linearGradientContainerVibrant,
+      containerShadow: AppColors.shadowContainerColorLightVibrant,
       fontColor: AppColors.fontColorContainerVibrant,
       fontColorVariant: AppColors.fontColorContainerVariantVibrant,
       fontColorTransaction: AppColors.fontColorTransactionVibrant,
@@ -102,6 +105,7 @@ class AppTheme {
     AppContainerTheme(
       backgroundColor: AppColors.containerColorNeutral,
       gradientColor: AppGradient.linearGradientContainerNeutral,
+      containerShadow: AppColors.shadowContainerColorLightNeutral,
       fontColor: AppColors.fontColorContainerNeutral,
       fontColorVariant: AppColors.fontColorContainerVariantNeutral,
       fontColorTransaction: AppColors.fontColorTransactionNeutral,

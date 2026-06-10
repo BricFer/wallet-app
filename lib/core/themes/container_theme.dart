@@ -13,6 +13,7 @@ class AppContainerTheme extends ThemeExtension<AppContainerTheme> {
   final Color borderColor;
   final double borderRadius;
   final List<BoxShadow>? boxShadow;
+  final Color containerShadow;
 
   const AppContainerTheme({
     required this.backgroundColor,
@@ -25,6 +26,7 @@ class AppContainerTheme extends ThemeExtension<AppContainerTheme> {
     required this.borderColor,
     required this.borderRadius,
     this.boxShadow,
+    required this.containerShadow,
   });
 
   @override
@@ -39,6 +41,7 @@ class AppContainerTheme extends ThemeExtension<AppContainerTheme> {
     Color? borderColor,
     double? borderRadius,
     List<BoxShadow>? boxShadow,
+    Color? containerShadow,
   }) {
     return AppContainerTheme(
       backgroundColor: backgroundColor ?? this.backgroundColor,
@@ -51,6 +54,7 @@ class AppContainerTheme extends ThemeExtension<AppContainerTheme> {
       borderColor: borderColor ?? this.borderColor,
       borderRadius: borderRadius ?? this.borderRadius,
       boxShadow: boxShadow ?? this.boxShadow,
+      containerShadow: containerShadow ?? this.containerShadow,
     );
   }
 
@@ -86,6 +90,7 @@ class AppContainerTheme extends ThemeExtension<AppContainerTheme> {
       )!,
       borderColor: Color.lerp(borderColor, other.borderColor, t)!,
       borderRadius: lerpDouble(borderRadius, other.borderRadius, t)!,
+      containerShadow: Color.lerp(containerShadow, other.containerShadow, t)!,
       boxShadow: t < 0.5 ? boxShadow : other.boxShadow,
     );
   }

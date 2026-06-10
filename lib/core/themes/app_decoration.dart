@@ -13,18 +13,18 @@ class AppDecoration {
     BorderRadiusGeometry? borderRadius,
     bool showGradient = true,
   }) {
-    final containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
+    final _containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
 
     return BoxDecoration(
       color: containerBackgroud,
-      gradient: showGradient ? containerTheme.gradientColor : null,
+      gradient: showGradient ? _containerTheme.gradientColor : null,
       borderRadius:
           borderRadius ?? BorderRadius.all(Radius.circular(AppDimens.radius12)),
       boxShadow: [
         BoxShadow(
-          color: Theme.of(context).colorScheme.primary,
+          color: _containerTheme.containerShadow,
           spreadRadius: 2,
-          blurRadius: 5,
+          blurRadius: 3,
           offset: Offset(3, 3),
         ),
       ],
