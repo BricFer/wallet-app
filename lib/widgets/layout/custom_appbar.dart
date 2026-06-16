@@ -62,11 +62,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   text: TextSpan(
                     children: <TextSpan>[
                       TextSpan(
-                        text: "Welcome,",
+                        text: "Welcome,\n",
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       TextSpan(
-                        text: _currentUser?.displayName,
+                        text: _currentUser?.uid,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                     ],

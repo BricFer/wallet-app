@@ -12,11 +12,11 @@ import com.walletapp.demo.entity.GroupBudget;
 public interface GroupBudgetRepository extends JpaRepository<GroupBudget, Long> {
     List<GroupBudget> findByUserId(Long userId);
 
-    List<GroupBudget> findByUserIdAndGroupId(Long userId, Long groupId);
+    List<GroupBudget> findByGroupIdAndUserId(Long groupId, Long userId);
 
-    Optional<GroupBudget> findByUserIdAndGroupBudgetId(Long userId, Long budgetId);
+    Optional<GroupBudget> findByIdAndUserId(Long budgetId, Long userId);
 
     List<GroupBudget> findByUserIdAndIsActiveTrue(Long userId);
 
-    Optional<GroupBudget> findByUserIdAndGroupIdAndIsActiveTrue(Long userId, Long groupId);
+    Optional<GroupBudget> findByIdAndUserIdAndIsActiveTrue(Long groupId, Long userId);
 }

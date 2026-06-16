@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.walletapp.demo.dtos.response.ExpenseResumeResponseDto;
+import com.walletapp.demo.constants.Message;
 import com.walletapp.demo.dtos.request.ExpenseRequestDto;
 import com.walletapp.demo.dtos.response.ExpenseDetailResponseDto;
 import com.walletapp.demo.entity.Category;
@@ -22,6 +24,7 @@ import com.walletapp.demo.repository.WalletAppUserRepository;
 import lombok.AllArgsConstructor;
 
 @Service
+@Transactional(readOnly = true)
 @AllArgsConstructor
 public class ExpenseService {
     private ExpenseRepository expenseRepo;
@@ -30,6 +33,7 @@ public class ExpenseService {
     private GroupRepository groupRepo;
     private PaymentMethodRepository paymentMethodRepository;
 
+    @Transactional
     public ExpenseDetailResponseDto saveExpense(ExpenseRequestDto dto, Long userId) {
         Expense expense = new Expense();
         expense.setCommerce(dto.getCommerce());
@@ -39,26 +43,26 @@ public class ExpenseService {
         expense.setCurrency(dto.getCurrency());
         expense.setDate(dto.getDate());
 
-        User user = userRepo.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepo.findById(userId).orElseThrow(() -> new RuntimeException(Message.USER_NOT_FOUND));
 
         expense.setUser(user);
 
         if (dto.getCategoryId() != null) {
             Category category = categoryRepo.findById(dto.getCategoryId())
-                    .orElseThrow(() -> new RuntimeException("Category not found."));
+                    .orElseThrow(() -> new RuntimeException(Message.CATEGORY_NOT_FOUND));
             expense.setCategory(category);
         }
 
         if (dto.getGroupId() != null) {
             Group group = groupRepo.findById(dto.getGroupId())
-                    .orElseThrow(() -> new RuntimeException("Group not found."));
+                    .orElseThrow(() -> new RuntimeException(Message.GROUP_NOT_FOUND));
 
             expense.setGroup(group);
         }
 
         if (dto.getPaymentMethodId() != null) {
             PaymentMethod paymentMethod = paymentMethodRepository.findById(dto.getPaymentMethodId())
-                    .orElseThrow(() -> new RuntimeException("Payment method not found."));
+                    .orElseThrow(() -> new RuntimeException(Message.PAYMENT_METHOD_NOT_FOUND));
 
             expense.setPaymentMethod(paymentMethod);
         }
@@ -66,9 +70,10 @@ public class ExpenseService {
         return toDetailDto(expenseRepo.save(expense));
     }
 
+    @Transactional
     public ExpenseDetailResponseDto updateExpense(ExpenseRequestDto dto, Long userId, Long expenseId) {
-        Expense expense = expenseRepo.findByUserIdAndExpenseId(userId, expenseId)
-                .orElseThrow(() -> new RuntimeException("Expense not found."));
+        Expense expense = expenseRepo.findByIdAndUserId(expenseId, userId)
+                .orElseThrow(() -> new RuntimeException(Message.EXPENSE_NOT_FOUND));
 
         expense.setCommerce(dto.getCommerce());
         expense.setConcept(dto.getConcept());
@@ -79,20 +84,20 @@ public class ExpenseService {
 
         if (dto.getCategoryId() != null) {
             Category category = categoryRepo.findById(dto.getCategoryId())
-                    .orElseThrow(() -> new RuntimeException("Category not found."));
+                    .orElseThrow(() -> new RuntimeException(Message.CATEGORY_NOT_FOUND));
             expense.setCategory(category);
         }
 
         if (dto.getGroupId() != null) {
             Group group = groupRepo.findById(dto.getGroupId())
-                    .orElseThrow(() -> new RuntimeException("Group not found."));
+                    .orElseThrow(() -> new RuntimeException(Message.GROUP_NOT_FOUND));
 
             expense.setGroup(group);
         }
 
         if (dto.getPaymentMethodId() != null) {
             PaymentMethod paymentMethod = paymentMethodRepository.findById(dto.getPaymentMethodId())
-                    .orElseThrow(() -> new RuntimeException("Payment method not found."));
+                    .orElseThrow(() -> new RuntimeException(Message.PAYMENT_METHOD_NOT_FOUND));
 
             expense.setPaymentMethod(paymentMethod);
         }
@@ -102,8 +107,8 @@ public class ExpenseService {
 
     public ExpenseDetailResponseDto getExpense(Long userId, Long expenseId) {
 
-        Expense expense = expenseRepo.findByUserIdAndExpenseId(userId, expenseId)
-                .orElseThrow(() -> new RuntimeException("Expense not found."));
+        Expense expense = expenseRepo.findByIdAndUserId(expenseId, userId)
+                .orElseThrow(() -> new RuntimeException(Message.EXPENSE_NOT_FOUND));
 
         return toDetailDto(expense);
     }
@@ -132,7 +137,7 @@ public class ExpenseService {
         return expenseRepo.sumByCurrencyAndPaymentMethodAndMonth(userId, currency, paymentMethodId, month);
     }
 
-    public List<ExpenseResumeResponseDto> getAllPaymentMethodByCurrency(Long userId, String currency,
+    public List<ExpenseResumeResponseDto> getAllByPaymentMethod(Long userId, String currency,
             Long paymentMethodId) {
         return toResumeDto(
                 expenseRepo.findByUserIdAndCurrencyAndPaymentMethodId(userId, currency, paymentMethodId));
@@ -150,10 +155,11 @@ public class ExpenseService {
         return expenseRepo.sumByCategoryAndCurrency(userId, categoryId, currency);
     }
 
+    @Transactional
     public void deleteExpense(Long userId, Long expenseId) {
 
-        expenseRepo.findByUserIdAndExpenseId(userId, expenseId)
-                .orElseThrow(() -> new RuntimeException("Expense not found"));
+        expenseRepo.findByIdAndUserId(expenseId, userId)
+                .orElseThrow(() -> new RuntimeException(Message.EXPENSE_NOT_FOUND));
 
         expenseRepo.deleteById(expenseId);
     }

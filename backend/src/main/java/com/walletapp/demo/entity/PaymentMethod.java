@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "payment_methods", uniqueConstraints = @UniqueConstraint(columnNames = { "user_id", "name" }), indexes = {
-        @Index(name = "idx_payment_method_user_id", columnList = "user_id"),
+@Table(name = "payment_methods", uniqueConstraints = @UniqueConstraint(columnNames = { "created_by_id", "name" }), indexes = {
+        @Index(name = "idx_payment_method_user_id", columnList = "created_by_id"),
         @Index(name = "idx_payment_method_issuer", columnList = "issuer"),
 
 })
@@ -31,7 +31,7 @@ public class PaymentMethod {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "created_by_id", nullable = false)
     private User user;
     private String alias;
 
@@ -39,6 +39,7 @@ public class PaymentMethod {
     @Column(name = "payment_type")
     private PaymentType type;
 
+    @Column(nullable = false)
     private String issuer;
 
     @Column(name = "is_default")

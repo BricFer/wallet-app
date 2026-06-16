@@ -13,7 +13,7 @@ import com.walletapp.demo.entity.Expense;
 
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
-        Optional<Expense> findByUserIdAndExpenseId(Long userId, Long expenseId);
+        Optional<Expense> findByIdAndUserId(Long expenseId, Long userId);
 
         List<Expense> findByUserId(Long userId);
 

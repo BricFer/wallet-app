@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "groups", uniqueConstraints = {
-                @UniqueConstraint(columnNames = { "user_id", "name" })
+@Table(name = "expense_groups", uniqueConstraints = {
+                @UniqueConstraint(columnNames = { "created_by_id", "name" })
 }, indexes = {
-                @Index(name = "idx_group_user_id", columnList = "user_id"),
+                @Index(name = "idx_group_user_id", columnList = "created_by_id"),
 })
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,7 +29,7 @@ public class Group {
         private Long id;
 
         @ManyToOne
-        @JoinColumn(name = "user_id", nullable = false)
+        @JoinColumn(name = "created_by_id", nullable = false)
         private User user;
 
         @Column(nullable = false)

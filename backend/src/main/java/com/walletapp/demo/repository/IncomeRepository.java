@@ -14,7 +14,7 @@ import com.walletapp.demo.entity.Income;
 @Repository
 public interface IncomeRepository extends JpaRepository<Income, Long> {
 
-    Optional<Income> findByUserIdAndIncomeId(Long userId, Long incomeId);
+    Optional<Income> findByIdAndUserId(Long incomeId, Long userId);
 
     List<Income> findByUserId(Long userId);
 

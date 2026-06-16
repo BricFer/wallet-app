@@ -10,7 +10,7 @@ import com.walletapp.demo.entity.CategoryBudget;
 
 @Repository
 public interface CategoryBudgetRepository extends JpaRepository<CategoryBudget, Long> {
-    Optional<CategoryBudget> findByUserIdAndCategoryBudgetId(Long userId, Long budgetId);
+    Optional<CategoryBudget> findByIdAndUserId(Long budgetId, Long userId);
 
     List<CategoryBudget> findByUserId(Long userId);
 

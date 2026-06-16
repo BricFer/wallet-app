@@ -13,7 +13,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "recurring_expenses", indexes = {
-        @Index(name = "idx_recurring_expense_user_id", columnList = "user_id"),
+        @Index(name = "idx_recurring_expense_user_id", columnList = "created_by_id"),
         @Index(name = "idx_recurring_expense_category_id", columnList = "category_id"),
 
 })
@@ -29,7 +29,7 @@ public class RecurringExpense {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "created_by_id", nullable = false)
     private User user;
 
     @ManyToOne

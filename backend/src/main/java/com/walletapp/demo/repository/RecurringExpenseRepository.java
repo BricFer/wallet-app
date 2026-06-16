@@ -13,7 +13,7 @@ import com.walletapp.demo.entity.RecurringExpense;
 
 @Repository
 public interface RecurringExpenseRepository extends JpaRepository<RecurringExpense, Long> {
-    Optional<RecurringExpense> findByUserIdAndRecurringExpenseId(Long userId, Long recurringExpenseId);
+    Optional<RecurringExpense> findByIdAndUserId(Long recurringExpenseId, Long userId);
 
     List<RecurringExpense> findByUserId(Long userId);
 

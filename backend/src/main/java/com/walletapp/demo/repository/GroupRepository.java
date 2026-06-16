@@ -11,7 +11,7 @@ import com.walletapp.demo.entity.Group;
 @Repository
 public interface GroupRepository extends JpaRepository<Group, Long> {
 
-    Optional<Group> findByUserIdAndGroupId(Long userId, Long groupId);
+    Optional<Group> findByIdAndUserId(Long groupId, Long userId);
 
     List<Group> findByUserId(Long userId);
 

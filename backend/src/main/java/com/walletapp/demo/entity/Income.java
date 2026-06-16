@@ -13,7 +13,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "incomes", indexes = {
-        @Index(name = "idx_income_id", columnList = "user_id"),
+        @Index(name = "idx_income_id", columnList = "created_by_id"),
         @Index(name = "idx_income_category_id", columnList = "category_id"),
         @Index(name = "idx_income_payment_method_id", columnList = "payment_method_id"),
     })
@@ -29,7 +29,7 @@ public class Income {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "created_by_id", nullable = false)
     private User user;
 
     @ManyToOne

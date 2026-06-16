@@ -1,4 +1,4 @@
-package com.walletapp.demo.dtos.request;
+package com.walletapp.demo.dtos.request.user;
 
 
 import java.time.LocalDateTime;
@@ -12,8 +12,11 @@ import lombok.NoArgsConstructor;
 @Data
 public class UserRequestDto {
     private String username;
+    private String fullname;
     private String phoneNumber;
     private LocalDateTime dateOfBirth;
+    private String address;
+    private String email;
     private String country;
     private String defaultCurrency;
 }

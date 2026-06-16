@@ -1,4 +1,4 @@
-/// DTO send to backend
+
 class ExpenseRequest {
   final int? categoryId;
   final int? groupId;
@@ -8,7 +8,6 @@ class ExpenseRequest {
   final double amount;
   final String currency;
   final String? note;
-  // final String? imagePath;
   final DateTime date;
 
   ExpenseRequest({
@@ -20,7 +19,6 @@ class ExpenseRequest {
     required this.currency,
     this.concept,
     this.note,
-    // this.imagePath,
     required this.date,
   });
 
@@ -33,7 +31,6 @@ class ExpenseRequest {
     'currency': currency,
     'concept': concept,
     'note': note,
-    // 'imagePath': imagePath,
     'date': date.toIso8601String(),
   };
 }

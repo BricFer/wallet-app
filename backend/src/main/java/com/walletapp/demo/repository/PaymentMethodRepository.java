@@ -11,7 +11,7 @@ import com.walletapp.demo.enums.PaymentType;
 
 @Repository
 public interface PaymentMethodRepository extends JpaRepository<PaymentMethod, Long> {
-    Optional<PaymentMethod> findByUserIdAndPaymentMethodId(Long userId, Long methodId);
+    Optional<PaymentMethod> findByIdAndUserId(Long methodId, Long userId);
     
     List<PaymentMethod> findByUserId(Long userId);
 

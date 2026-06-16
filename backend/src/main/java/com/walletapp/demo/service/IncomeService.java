@@ -4,7 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.walletapp.demo.constants.Message;
 import com.walletapp.demo.dtos.request.IncomeRequestDto;
 import com.walletapp.demo.dtos.response.IncomeDetailResponseDto;
 import com.walletapp.demo.dtos.response.IncomeResumeResponseDto;
@@ -20,6 +22,7 @@ import com.walletapp.demo.repository.WalletAppUserRepository;
 import lombok.AllArgsConstructor;
 
 @Service
+@Transactional(readOnly = true)
 @AllArgsConstructor
 public class IncomeService {
     private CategoryRepository categoryRepo;
@@ -27,6 +30,7 @@ public class IncomeService {
     private PaymentMethodRepository methodRepo;
     private WalletAppUserRepository userRepo;
 
+    @Transactional
     public IncomeDetailResponseDto saveIncome(IncomeRequestDto dto, Long userId) {
 
         Income income = new Income();
@@ -36,19 +40,19 @@ public class IncomeService {
         income.setNote(dto.getNote());
         income.setSource(dto.getSource());
 
-        User user = userRepo.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepo.findById(userId).orElseThrow(() -> new RuntimeException(Message.USER_NOT_FOUND));
 
         income.setUser(user);
 
         if (dto.getCategoryId() != null) {
             Category category = categoryRepo.findById(dto.getCategoryId())
-                    .orElseThrow(() -> new RuntimeException("Category not found."));
+                    .orElseThrow(() -> new RuntimeException(Message.CATEGORY_NOT_FOUND));
             income.setCategory(category);
         }
 
         if (dto.getPaymentMethodId() != null) {
             PaymentMethod method = methodRepo.findById(dto.getPaymentMethodId())
-                    .orElseThrow(() -> new RuntimeException("Payment method not found"));
+                    .orElseThrow(() -> new RuntimeException(Message.PAYMENT_METHOD_NOT_FOUND));
             income.setPaymentMethod(method);
         }
 
@@ -57,8 +61,9 @@ public class IncomeService {
         return toDetailDto(saved);
     }
 
+    @Transactional
     public IncomeDetailResponseDto updateIncome(IncomeRequestDto dto, Long userId, Long incomeId) {
-        Income income = incomeRepo.findByUserIdAndIncomeId(userId, incomeId).orElseThrow(() -> new RuntimeException("Income not found."));
+        Income income = incomeRepo.findByIdAndUserId(incomeId, userId).orElseThrow(() -> new RuntimeException(Message.INCOME_NOT_FOUND));
 
         income.setAmount(dto.getAmount());
         income.setCurrency(dto.getCurrency());
@@ -68,21 +73,22 @@ public class IncomeService {
 
         if (dto.getCategoryId() != null) {
             Category category = categoryRepo.findById(dto.getCategoryId())
-                    .orElseThrow(() -> new RuntimeException("Category not found."));
+                    .orElseThrow(() -> new RuntimeException(Message.CATEGORY_NOT_FOUND));
             income.setCategory(category);
         }
 
         if (dto.getPaymentMethodId() != null) {
             PaymentMethod method = methodRepo.findById(dto.getPaymentMethodId())
-                    .orElseThrow(() -> new RuntimeException("Payment method not found"));
+                    .orElseThrow(() -> new RuntimeException(Message.PAYMENT_METHOD_NOT_FOUND));
             income.setPaymentMethod(method);
         }
 
         return toDetailDto(incomeRepo.save(income));
     }
+    
     public IncomeDetailResponseDto getIncome(Long userId, Long incomeId) {
-        Income income = incomeRepo.findByUserIdAndIncomeId(userId, incomeId)
-                .orElseThrow(() -> new RuntimeException("Income not found."));
+        Income income = incomeRepo.findByIdAndUserId(incomeId, userId)
+                .orElseThrow(() -> new RuntimeException(Message.INCOME_NOT_FOUND));
 
         return toDetailDto(income);
     }
@@ -113,6 +119,14 @@ public class IncomeService {
 
     public List<IncomeResumeResponseDto> getAllByDatePeriod(Long userId, LocalDateTime start, LocalDateTime end) {
         return toResumeDto(incomeRepo.findByUserIdAndDateBetween(userId, start, end));
+    }
+
+    @Transactional
+    public void deleteIncome(Long userId, Long incomeId) {
+        incomeRepo.findByIdAndUserId(incomeId, userId)
+                .orElseThrow(() -> new RuntimeException(Message.INCOME_NOT_FOUND));
+
+        incomeRepo.deleteById(incomeId);
     }
 
     private IncomeDetailResponseDto toDetailDto(Income income) {

@@ -17,7 +17,7 @@ class IncomeRequest {
     this.note
   });
 
-  Map<String, dynamic> toJson () => {
+  Map<String, dynamic> toJson() => {
     'categoryId': categoryId,
     'source': source,
     'amount': amount,

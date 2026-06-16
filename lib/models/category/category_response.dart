@@ -1,4 +1,4 @@
-import 'package:wallet_app/models/category.dart';
+enum CategoryType { income, expense }
 
 class CategoryResponse {
   final int categoryId;

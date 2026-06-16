@@ -1,4 +1,4 @@
-import 'package:wallet_app/models/payment_method.dart';
+import 'package:wallet_app/models/payment_method/payment_method_request.dart';
 
 class ExpenseDetailResponse {
   final int expenseId;
