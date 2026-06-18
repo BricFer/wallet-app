@@ -25,7 +25,7 @@ class _TransactionGroupState extends State<TransactionGroup> {
     return Row(
       spacing: AppDimens.spacing8,
       children: [
-        Text("Group:", style: Theme.of(context).textTheme.bodyMedium),
+        Text('Group:', style: Theme.of(context).textTheme.bodyMedium),
         DropdownMenu<String>(
           textAlign: TextAlign.center,
           textStyle: Theme.of(context).textTheme.bodyMedium,
@@ -42,18 +42,18 @@ class _TransactionGroupState extends State<TransactionGroup> {
             ),
           ),
           controller: _groupController,
-          initialSelection: "none",
+          initialSelection: 'none',
           dropdownMenuEntries: [
             // TODO: Traer el listado de grupos creado por el usuario y pintarlo con un for()
             DropdownMenuEntry(
-              value: "none",
-              label: "[None]",
+              value: 'none',
+              label: '[None]',
               enabled: false,
               style: ButtonStyle(),
             ),
             DropdownMenuEntry(
-              value: "london",
-              label: "London",
+              value: 'london',
+              label: 'London',
               style: ButtonStyle(),
             ),
 

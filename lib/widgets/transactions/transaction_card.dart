@@ -3,12 +3,14 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/core/themes/colors.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
+import 'package:wallet_app/models/expense/expense_resume_response.dart';
 import 'package:wallet_app/screens/add_edit_expense.dart';
+import 'package:wallet_app/screens/expense_details.dart';
 
 class TransactionCard extends StatelessWidget {
-  const TransactionCard({super.key, required this.amount, required this.i});
-  final double amount;
-  final int i;
+  const TransactionCard({super.key, required this.expense});
+
+  final ExpenseResumeResponse expense;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +31,24 @@ class TransactionCard extends StatelessWidget {
                   onPressed: (_) {
                     Navigator.push(
                       context,
-                      // TODO: AddEditExpense tiene que recibir los datos para poder editar
-                      MaterialPageRoute(builder: (_) => AddEditExpenseScreen()),
+                      MaterialPageRoute<void>(
+                        builder: (_) => ExpenseDetails(expenseId: expense.expenseId,),
+                      ),
+                    );
+                  },
+                  backgroundColor: _colorScheme.secondary,
+                  foregroundColor: containerTheme.iconColor,
+                  icon: AppIcons.viewIcon,
+                  label: Strings.viewEn,
+                  borderRadius: BorderRadius.circular(AppDimens.radius12),
+                ),
+
+                SizedBox(width: AppDimens.width12),
+                SlidableAction(
+                  onPressed: (_) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => AddEditExpenseScreen(expenseId: expense.expenseId,)),
                     );
                   },
                   backgroundColor: _colorScheme.secondary,
@@ -58,20 +76,30 @@ class TransactionCard extends StatelessWidget {
                   text: TextSpan(
                     children: <TextSpan>[
                       TextSpan(
-                        text: "Comercio $i",
+                        text: expense.commerce,
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
                           fontSize: 20.0,
                           color: containerTheme.fontColorVariant,
                         ),
                       ),
-                      TextSpan(
-                        text: "\nConcepto $i",
-                        style: TextStyle(
-                          color: containerTheme.fontColorVariant,
+                      if (expense.categoryName != null)
+                        TextSpan(
+                          text: expense.categoryName,
+                          style: Theme.of(context).textTheme.labelMedium
+                              ?.copyWith(
+                                color: containerTheme.fontColorVariant,
+                              ),
                         ),
-                      ),
+
+                      if (expense.concept != null)
+                        TextSpan(
+                          text: expense.concept,
+                          style: TextStyle(
+                            color: containerTheme.fontColorVariant,
+                          ),
+                        ),
                       TextSpan(
-                        text: "\nFecha $i",
+                        text: '${expense.date}',
                         style: TextStyle(
                           color: containerTheme.fontColorVariant,
                         ),
@@ -80,7 +108,7 @@ class TransactionCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "€${amount}0",
+                  '${expense.amount} ${expense.currency}',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: containerTheme.fontColorVariant,

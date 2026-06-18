@@ -17,7 +17,6 @@ class AppTheme {
     );
   }
 
-  // TODO: Evaluar si agregar un lightTheme con colores planos en lugar de con gradient
   static final light = _base(
     const ColorScheme.light(
       primary: AppColors.primaryLight,

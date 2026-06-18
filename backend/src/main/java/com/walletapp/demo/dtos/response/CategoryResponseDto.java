@@ -13,4 +13,5 @@ public class CategoryResponseDto {
     private Long categoryId;
     private String name;
     private CategoryType type;
+    private String iconKey;
 }

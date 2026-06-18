@@ -31,3 +31,15 @@ build/
 
 ### VS Code ###
 .vscode/
+
+META-INF
+firebase-service-account.json
+
+# Java/Spring Boot
+backend/target/
+backend/.mvn/
+
+# Flutter
+flutter_app/build/
+flutter_app/.dart_tool/
+flutter_app/.flutter-plugin-dependencies

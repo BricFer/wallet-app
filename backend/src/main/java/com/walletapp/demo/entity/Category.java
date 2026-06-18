@@ -35,6 +35,9 @@ public class Category {
     @Column(name = "category_type", nullable = false)
     private CategoryType type;
 
+    @Column(name = "icon_key", nullable = false)
+    private String iconKey;
+
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;

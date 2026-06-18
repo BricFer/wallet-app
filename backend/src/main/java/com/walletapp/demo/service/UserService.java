@@ -22,12 +22,15 @@ public class UserService {
     @Transactional
     public UserResponseDto saveUser(UserRequestDto dto, String firebaseUid) {
         User user = new User();
-        user.setUsername(dto.getUsername());
-        user.setFirebaseUid(firebaseUid);
-        user.setPhoneNumber(dto.getPhoneNumber());
-        user.setDateOfBirth(dto.getDateOfBirth());
+        user.setAddress(dto.getAddress());
         user.setCountry(dto.getCountry());
+        user.setDateOfBirth(dto.getDateOfBirth());
         user.setDefaultCurrency(dto.getDefaultCurrency());
+        user.setEmail(dto.getEmail());
+        user.setFirebaseUid(firebaseUid);
+        user.setFullname(dto.getFullname());
+        user.setPhoneNumber(dto.getPhoneNumber());
+        user.setUsername(dto.getUsername());
 
         User saved = userRepo.save(user);
 

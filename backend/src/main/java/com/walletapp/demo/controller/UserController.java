@@ -26,6 +26,7 @@ import com.walletapp.demo.dtos.request.user.UserRequestUsernameDto;
 import com.walletapp.demo.dtos.response.UserResponseDto;
 import com.walletapp.demo.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -34,14 +35,18 @@ import lombok.AllArgsConstructor;
 public class UserController {
     private UserService userService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<UserResponseDto> saveUser(@RequestBody UserRequestDto dto,
-            @RequestHeader String firebaseUid) {
+            HttpServletRequest req) {
+        String firebaseUid = (String) req.getAttribute("firebaseUid");
+
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(dto, firebaseUid));
     }
 
     @GetMapping("/user-info")
-    public ResponseEntity<UserResponseDto> getUser(@RequestHeader String firebaseUid) {
+    public ResponseEntity<UserResponseDto> getUser(HttpServletRequest req) {
+        String firebaseUid = (String) req.getAttribute("firebaseUid");
+
         return ResponseEntity.ok(userService.getUserByFirebaseUid(firebaseUid));
     }
 

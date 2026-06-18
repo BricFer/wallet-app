@@ -140,4 +140,15 @@ GoogleService-Info.plist
 .metadata
 analysis_options.yaml
 
-resources
+/resources/META-INF
+firebase-service-account.json
+
+# Java/Spring Boot
+backend/target/
+backend/.mvn/
+backend/firebase-service-account.json
+
+# Flutter
+flutter_app/build/
+flutter_app/.dart_tool/
+flutter_app/.flutter-plugin-dependencies

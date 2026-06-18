@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+
 import 'package:wallet_app/core/constants/dimens.dart';
 import 'package:wallet_app/core/constants/paddings.dart';
 import 'package:wallet_app/core/providers/auth_provider.dart';
@@ -12,9 +13,14 @@ import 'package:wallet_app/widgets/forms/form_button.dart';
 import 'package:wallet_app/widgets/forms/form_input.dart';
 import 'package:wallet_app/widgets/layout/custom_header.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;

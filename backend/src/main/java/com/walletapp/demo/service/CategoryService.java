@@ -23,7 +23,8 @@ public class CategoryService {
             .map(category -> new CategoryResponseDto(
                 category.getId(),
                 category.getName(),
-                category.getType()
+                category.getType(),
+                category.getIconKey()
             ))
             .toList();
     }
@@ -34,7 +35,8 @@ public class CategoryService {
             .map(category -> new CategoryResponseDto(
                 category.getId(),
                 category.getName(),
-                category.getType()
+                category.getType(),
+                category.getIconKey()
             ))
             .toList();
     }

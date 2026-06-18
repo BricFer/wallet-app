@@ -58,6 +58,7 @@ class CustomProfileRow extends StatelessWidget {
 
     showDialog(
       barrierDismissible: false,
+      barrierColor: Theme.of(context).colorScheme.primary,
       context: context,
       builder: (dialogContext) => EditDialog(
         label: label,

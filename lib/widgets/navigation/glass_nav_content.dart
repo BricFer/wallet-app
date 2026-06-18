@@ -16,8 +16,8 @@ class GlassNavContent extends StatelessWidget {
       label: Strings.homeEn,
     ),
     (
-      icon: AppIcons.otherExpensesIcon,
-      selectedIcon: AppIcons.otherExpensesIcon,
+      icon: AppIcons.expensesIcon,
+      selectedIcon: AppIcons.expensesIcon,
       label: Strings.exchangeEn,
     ),
     (

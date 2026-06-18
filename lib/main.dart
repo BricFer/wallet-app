@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/strings.dart';
 import 'package:wallet_app/core/providers/auth_provider.dart';
+import 'package:wallet_app/core/providers/expense_provider.dart';
 import 'package:wallet_app/core/providers/navigation_provider.dart';
 import 'package:wallet_app/core/providers/theme_provider.dart';
 import 'package:wallet_app/core/routes/router.dart';
@@ -21,6 +22,7 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => NavigationProvider()),
+        ChangeNotifierProvider(create: (_) => ExpenseProvider()),
         ChangeNotifierProvider.value(value: authProvider),
       ],
       child: MyApp(),

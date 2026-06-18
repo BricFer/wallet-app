@@ -40,7 +40,10 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   PreferredSizeWidget build(BuildContext context) {
     final _colorScheme = Theme.of(context).colorScheme;
-    final _currentUser = context.read<AuthProvider>().user;
+    final fullname = context.watch<AuthProvider>().fullname;
+    final username = context.watch<AuthProvider>().username;
+
+    final displayedName = username ?? fullname;
 
     return AppBar(
       backgroundColor: _colorScheme.surface,
@@ -66,7 +69,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       TextSpan(
-                        text: _currentUser?.uid,
+                        text: displayedName,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                     ],

@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:wallet_app/core/providers/auth_provider.dart';
 import 'package:wallet_app/screens/screens.dart';
+import 'package:wallet_app/screens/sign_up_details.dart';
 
 const _publicRoutes = {'/login', '/sign-up', '/reset-password'};
 
@@ -8,11 +9,22 @@ GoRouter buildRouter(AuthProvider authProvider) {
   return GoRouter(
     refreshListenable: authProvider,
     redirect: (context, state) {
-      final isAuth = authProvider.isAuthenticated;
+      final isLoggedIn = authProvider.firebaseUser != null;
+      final hasProfile = authProvider.hasBackendProfile;
       final isPublicRoute = _publicRoutes.contains(state.matchedLocation);
+      final isCompleteProfileRoute =
+          state.matchedLocation == '/sign-up-details';
 
-      if (!isAuth && !isPublicRoute) return "/login";
-      if (isAuth && isPublicRoute) return "/dashboard";
+      if (!isLoggedIn) {
+        return isPublicRoute ? null : '/login';
+      }
+      if (isLoggedIn && hasProfile == false && !isCompleteProfileRoute) {
+        return '/sign-up-details';
+      }
+      if (isLoggedIn && hasProfile == true && isCompleteProfileRoute) {
+        return 'dashboard';
+      }
+
       return null;
     },
     routes: [
@@ -39,7 +51,6 @@ GoRouter buildRouter(AuthProvider authProvider) {
         builder: (_, __) => const AddEditIncomeScreen(),
       ),
       GoRoute(path: "/currency", builder: (_, __) => const CurrencyScreen()),
-      GoRoute(path: "/dashboard", builder: (_, __) => const DashboardScreen()),
       GoRoute(
         path: "/edit-profile",
         builder: (_, __) => const EditProfileScreen(),
@@ -61,8 +72,12 @@ GoRouter buildRouter(AuthProvider authProvider) {
       GoRoute(path: "/settings", builder: (_, __) => const SettingsScreen()),
       GoRoute(path: "/sign-up", builder: (_, __) => const SignUpScreen()),
       GoRoute(
+        path: "/sign-up-details",
+        builder: (_, __) => const SignUpDetailsScreen(),
+      ),
+      GoRoute(
         path: "/transactions",
-        builder: (_, __) => const TransactionsScreen(),
+        builder: (_, __) => TransactionsScreen(),
       ),
     ],
   );

@@ -14,6 +14,7 @@ class AppDimens {
   static const double height75 = 75.0;
   static const double height80 = 80.0;
   static const double height85 = 85.0;
+  static const double height150 = 150.0;
   static const double height245 = 245.0;
 
   static const double elevation0 = 0.0;

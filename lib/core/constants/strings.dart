@@ -38,8 +38,10 @@ class Strings {
   static const String countryEn = "Country";
   static const String emailCodeEn = "Email code";
   static const String emailEn = "Email";
+  static const String usernameEn = "Nickname";
   static const String fullnameEn = "Fullname";
   static const String languageEn = "Language";
+  static const String defaultCurrencyEn = "Default currency";
   static const String menuEn = "Menu";
   static const String passwordEn = "Password";
   static const String patternEn = "Pattern";
@@ -52,6 +54,7 @@ class Strings {
   static const String transactionsListEn = "Transactions list";
   static const String yourInfoEn = "Your Information";
   static const String saveEn = "Save";
+  static const String viewEn = "View";
   static const String editEn = "Edit";
   static const String updateEn = "Update";
   static const String cancelEn = "Cancel";
