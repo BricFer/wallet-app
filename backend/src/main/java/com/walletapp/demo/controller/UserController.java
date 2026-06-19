@@ -40,6 +40,12 @@ public class UserController {
             HttpServletRequest req) {
         String firebaseUid = (String) req.getAttribute("firebaseUid");
 
+        System.out.println(">>> firebaseUid recibido: " + firebaseUid);
+
+        if(firebaseUid == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(dto, firebaseUid));
     }
 

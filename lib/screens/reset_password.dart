@@ -43,7 +43,7 @@ class ResetPasswordScreen extends StatelessWidget {
                     width: double.infinity,
                     height: AppDimens.height64,
                     child: CustomFormButton(
-                      label: Strings.updateEn,
+                      label: Strings.update,
                       onPressed: () async {
                         String pwd = _passwordController.text;
 

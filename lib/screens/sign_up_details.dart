@@ -6,6 +6,7 @@ import 'package:wallet_app/core/constants/country.dart';
 import 'package:wallet_app/core/constants/default_currency.dart';
 import 'package:wallet_app/core/constants/dimens.dart';
 import 'package:wallet_app/core/constants/paddings.dart';
+import 'package:wallet_app/core/constants/strings.dart';
 import 'package:wallet_app/models/user/user_request.dart';
 import 'package:wallet_app/service/user_service.dart';
 import 'package:wallet_app/widgets/forms/dropdown_register.dart';
@@ -104,23 +105,23 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
               child: Column(
                 children: <Widget>[
                   CustomFormInput(
-                    labelText: 'Fullname',
+                    labelText: Strings.fullname,
                     controller: _fullnameController,
                   ),
                   SizedBox(height: AppDimens.height24),
                   CustomFormInput(
-                    labelText: 'Nickname',
+                    labelText: Strings.username,
                     controller: _usernameController,
                   ),
                   SizedBox(height: AppDimens.height24),
                   CustomFormInput(
-                    labelText: 'Phone number',
+                    labelText: Strings.phoneNumber,
                     hintText: '+(##) ### ### ###',
                     controller: _phoneNumberController,
                   ),
                   SizedBox(height: AppDimens.height24),
                   CustomFormInput(
-                    labelText: 'Address',
+                    labelText: Strings.address,
                     controller: _addressController,
                   ),
                   SizedBox(height: AppDimens.height24),
@@ -136,7 +137,7 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
                   Row(
                     spacing: AppDimens.spacing8,
                     children: [
-                      Text('Country'),
+                      Text(Strings.country),
                       DropdownRegister(
                         controller: _countryController,
                         dropdownMenuEntries: Country.countries.entries.map((
@@ -156,7 +157,7 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
                     spacing: AppDimens.spacing8,
                     children: [
                       Text(
-                        'Default currency',
+                        Strings.defaultCurrency,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       DropdownRegister(
@@ -178,7 +179,7 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
                     width: double.infinity,
                     height: AppDimens.height64,
                     child: CustomFormButton(
-                      label: 'Finish',
+                      label: Strings.register,
                       onPressed: _submit,
                     ),
                   ),

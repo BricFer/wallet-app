@@ -20,7 +20,7 @@ class PersonalInfoScreen extends StatelessWidget {
               child: CustomColumn(
                 children: [
                   GestureDetector(
-                    child: CustomRow(text: Strings.yourInfoEn),
+                    child: CustomRow(text: Strings.yourInfo),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -31,7 +31,7 @@ class PersonalInfoScreen extends StatelessWidget {
                     },
                   ),
                   GestureDetector(
-                    child: CustomRow(text: Strings.accessMethodsEn),
+                    child: CustomRow(text: Strings.accessMethods),
                     onTap: () {
                       Navigator.push(
                         context,

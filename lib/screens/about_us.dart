@@ -10,7 +10,7 @@ class AboutUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: Strings.aboutUsEn),
+      appBar: CustomAppBar(title: Strings.aboutUs),
       body: Padding(
         padding: AppPaddings.paddingAll16,
         child: CustomColumn(
@@ -19,7 +19,7 @@ class AboutUsScreen extends StatelessWidget {
               height: AppDimens.height64,
               child: GestureDetector(
                 child: CustomRow(
-                  text: Strings.aboutUsEn,
+                  text: Strings.aboutUs,
                   icon: AppIcons.aboutUsIcon,
                   haveIconColor: true,
                 ),
@@ -38,7 +38,7 @@ class AboutUsScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     child: CustomRow(
-                      text: Strings.portfolioEn,
+                      text: Strings.portfolio,
                       icon: AppIcons.portfolioFaIcon,
                       haveIconColor: true,
                     ),

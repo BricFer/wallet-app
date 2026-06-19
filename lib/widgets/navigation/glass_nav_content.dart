@@ -13,27 +13,27 @@ class GlassNavContent extends StatelessWidget {
     (
       icon: AppIcons.homeIcon,
       selectedIcon: AppIcons.selectedHomeIcon,
-      label: Strings.homeEn,
+      label: Strings.home,
     ),
     (
       icon: AppIcons.expensesIcon,
       selectedIcon: AppIcons.expensesIcon,
-      label: Strings.exchangeEn,
+      label: Strings.exchange,
     ),
     (
       icon: AppIcons.transferIcon,
       selectedIcon: AppIcons.transferIcon,
-      label: Strings.transactionEn,
+      label: Strings.transaction,
     ),
     (
       icon: AppIcons.settingsIcon,
       selectedIcon: AppIcons.selectedSettingsIcon,
-      label: Strings.settingsEn,
+      label: Strings.settings,
     ),
     (
       icon: AppIcons.aboutUsIcon,
       selectedIcon: AppIcons.aboutUsIcon,
-      label: Strings.aboutUsEn,
+      label: Strings.aboutUs,
     ),
   ];
 

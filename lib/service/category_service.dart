@@ -5,7 +5,7 @@ import 'package:wallet_app/models/category/category_response.dart';
 
 class CategoryService {
   final String baseUrl =
-      'postgres-gmll-production.up.railway.app/api/v1/categories';
+      'wallet-app-production-db4e.up.railway.app/categories';
 
   Future<List<CategoryResponse>> getAllCategories() async {
 

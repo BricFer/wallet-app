@@ -39,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
 
     return Scaffold(
-      appBar: CustomAppBar(title: Strings.profileEn),
+      appBar: CustomAppBar(title: Strings.profile),
       body: Padding(
         padding: AppPaddings.paddingAll16,
         child: Column(
@@ -52,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 spacing: AppDimens.spacing16,
                 children: [
                   CustomProfileRow(
-                    label: Strings.usernameEn,
+                    label: Strings.username,
                     subtext: '\n${user?.username}',
                     onSave: (value) async {
                       // TODO: Implementar al tener la base de datos
@@ -60,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                   ),
                   CustomProfileRow(
-                    label: Strings.fullnameEn,
+                    label: Strings.fullname,
                     subtext: '\n${user?.fullname}',
                     onSave: (value) async {
                       // TODO: Implementar al tener la base de datos
@@ -68,32 +68,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                   ),
                   CustomProfileRow(
-                    label: Strings.addressEn,
+                    label: Strings.address,
                     subtext: '\n${user?.address}',
                     onSave: (value) async {},
                   ),
                   CustomProfileRow(
-                    label: Strings.phoneNumberEn,
+                    label: Strings.phoneNumber,
                     subtext: '\n${user?.phoneNumber}',
                     onSave: (value) async {},
                   ),
                   CustomProfileRow(
-                    label: Strings.emailEn,
+                    label: Strings.email,
                     subtext: '\n${user?.email}',
                     onSave: (value) async {},
                   ),
                   CustomProfileRow(
-                    label: Strings.countryEn,
+                    label: Strings.country,
                     subtext: '\n${user?.country}',
                     onSave: (value) async {},
                   ),
                   CustomProfileRow(
-                    label: Strings.birthEn,
+                    label: Strings.birth,
                     subtext: '\n${user?.dateOfBirth}',
                     onSave: (value) async {},
                   ),
                   CustomProfileRow(
-                    label: Strings.defaultCurrencyEn,
+                    label: Strings.defaultCurrency,
                     subtext: '\n${user?.defaultCurrency}',
                     onSave: (value) async {},
                   ),

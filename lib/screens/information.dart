@@ -8,7 +8,7 @@ class InformationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: Strings.aboutUsEn),
+      appBar: CustomAppBar(title: Strings.aboutUs),
       body: SingleChildScrollView(
         child: Container(
           padding: AppPaddings.paddingAll16,

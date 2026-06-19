@@ -17,15 +17,15 @@ class AccountAccessScreen extends StatelessWidget {
             CustomContainer(
               child: Column(
                 children: [
-                  SwitchRow(label: Strings.passwordEn, isActive: true,),
-                  SwitchRow(label: Strings.patternEn),
-                  SwitchRow(label: Strings.emailCodeEn),
-                  SwitchRow(label: Strings.phoneCodeEn),
+                  SwitchRow(label: Strings.password, isActive: true,),
+                  SwitchRow(label: Strings.pattern),
+                  SwitchRow(label: Strings.emailCode),
+                  SwitchRow(label: Strings.phoneCode),
                   SwitchRow(label: Strings.mfa),
                 ],
               ),
             ),
-            CustomContainer(child: CustomRow(text: Strings.changePasswordEn)),
+            CustomContainer(child: CustomRow(text: Strings.changePassword)),
           ],
         ),
       ),

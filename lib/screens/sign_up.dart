@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:wallet_app/core/constants/strings.dart';
 import 'package:wallet_app/core/providers/auth_provider.dart';
 import 'package:wallet_app/core/constants/dimens.dart';
 import 'package:wallet_app/core/constants/paddings.dart';
@@ -34,12 +35,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: <Widget>[
                   SizedBox(height: AppDimens.height24),
                   CustomFormInput(
-                    labelText: 'Email',
+                    labelText: Strings.email,
                     controller: _emailController,
                   ),
                   SizedBox(height: AppDimens.height24),
                   CustomFormInput(
-                    labelText: 'Password',
+                    labelText: Strings.password,
                     controller: _passwordController,
                   ),
                   SizedBox(height: AppDimens.height48),
@@ -47,7 +48,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     width: double.infinity,
                     height: AppDimens.height64,
                     child: CustomFormButton(
-                      label: 'Register',
+                      label: Strings.register,
                       onPressed: () async {
                         String user = _emailController.text;
                         String pwd = _passwordController.text;

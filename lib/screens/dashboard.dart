@@ -29,7 +29,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       return const Center(child: CircularProgressIndicator());
     }
     return Scaffold(
-      appBar: CustomAppBar(title: Strings.homeEn, isDashboard: true),
+      appBar: CustomAppBar(title: Strings.home, isDashboard: true),
       body: Center(child: Text('Hola, $fullname\nTotal de gastos: ${expenseProvider.total}')),
     );
   }

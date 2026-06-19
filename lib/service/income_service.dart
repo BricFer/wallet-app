@@ -8,7 +8,7 @@ import 'package:wallet_app/models/income/income_resume_response.dart';
 
 class IncomeService {
   final String baseUrl =
-      'postgres-gmll-production.up.railway.app/api/v1/incomes';
+      'wallet-app-production-db4e.up.railway.app/api/v1/incomes';
 
   Future<String?> _getToken() async {
     final user = FirebaseAuth.instance.currentUser;

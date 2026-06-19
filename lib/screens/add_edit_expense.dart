@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/dimens.dart';
 import 'package:wallet_app/core/constants/icons.dart';
 import 'package:wallet_app/core/constants/paddings.dart';
+import 'package:wallet_app/core/constants/strings.dart';
 import 'package:wallet_app/core/providers/auth_provider.dart';
 import 'package:wallet_app/core/themes/app_decoration.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
@@ -49,47 +50,52 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
     final _colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: CustomAppBar(title: 'Add Expense'),
-      body: ListView(
-        padding: AppPaddings.paddingLTR16B106,
-        children: [
-          TransactionGroup(),
-          TransactionInput(
-            labelText: 'Commerce',
-            hintText: 'Ex. Mercadona',
-            icon: FontAwesomeIcons.basketShopping,
-          ),
-          TransactionInput(labelText: 'Concept', hintText: 'Ex. Weekly buying'),
-          TransactionInput(
-            labelText: 'Amount',
-            hintText: 'Ex. 0,00€',
-            keyboardType: TextInputType.number,
-            icon: AppIcons.euroFaIcon,
-          ),
-          //
-          TransactionType(),
-          TransactionInput(labelText: 'Note', maxLength: 150, showCursor: true),
-          SizedBox(height: AppDimens.height48),
-          CustomContainer(
-            decoration: AppDecoration.container(
-              context,
-              containerBackgroud: _colorScheme.tertiary,
-              showGradient: false,
+      appBar: CustomAppBar(title: Strings.addExpense),
+      floatingActionButton: FloatingActionButton(onPressed: () => () {
+        
+      }),
+      body: Form(
+        child: ListView(
+          padding: AppPaddings.paddingLTR16B106,
+          children: [
+            TransactionGroup(),
+            TransactionInput(
+              labelText: Strings.commerce,
+              hintText: 'Ex. Mercadona',
+              icon: FontAwesomeIcons.basketShopping,
             ),
-
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Icon(AppIcons.calendarIcon),
-                Text(
-                  'Payment Method',
-                  style: TextStyle(color: containerTheme.fontColorTransaction),
-                ),
-                Icon(AppIcons.cameraIcon),
-              ],
+            TransactionInput(labelText: Strings.concept, hintText: 'Ex. Weekly buying'),
+            TransactionInput(
+              labelText: Strings.amount,
+              hintText: 'Ex. 0,00€',
+              keyboardType: TextInputType.number,
+              icon: AppIcons.euroFaIcon,
             ),
-          ),
-        ],
+            //
+            TransactionType(),
+            TransactionInput(labelText: Strings.note, maxLength: 150, showCursor: true),
+            SizedBox(height: AppDimens.height48),
+            CustomContainer(
+              decoration: AppDecoration.container(
+                context,
+                containerBackgroud: _colorScheme.tertiary,
+                showGradient: false,
+              ),
+        
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(AppIcons.calendarIcon),
+                  Text(
+                    Strings.paymentMethod,
+                    style: TextStyle(color: containerTheme.fontColorTransaction),
+                  ),
+                  Icon(AppIcons.cameraIcon),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

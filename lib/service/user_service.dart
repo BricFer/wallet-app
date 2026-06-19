@@ -7,7 +7,7 @@ import 'package:wallet_app/models/user/user_request.dart';
 import 'package:wallet_app/models/user/user_response.dart';
 
 class UserService {
-  final String baseUrl = 'postgres-gmll-production.up.railway.app/api/v1/user';
+  final String baseUrl = 'wallet-app-production-db4e.up.railway.app/api/v1/user';
 
   Future<String?> _getToken() async {
     final user = FirebaseAuth.instance.currentUser;

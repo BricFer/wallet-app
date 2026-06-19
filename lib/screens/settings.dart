@@ -14,7 +14,7 @@ class SettingsScreen extends StatelessWidget {
     final containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
 
     return Scaffold(
-      appBar: CustomAppBar(title: Strings.settingsEn),
+      appBar: CustomAppBar(title: Strings.settings),
       body: SingleChildScrollView(
         padding: AppPaddings.paddingLTR16B106,
         child: CustomColumn(
@@ -46,7 +46,7 @@ class SettingsScreen extends StatelessWidget {
                               ),
                         ),
                         TextSpan(
-                          text: Strings.incomesEn,
+                          text: Strings.incomes,
                           style: TextStyle(
                             color: containerTheme.fontColorVariant,
                           ),
@@ -70,7 +70,7 @@ class SettingsScreen extends StatelessWidget {
                               ),
                         ),
                         TextSpan(
-                          text: Strings.expensesEn,
+                          text: Strings.expenses,
                           style: TextStyle(
                             color: containerTheme.fontColorVariant,
                           ),
@@ -84,7 +84,7 @@ class SettingsScreen extends StatelessWidget {
             SizedBox(height: AppDimens.spacing16),
             GestureDetector(
               child: CustomRow(
-                text: Strings.personalInformationEn,
+                text: Strings.personalInformation,
                 icon: AppIcons.personalInformationIcon,
                 fontColor: containerTheme.fontColor,
               ),
@@ -98,17 +98,17 @@ class SettingsScreen extends StatelessWidget {
               },
             ),
             CustomRow(
-              text: '${Strings.inboxEn}/${Strings.notificationsEn}',
+              text: '${Strings.inbox}/${Strings.notifications}',
               icon: AppIcons.notificationsIcon,
               fontColor: containerTheme.fontColor,
             ),
             CustomRow(
-              text: Strings.privacyEn,
+              text: Strings.privacy,
               icon: AppIcons.privacyIcon,
               fontColor: containerTheme.fontColor,
             ),
             CustomRow(
-              text: Strings.languageEn,
+              text: Strings.language,
               faIcon: AppIcons.languageFaIcon,
               fontColor: containerTheme.fontColor,
             ),
@@ -117,7 +117,7 @@ class SettingsScreen extends StatelessWidget {
                 context.read<AuthProvider>().logout();
               },
               child: CustomRow(
-                text: Strings.logoutEn,
+                text: Strings.logout,
                 icon: AppIcons.logoutIcon,
                 fontColor: containerTheme.fontColor,
               ),

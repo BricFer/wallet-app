@@ -41,7 +41,7 @@ class _ExpenseDetailsState extends State<ExpenseDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: Strings.expensesEn),
+      appBar: CustomAppBar(title: Strings.expenses),
       body: Padding(
         padding: AppPaddings.paddingAll16,
         child: Column(

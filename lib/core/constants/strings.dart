@@ -27,61 +27,62 @@ class Strings {
   static const String vibrantTheme = "Vibrant";
   static const String neutralTheme = "Neutral";
 
-  // English variables
+    // English variables
   // ==================== App Strings ====================
-  static const String accessMethodsEn = "Access methods";
-  static const String addressEn = "Address";
-  static const String appDescriptionEn =
+  static const String accessMethods = "Access methods";
+  static const String address = "Address";
+  static const String amount = "Amount";
+  static const String appDescription =
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit";
-  static const String birthEn = "Bith";
-  static const String changePasswordEn = "Change Password";
-  static const String countryEn = "Country";
-  static const String emailCodeEn = "Email code";
-  static const String emailEn = "Email";
-  static const String usernameEn = "Nickname";
-  static const String fullnameEn = "Fullname";
-  static const String languageEn = "Language";
-  static const String defaultCurrencyEn = "Default currency";
-  static const String menuEn = "Menu";
-  static const String passwordEn = "Password";
-  static const String patternEn = "Pattern";
-  static const String phoneCodeEn = "Phone code";
-  static const String phoneNumberEn = "Phone number";
-  static const String portfolioEn = "Portfolio";
-  static const String regionEn = "Region";
-  static const String themeEn = "Theme";
-  static const String transactionEn = "Transactions";
-  static const String transactionsListEn = "Transactions list";
-  static const String yourInfoEn = "Your Information";
-  static const String saveEn = "Save";
-  static const String viewEn = "View";
-  static const String editEn = "Edit";
-  static const String updateEn = "Update";
-  static const String cancelEn = "Cancel";
-  static const String backEn = "Back";
-  static const String deleteEn = "Delete";
+  static const String birth = "Bith";
+  static const String changePassword = "Change Password";
+  static const String country = "Country";
+  static const String commerce = "Commerce";
+  static const String concept = "Concept";
+  static const String emailCode = "Email code";
+  static const String email = "Email";
+  static const String username = "Nickname";
+  static const String fullname = "Fullname";
+  static const String language = "Language";
+  static const String defaultCurrency = "Default currency";
+  static const String menu = "Menu";
+  static const String note = "Note";
+  static const String paymentMethod = "Payment Method";
+  static const String password = "Password";
+  static const String pattern = "Pattern";
+  static const String phoneCode = "Phone code";
+  static const String phoneNumber = "Phone number";
+  static const String portfolio = "Portfolio";
+  static const String region = "Region";
+  static const String theme = "Theme";
+  static const String transaction = "Transactions";
+  static const String transactionsList = "Transactions list";
+  static const String yourInfo = "Your Information";
+  static const String save = "Save";
+  static const String view = "View";
+  static const String edit = "Edit";
+  static const String update = "Update";
+  static const String cancel = "Cancel";
+  static const String back = "Back";
+  static const String delete = "Delete";
+  static const String register = "Register";
 
   // ==================== Navigation ====================
-  static const String aboutUsEn = "About us";
-  static const String addExpensesEn = "Add Expense";
-  static const String currencyEn = "Currency";
-  static const String exchangeEn = "Exchange";
-  static const String expensesEn = "Expenses";
-  static const String homeEn = "Home";
-  static const String inboxEn = "Inbox";
-  static const String incomesEn = "Incomes";
-  static const String logoutEn = "Logout";
-  static const String notificationsEn = "Notifications";
-  static const String personalInformationEn = "Personal Information";
-  static const String privacyEn = "Privacy";
-  static const String profileEn = "Profile";
-  static const String settingsEn = "Settings";
-  static const String saveEs = "Guardar";
-  static const String editEs = "Editar";
-  static const String updateEs = "Actualizar";
-  static const String cancelEs = "Cancelar";
-  static const String backEs = "Regresar";
-  static const String deleteEs = "Eliminar";
+  static const String aboutUs = "About us";
+  static const String addExpense = "Add Expense";
+  static const String currency = "Currency";
+  static const String exchange = "Exchange";
+  static const String expenses = "Expenses";
+  static const String home = "Home";
+  static const String inbox = "Inbox";
+  static const String incomes = "Incomes";
+  static const String login = "Login";
+  static const String logout = "Logout";
+  static const String notifications = "Notifications";
+  static const String personalInformation = "Personal Information";
+  static const String privacy = "Privacy";
+  static const String profile = "Profile";
+  static const String settings = "Settings";
 
   // Spanish variables
   // ==================== App Strings ====================
@@ -107,6 +108,12 @@ class Strings {
   static const String transactionEs = "Transacción";
   static const String transactionsListEs = "Lista de operaciones";
   static const String yourInfoEs = "Tu información";
+  static const String saveEs = "Guardar";
+  static const String editEs = "Editar";
+  static const String updateEs = "Actualizar";
+  static const String cancelEs = "Cancelar";
+  static const String backEs = "Regresar";
+  static const String deleteEs = "Eliminar";
 
   // ==================== Navegación ====================
   static const String aboutUsEs = "Sobre nosotros";

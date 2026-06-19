@@ -39,7 +39,7 @@ class TransactionCard extends StatelessWidget {
                   backgroundColor: _colorScheme.secondary,
                   foregroundColor: containerTheme.iconColor,
                   icon: AppIcons.viewIcon,
-                  label: Strings.viewEn,
+                  label: Strings.view,
                   borderRadius: BorderRadius.circular(AppDimens.radius12),
                 ),
 
@@ -54,7 +54,7 @@ class TransactionCard extends StatelessWidget {
                   backgroundColor: _colorScheme.secondary,
                   foregroundColor: containerTheme.iconColor,
                   icon: AppIcons.editIcon,
-                  label: Strings.editEn,
+                  label: Strings.edit,
                   borderRadius: BorderRadius.circular(AppDimens.radius12),
                 ),
 
@@ -64,7 +64,7 @@ class TransactionCard extends StatelessWidget {
                   backgroundColor: AppColors.alertColor,
                   foregroundColor: containerTheme.iconColor,
                   icon: AppIcons.deleteIcon,
-                  label: Strings.deleteEn,
+                  label: Strings.delete,
                   borderRadius: BorderRadius.circular(AppDimens.radius12),
                 ),
               ],

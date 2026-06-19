@@ -33,7 +33,7 @@ class _TransactionScreenState extends State<TransactionsScreen> {
     }
 
     return Scaffold(
-      appBar: CustomAppBar(title: Strings.transactionEn),
+      appBar: CustomAppBar(title: Strings.transaction),
       body: Padding(
         padding: AppPaddings.paddingAll16,
         child: ListView(
@@ -42,7 +42,7 @@ class _TransactionScreenState extends State<TransactionsScreen> {
             TransactionBoxes(),
             SizedBox(height: AppDimens.elevation16),
             Text(
-              Strings.transactionsListEn,
+              Strings.transactionsList,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
 

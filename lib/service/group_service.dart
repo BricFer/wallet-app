@@ -7,7 +7,7 @@ import 'package:wallet_app/models/group/group_response.dart';
 
 class GroupService {
   final String baseUrl =
-      'postgres-gmll-production.up.railway.app/api/v1/groups';
+      'wallet-app-production-db4e.up.railway.app/api/v1/groups';
 
   Future<String?> _getToken() async {
     final user = FirebaseAuth.instance.currentUser;
