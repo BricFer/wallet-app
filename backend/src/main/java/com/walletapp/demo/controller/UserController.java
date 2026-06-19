@@ -40,9 +40,7 @@ public class UserController {
             HttpServletRequest req) {
         String firebaseUid = (String) req.getAttribute("firebaseUid");
 
-        System.out.println(">>> firebaseUid recibido: " + firebaseUid);
-
-        if(firebaseUid == null) {
+        if (firebaseUid == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
@@ -52,6 +50,12 @@ public class UserController {
     @GetMapping("/user-info")
     public ResponseEntity<UserResponseDto> getUser(HttpServletRequest req) {
         String firebaseUid = (String) req.getAttribute("firebaseUid");
+
+        System.out.println(">>> getUserInfo firebaseUid: " + firebaseUid);
+
+        if (firebaseUid == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
 
         return ResponseEntity.ok(userService.getUserByFirebaseUid(firebaseUid));
     }

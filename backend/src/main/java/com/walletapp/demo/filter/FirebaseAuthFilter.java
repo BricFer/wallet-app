@@ -23,8 +23,6 @@ public class FirebaseAuthFilter extends OncePerRequestFilter {
 
         String authHeader = request.getHeader("Authorization");
 
-        System.out.println(">>> Authorization header: " + authHeader);
-
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
 
@@ -34,12 +32,9 @@ public class FirebaseAuthFilter extends OncePerRequestFilter {
 
                 // Guarda el firebaseUid para que el controller lo pueda usar
                 request.setAttribute("firebaseUid", firebaseUid);
-                System.out.println(">>> Token verificado, uid: " + decodedToken.getUid());
 
             } catch (FirebaseAuthException e) {
-                System.out.println(">>> Error verificando token: " + e.getMessage());
                 String fallbackUid = request.getHeader("firebaseUid");
-                System.out.println(">>> Fallback firebaseUid: " + fallbackUid);
                 if (fallbackUid != null) {
                     request.setAttribute("firebaseUid", fallbackUid);
                 } else {
@@ -48,7 +43,7 @@ public class FirebaseAuthFilter extends OncePerRequestFilter {
                 }
             }
         } else {
-            System.out.println(">>> No hay header Authorization");
+            System.out.println(">>> No header Authorization");
         }
 
         filterChain.doFilter(request, response);

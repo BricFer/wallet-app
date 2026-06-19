@@ -7,7 +7,7 @@ import 'package:wallet_app/models/payment_method/payment_method_response.dart';
 
 class PaymentMethodService {
   final String baseUrl =
-      'wallet-app-production-db4e.up.railway.app/api/v1/payment-methods';
+      'https://wallet-app-production-db4e.up.railway.app/api/v1/payment-methods';
 
   Future<String?> _getToken() async {
     final user = FirebaseAuth.instance.currentUser;

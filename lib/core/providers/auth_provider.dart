@@ -28,12 +28,15 @@ class AuthProvider extends ChangeNotifier {
     if (firebaseUser == null) return;
 
     try {
-      final response = await _userService.getUserInfo();
+      debugPrint('>>> Checking backend profile for: ${firebaseUser!.uid}');
+        final response = await _userService.getUserInfo();
+        debugPrint('>>> Response: $response');
       hasBackendProfile = response != null;
       userId = response?.userId;
       fullname = response?.fullname;
       username = response?.username;
     } catch (e) {
+      debugPrint('>>> Error checkBackendProfile: $e');
       hasBackendProfile = false;
     }
     notifyListeners();
@@ -48,6 +51,8 @@ class AuthProvider extends ChangeNotifier {
         email: email,
         password: password,
       );
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
+      debugPrint('TOKEN: $token');
     } on FirebaseAuthException catch (e) {
       _errorMessage = switch (e.code) {
         'INVALID_LOGIN_CREDENTIALS' => 'Invalid login credentials.',

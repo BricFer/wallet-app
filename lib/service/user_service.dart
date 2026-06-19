@@ -7,7 +7,8 @@ import 'package:wallet_app/models/user/user_request.dart';
 import 'package:wallet_app/models/user/user_response.dart';
 
 class UserService {
-  final String baseUrl = 'wallet-app-production-db4e.up.railway.app/api/v1/user';
+  final String baseUrl =
+      'https://wallet-app-production-db4e.up.railway.app/api/v1/user';
 
   Future<String?> _getToken() async {
     final user = FirebaseAuth.instance.currentUser;
@@ -16,6 +17,10 @@ class UserService {
 
   Future<UserResponse> saveUser(UserRequest dto) async {
     final token = await _getToken();
+
+    if (token == null) {
+      throw Exception('No hay sesión activa de Firebase');
+    }
 
     final response = await http.post(
       Uri.parse('$baseUrl/register'),
