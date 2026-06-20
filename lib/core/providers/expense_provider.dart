@@ -22,8 +22,11 @@ class ExpenseProvider extends ChangeNotifier {
 
       expenses = results[0] as List<ExpenseResumeResponse>;
       total = results[1] as double;
-    } catch(e) {
+    } catch (e) {
       debugPrint(e.toString());
+    } finally {
+      isLoading = false;
+      notifyListeners();
     }
   }
 }

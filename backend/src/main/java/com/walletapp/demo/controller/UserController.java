@@ -51,8 +51,6 @@ public class UserController {
     public ResponseEntity<UserResponseDto> getUser(HttpServletRequest req) {
         String firebaseUid = (String) req.getAttribute("firebaseUid");
 
-        System.out.println(">>> getUserInfo firebaseUid: " + firebaseUid);
-
         if (firebaseUid == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }

@@ -34,13 +34,7 @@ public class FirebaseAuthFilter extends OncePerRequestFilter {
                 request.setAttribute("firebaseUid", firebaseUid);
 
             } catch (FirebaseAuthException e) {
-                String fallbackUid = request.getHeader("firebaseUid");
-                if (fallbackUid != null) {
-                    request.setAttribute("firebaseUid", fallbackUid);
-                } else {
-                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                    return;
-                }
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             }
         } else {
             System.out.println(">>> No header Authorization");

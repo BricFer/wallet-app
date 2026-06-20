@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import 'package:wallet_app/core/constants/country.dart';
@@ -61,9 +62,10 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
     }
 
     Future<void> _submit() async {
-      debugPrint("SUBMIT");
-      
-      if (_selectedDateOfBirth == null) return;
+
+      if (_selectedDateOfBirth == null) {
+        return;
+      }
 
       final authProvider = context.read<AuthProvider>();
       final email = authProvider.firebaseUser?.email ?? '';
@@ -89,6 +91,7 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
 
         context.go('/dashboard');
       } catch (e, stacktrace) {
+        debugPrint('>>> Error at _submit: $e');
         debugPrint(e.toString());
         debugPrintStack(stackTrace: stacktrace);
       }
@@ -99,7 +102,7 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
         child: ListView(
           padding: AppPaddings.paddingBottom106,
           children: [
-            CustomHeader(title: 'Create\nprofile,'),
+            CustomHeader(title: 'Create\na profile,'),
             Padding(
               padding: AppPaddings.paddingAll16,
               child: Column(
@@ -130,7 +133,9 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
                     child: Text(
                       _selectedDateOfBirth == null
                           ? 'Select date of birth'
-                          : _selectedDateOfBirth!.toIso8601String(),
+                          : DateFormat(
+                              'dd/MM/yyyy',
+                            ).format(_selectedDateOfBirth!),
                     ),
                   ),
                   SizedBox(height: AppDimens.height24),

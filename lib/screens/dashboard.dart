@@ -16,8 +16,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
     super.initState();
-    final userId = context.read<AuthProvider>().userId!;
-    context.read<ExpenseProvider>().loadExpenses(userId, 'EUR');
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // addPostFrameCallback espera a que termine el primer build antes de ejecutar el código
+      final userId = context.read<AuthProvider>().userId!;
+      context.read<ExpenseProvider>().loadExpenses(userId, 'EUR');
+    });
   }
 
   @override
@@ -30,7 +33,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
     return Scaffold(
       appBar: CustomAppBar(title: Strings.home, isDashboard: true),
-      body: Center(child: Text('Hola, $fullname\nTotal de gastos: ${expenseProvider.total}')),
+      body: Center(
+        child: Text(
+          'Hola, $fullname\nTotal de gastos: ${expenseProvider.total}',
+        ),
+      ),
     );
   }
 }

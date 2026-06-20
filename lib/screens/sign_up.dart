@@ -42,6 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   CustomFormInput(
                     labelText: Strings.password,
                     controller: _passwordController,
+                    obscureText: true,
                   ),
                   SizedBox(height: AppDimens.height48),
                   SizedBox(

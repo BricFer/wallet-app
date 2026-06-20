@@ -21,6 +21,8 @@ public class UserService {
 
     @Transactional
     public UserResponseDto saveUser(UserRequestDto dto, String firebaseUid) {
+        // TODO: eliminar esta linea
+        System.out.println(">>> saveUser - firebaseUid recibido: " + firebaseUid);
         User user = new User();
         user.setAddress(dto.getAddress());
         user.setCountry(dto.getCountry());
@@ -34,6 +36,8 @@ public class UserService {
 
         User saved = userRepo.save(user);
 
+        // TODO: eliminar esta linea
+        System.out.println(">>> saveUser - usuario guardado con firebaseUid: " + saved.getFirebaseUid());
         return toResponseDto(saved);
     }
 
@@ -110,7 +114,8 @@ public class UserService {
     }
 
     public UserResponseDto getUserByFirebaseUid(String firebaseUid) {
-        User user = userRepo.findByFirebaseUid(firebaseUid).orElseThrow(() -> new RuntimeException(Message.USER_NOT_FOUND));
+        User user = userRepo.findByFirebaseUid(firebaseUid)
+                .orElseThrow(() -> new RuntimeException(Message.USER_NOT_FOUND));
 
         return toResponseDto(user);
     }
@@ -130,15 +135,14 @@ public class UserService {
 
     private UserResponseDto toResponseDto(User user) {
         return new UserResponseDto(
-            user.getId(),
-            user.getUsername(),
-            user.getFullname(),
-            user.getPhoneNumber(),
-            user.getDateOfBirth(),
-            user.getAddress(),
-            user.getEmail(),
-            user.getCountry(),
-            user.getDefaultCurrency()
-        );
+                user.getId(),
+                user.getUsername(),
+                user.getFullname(),
+                user.getPhoneNumber(),
+                user.getDateOfBirth(),
+                user.getAddress(),
+                user.getEmail(),
+                user.getCountry(),
+                user.getDefaultCurrency());
     }
 }

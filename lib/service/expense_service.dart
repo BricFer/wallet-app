@@ -12,7 +12,8 @@ class ExpenseService {
 
   Future<String?> _getToken() async {
     final user = FirebaseAuth.instance.currentUser;
-    return await user?.getIdToken();
+    if (user == null) return null;
+    return await user.getIdToken(true);
   }
 
   Future<ExpenseDetailResponse> getExpenseInfo(
