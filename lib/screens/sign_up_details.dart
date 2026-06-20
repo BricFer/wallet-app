@@ -32,6 +32,8 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
   final _defaultCurrencyController = TextEditingController();
   DateTime? _selectedDateOfBirth;
 
+  final UserService _userService = UserService();
+
   @override
   void dispose() {
     _usernameController.dispose();
@@ -44,59 +46,56 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
     super.dispose();
   }
 
+  Future<void> _selectDateOfBirth() async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+
+    if (picked != null) {
+      setState(() => _selectedDateOfBirth = picked);
+    }
+  }
+
+  Future<void> _submit() async {
+    if (_selectedDateOfBirth == null) {
+      return;
+    }
+
+    final authProvider = context.read<AuthProvider>();
+    final email = authProvider.firebaseUser?.email ?? '';
+
+    final dto = UserRequest(
+      username: _usernameController.text,
+      fullname: _fullnameController.text,
+      phoneNumber: _phoneNumberController.text,
+      dateOfBirth: _selectedDateOfBirth!,
+      address: _addressController.text,
+      email: email,
+      country: _countryController.text,
+      defaultCurrency: _defaultCurrencyController.text,
+    );
+
+    try {
+      await _userService.saveUser(dto);
+
+      if (!mounted) return;
+      await authProvider.checkBackendProfile();
+
+      if (!mounted) return;
+
+      context.go('/dashboard');
+    } catch (e, stacktrace) {
+      debugPrint('>>> Error at _submit: $e');
+      debugPrint(e.toString());
+      debugPrintStack(stackTrace: stacktrace);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final UserService _userService = UserService();
-
-    Future<void> _selectDateOfBirth() async {
-      final picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2000),
-        lastDate: DateTime.now(),
-      );
-
-      if (picked != null) {
-        setState(() => _selectedDateOfBirth = picked);
-      }
-    }
-
-    Future<void> _submit() async {
-
-      if (_selectedDateOfBirth == null) {
-        return;
-      }
-
-      final authProvider = context.read<AuthProvider>();
-      final email = authProvider.firebaseUser?.email ?? '';
-
-      final dto = UserRequest(
-        username: _usernameController.text,
-        fullname: _fullnameController.text,
-        phoneNumber: _phoneNumberController.text,
-        dateOfBirth: _selectedDateOfBirth!,
-        address: _addressController.text,
-        email: email,
-        country: _countryController.text,
-        defaultCurrency: _defaultCurrencyController.text,
-      );
-
-      try {
-        await _userService.saveUser(dto);
-
-        if (!mounted) return;
-        await authProvider.checkBackendProfile();
-
-        if (!mounted) return;
-
-        context.go('/dashboard');
-      } catch (e, stacktrace) {
-        debugPrint('>>> Error at _submit: $e');
-        debugPrint(e.toString());
-        debugPrintStack(stackTrace: stacktrace);
-      }
-    }
-
     return Scaffold(
       body: Form(
         child: ListView(

@@ -21,8 +21,6 @@ public class UserService {
 
     @Transactional
     public UserResponseDto saveUser(UserRequestDto dto, String firebaseUid) {
-        // TODO: eliminar esta linea
-        System.out.println(">>> saveUser - firebaseUid recibido: " + firebaseUid);
         User user = new User();
         user.setAddress(dto.getAddress());
         user.setCountry(dto.getCountry());
@@ -35,9 +33,6 @@ public class UserService {
         user.setUsername(dto.getUsername());
 
         User saved = userRepo.save(user);
-
-        // TODO: eliminar esta linea
-        System.out.println(">>> saveUser - usuario guardado con firebaseUid: " + saved.getFirebaseUid());
         return toResponseDto(saved);
     }
 
