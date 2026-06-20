@@ -126,7 +126,9 @@ public class ExpenseService {
     }
 
     public Double getTotalExpensesAmount(Long userId, String currency) {
-        return expenseRepo.totalExpenseAmount(userId, currency);
+        Double total = expenseRepo.totalExpenseAmount(userId, currency);
+
+        return total != null ? total : 0.0;
     }
 
     public Double getTotalByMonth(Long userId, String currency, int month) {

@@ -21,8 +21,10 @@ GoRouter buildRouter(AuthProvider authProvider) {
       if (isLoggedIn && hasProfile == false && !isCompleteProfileRoute) {
         return '/sign-up-details';
       }
-      if (isLoggedIn && hasProfile == true && isCompleteProfileRoute) {
-        return 'dashboard';
+      if (isLoggedIn &&
+          hasProfile == true &&
+          (isCompleteProfileRoute || isPublicRoute)) {
+        return '/dashboard';
       }
 
       return null;
@@ -75,10 +77,7 @@ GoRouter buildRouter(AuthProvider authProvider) {
         path: "/sign-up-details",
         builder: (_, __) => const SignUpDetailsScreen(),
       ),
-      GoRoute(
-        path: "/transactions",
-        builder: (_, __) => TransactionsScreen(),
-      ),
+      GoRoute(path: "/transactions", builder: (_, __) => TransactionsScreen()),
     ],
   );
 }

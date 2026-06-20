@@ -26,7 +26,7 @@ class UserService {
     final token = await _getToken();
 
     if (token == null) {
-      throw Exception('No hay sesión activa de Firebase');
+      throw Exception('No active session of Firebase');
     }
 
     final response = await http.post(
@@ -55,11 +55,6 @@ class UserService {
   Future<UserResponse?> getUserInfo() async {
     final token = await _getToken();
 
-    final url = Uri.parse('$baseUrl/user-info');
-    debugPrint('URL FINAL: $url');
-    
-    debugPrint('>>> getUserInfo token: $token');
-
     final response = await http.get(
       Uri.parse('$baseUrl/user-info'),
       headers: {
@@ -67,9 +62,6 @@ class UserService {
         'Content-type': 'application/json',
       },
     );
-
-    debugPrint('>>> getUserInfo status: ${response.statusCode}');
-    debugPrint('>>> getUserInfo body: ${response.body}');
 
     if (response.statusCode == 200) {
       return UserResponse.fromJson(jsonDecode(response.body));
