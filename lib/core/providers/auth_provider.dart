@@ -4,13 +4,19 @@ import 'package:wallet_app/service/user_service.dart';
 
 class AuthProvider extends ChangeNotifier {
   User? firebaseUser;
+
   bool? hasBackendProfile;
+  // bool _checkingProfile = false;
+
   int? userId;
   String? fullname;
   String? username;
-  bool get isAuthenticated => firebaseUser != null;
+
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
+
+  bool _loadingProfile = false;
+  bool get loadingProfile => _loadingProfile;
 
   final UserService _userService = UserService();
 
@@ -18,19 +24,28 @@ class AuthProvider extends ChangeNotifier {
     FirebaseAuth.instance.authStateChanges().listen((user) async {
       firebaseUser = user;
 
-      if (user != null) {
-        await user.getIdToken(true);
-        await checkBackendProfile();
-      } else {
+      if (user == null) {
         hasBackendProfile = null;
         userId = null;
+        notifyListeners();
+        return;
       }
-      notifyListeners();
+
+      await user.getIdToken(true);
+      await checkBackendProfile();
+      // notifyListeners();
     });
   }
 
   Future<void> checkBackendProfile() async {
     if (firebaseUser == null) return;
+
+    // if (_checkingProfile) return;
+    if (_loadingProfile) return;
+
+    // _checkingProfile = true;
+    _loadingProfile = true;
+    notifyListeners();
 
     try {
       final response = await _userService.getUserInfo();
@@ -41,8 +56,11 @@ class AuthProvider extends ChangeNotifier {
       username = response?.username;
     } catch (e) {
       hasBackendProfile = false;
+    } finally {
+      // _checkingProfile = false;
+      _loadingProfile = false;
+      notifyListeners();
     }
-    notifyListeners();
   }
 
   Future<void> signIn(String email, String password) async {
@@ -85,13 +103,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<void> logout() async {
-    _errorMessage = null;
-    try {
-      await FirebaseAuth.instance.signOut();
-    } on Exception catch (e) {
-      _errorMessage = e.toString();
-      notifyListeners();
-    }
+    await FirebaseAuth.instance.signOut();
   }
 
   Future<void> updateUserPassword(String newPassword) async {

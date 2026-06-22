@@ -292,7 +292,7 @@ class ExpenseService {
     }
   }
 
-  Future<List<ExpenseResumeResponse>> getExpensesTotalByCategory(
+  Future<double> getExpensesTotalByCategory(
     int userId,
     int categoryId,
     String currency,
@@ -311,9 +311,9 @@ class ExpenseService {
     );
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body);
+      return jsonDecode(response.body) as double;
     } else {
-      throw Exception('Failed to get the expense list for that category.');
+      throw Exception('Failed to get the expense total for that category.');
     }
   }
 

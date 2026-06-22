@@ -18,6 +18,6 @@ class GroupResponse {
     name: json['name'],
     description: json['description'],
     budgetLimit: json['budgetLimit'],
-    isActive: json['isActive'],
+    isActive: (json['isActive'] as bool),
   );
 }

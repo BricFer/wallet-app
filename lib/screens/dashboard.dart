@@ -26,6 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     final fullname = context.watch<AuthProvider>().fullname;
+    final username = context.watch<AuthProvider>().username;
     final expenseProvider = context.watch<ExpenseProvider>();
 
     if (expenseProvider.isLoading) {
@@ -35,7 +36,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       appBar: CustomAppBar(title: Strings.home, isDashboard: true),
       body: Center(
         child: Text(
-          'Hola, $fullname\nTotal de gastos: ${expenseProvider.total}',
+          'Hola, $fullname\nTotal de gastos: ${expenseProvider.total}\nUsername: $username',
         ),
       ),
     );

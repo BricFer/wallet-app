@@ -55,7 +55,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        return ResponseEntity.ok(userService.getUserByFirebaseUid(firebaseUid));
+        return userService.getUserByFirebaseUid(firebaseUid).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PatchMapping("/user-info/username")

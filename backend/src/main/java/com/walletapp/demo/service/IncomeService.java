@@ -63,7 +63,8 @@ public class IncomeService {
 
     @Transactional
     public IncomeDetailResponseDto updateIncome(IncomeRequestDto dto, Long userId, Long incomeId) {
-        Income income = incomeRepo.findByIdAndUserId(incomeId, userId).orElseThrow(() -> new RuntimeException(Message.INCOME_NOT_FOUND));
+        Income income = incomeRepo.findByIdAndUserId(incomeId, userId)
+                .orElseThrow(() -> new RuntimeException(Message.INCOME_NOT_FOUND));
 
         income.setAmount(dto.getAmount());
         income.setCurrency(dto.getCurrency());
@@ -85,7 +86,7 @@ public class IncomeService {
 
         return toDetailDto(incomeRepo.save(income));
     }
-    
+
     public IncomeDetailResponseDto getIncome(Long userId, Long incomeId) {
         Income income = incomeRepo.findByIdAndUserId(incomeId, userId)
                 .orElseThrow(() -> new RuntimeException(Message.INCOME_NOT_FOUND));
@@ -106,11 +107,15 @@ public class IncomeService {
     }
 
     public Double getTotalAmount(Long userId, String currency) {
-        return incomeRepo.totalIncomeAmount(userId, currency);
+        Double total = incomeRepo.totalIncomeAmount(userId, currency);
+
+        return total != null ? total : 0.0;
     }
 
     public Double getTotalByMonth(Long userId, String currency, int month) {
-        return incomeRepo.sumByCurrencyAndMonth(userId, currency, month);
+        Double total = incomeRepo.sumByCurrencyAndMonth(userId, currency, month);
+
+        return total != null ? total : 0.0;
     }
 
     public List<IncomeResumeResponseDto> getAllByPaymentMethod(Long userId, String currency, Long paymentMethodId) {

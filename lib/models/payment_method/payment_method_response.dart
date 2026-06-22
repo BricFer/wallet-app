@@ -1,25 +1,29 @@
 import 'package:wallet_app/models/payment_method/payment_method_request.dart';
 
 class PaymentMethodResponse {
-    final String? alias;
-    final PaymentType type;
-    final String issuer;
-    final bool isDefault;
-    final bool isActive;
+  final int paymentMethodId;
+  final String? alias;
+  final PaymentType type;
+  final String issuer;
+  final bool isDefault;
+  final bool isActive;
 
-    PaymentMethodResponse({
-      this.alias,
-      required this.type,
-      required this.issuer,
-      required this.isDefault,
-      required this.isActive,
-    });
+  PaymentMethodResponse({
+    required this.paymentMethodId,
+    this.alias,
+    required this.type,
+    required this.issuer,
+    required this.isDefault,
+    required this.isActive,
+  });
 
-    factory PaymentMethodResponse.fromJson(Map<String, dynamic> json) => PaymentMethodResponse(
-      alias: json['alias'],
-      type: PaymentType.values.byName(json['type']),
-      issuer: json['issuer'],
-      isDefault: json['isDefault'],
-      isActive: json['isActive']
+  factory PaymentMethodResponse.fromJson(Map<String, dynamic> json) =>
+      PaymentMethodResponse(
+        paymentMethodId: json['id'],
+        alias: json['alias'],
+        type: PaymentType.values.byName(json['type']),
+        issuer: json['issuer'],
+        isDefault: json['isDefault'],
+        isActive: json['isActive'],
       );
 }

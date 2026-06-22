@@ -42,40 +42,42 @@ class GlassNavContent extends StatelessWidget {
     final nav = context.watch<NavigationProvider>();
     final _colorScheme = Theme.of(context).colorScheme;
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: List.generate(_items.length, (index) {
-        final item = _items[index];
-        final isSelected = index == nav.currentIndex;
+    return SafeArea(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: List.generate(_items.length, (index) {
+          final item = _items[index];
+          final isSelected = index == nav.currentIndex;
 
-        return GestureDetector(
-          onTap: () => context.read<NavigationProvider>().setIndex(index),
-          behavior: HitTestBehavior.opaque,
-          child: Padding(
-            padding: AppPaddings.paddingAll4,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              spacing: AppDimens.spacing4,
-              children: [
-                Icon(
-                  isSelected ? item.selectedIcon : item.icon,
-                  color: isSelected
-                      ? _colorScheme.tertiary
-                      : _colorScheme.onSurface,
-                ),
-                Text(
-                  item.label,
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+          return GestureDetector(
+            onTap: () => context.read<NavigationProvider>().setIndex(index),
+            behavior: HitTestBehavior.opaque,
+            child: Padding(
+              padding: AppPaddings.paddingAll4,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                spacing: AppDimens.spacing4,
+                children: [
+                  Icon(
+                    isSelected ? item.selectedIcon : item.icon,
                     color: isSelected
                         ? _colorScheme.tertiary
                         : _colorScheme.onSurface,
                   ),
-                ),
-              ],
+                  Text(
+                    item.label,
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: isSelected
+                          ? _colorScheme.tertiary
+                          : _colorScheme.onSurface,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
-      }),
+          );
+        }),
+      ),
     );
   }
 }

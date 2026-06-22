@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/core/constants/dimens.dart';
+import 'package:wallet_app/core/constants/paddings.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
 
 class TransactionBoxes extends StatefulWidget {
@@ -18,12 +19,12 @@ class _TransactionBoxesState extends State<TransactionBoxes> {
     final _colorScheme = Theme.of(context).colorScheme;
 
     final double size1 = _firstContainerActive
-        ? AppDimens.boxSize208
-        : AppDimens.boxSize144;
+        ? AppDimens.boxSize116
+        : AppDimens.boxSize96;
 
     final double size2 = _firstContainerActive
-        ? AppDimens.boxSize144
-        : AppDimens.boxSize208;
+        ? AppDimens.boxSize96
+        : AppDimens.boxSize116;
 
     final Color color1 = _firstContainerActive
         ? _colorScheme.primary
@@ -48,46 +49,56 @@ class _TransactionBoxesState extends State<TransactionBoxes> {
             fontSize: 40.0,
             fontWeight: FontWeight.bold,
           );
+    final int flex1 = _firstContainerActive ? 2 : 1;
+    final int flex2 = _firstContainerActive ? 1 : 2;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       spacing: AppDimens.spacing20,
       children: [
-        GestureDetector(
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.easeInOut,
-            width: size1,
-            height: size1,
-            decoration: BoxDecoration(
-              color: color1,
-              borderRadius: BorderRadius.circular(AppDimens.radius20),
+        Expanded(
+          flex: flex1,
+          child: GestureDetector(
+            child: AnimatedContainer(
+              padding: AppPaddings.paddingAll8,
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              // width: size1,
+              height: size1,
+              decoration: BoxDecoration(
+                color: color1,
+                borderRadius: BorderRadius.circular(AppDimens.radius20),
+              ),
+              child: Center(child: Text("€53.49+", style: textStyle1)),
             ),
-            child: Center(child: Text("€53.49+", style: textStyle1)),
+            onTap: () {
+              setState(() {
+                _firstContainerActive = true;
+              });
+            },
           ),
-          onTap: () {
-            setState(() {
-              _firstContainerActive = true;
-            });
-          },
         ),
-        GestureDetector(
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.easeInOut,
-            width: size2,
-            height: size2,
-            decoration: BoxDecoration(
-              color: color2,
-              borderRadius: BorderRadius.circular(AppDimens.radius20),
+        Expanded(
+          flex: flex2,
+          child: GestureDetector(
+            child: AnimatedContainer(
+              padding: AppPaddings.paddingAll8,
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              // width: size2,
+              height: size2,
+              decoration: BoxDecoration(
+                color: color2,
+                borderRadius: BorderRadius.circular(AppDimens.radius20),
+              ),
+              child: Center(child: Text("€93.25-", style: textStyle2)),
             ),
-            child: Center(child: Text("€93.25-", style: textStyle2)),
+            onTap: () {
+              setState(() {
+                _firstContainerActive = false;
+              });
+            },
           ),
-          onTap: () {
-            setState(() {
-              _firstContainerActive = false;
-            });
-          },
         ),
       ],
     );

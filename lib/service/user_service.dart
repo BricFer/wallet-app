@@ -12,18 +12,12 @@ class UserService {
 
   Future<String?> _getToken() async {
     final user = FirebaseAuth.instance.currentUser;
-    debugPrint('>>> _getToken - user: ${user?.uid}');
 
     if (user == null) {
-      debugPrint('>>> _getToken - user es null');
       return null;
     }
 
     final token = await user.getIdToken(true);
-
-    debugPrint(
-      '>>> _getToken - token obtenido: ${token != null}, length: ${token?.length}',
-    );
     return token;
   }
 
@@ -59,9 +53,6 @@ class UserService {
 
   Future<UserResponse?> getUserInfo() async {
     final token = await _getToken();
-    debugPrint(
-      '>>> getUserInfo - token: ${token != null ? "presente" : "NULL"}',
-    );
 
     final response = await http.get(
       Uri.parse('$baseUrl/user-info'),

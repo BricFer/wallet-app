@@ -16,7 +16,6 @@ class ExpenseDetails extends StatefulWidget {
 }
 
 class _ExpenseDetailsState extends State<ExpenseDetails> {
-  late int expenseId;
   final ExpenseService _service = ExpenseService();
 
   late ExpenseDetailResponse expense;
@@ -25,13 +24,12 @@ class _ExpenseDetailsState extends State<ExpenseDetails> {
   @override
   void initState() {
     super.initState();
-    expenseId = widget.expenseId;
     _loadExpense();
   }
 
   Future<void> _loadExpense() async {
     final userId = context.read<AuthProvider>().userId;
-    expense = await _service.getExpenseInfo(userId, expenseId);
+    expense = await _service.getExpenseInfo(userId, widget.expenseId);
 
     setState(() {
       isLoading = false;

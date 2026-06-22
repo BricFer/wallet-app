@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/core/providers/auth_provider.dart';
@@ -15,12 +17,13 @@ class TransactionsScreen extends StatefulWidget {
 }
 
 class _TransactionScreenState extends State<TransactionsScreen> {
-
   @override
   void initState() {
     super.initState();
-    final userId = context.read<AuthProvider>().userId!;
-    context.read<ExpenseProvider>().loadExpenses(userId, 'EUR');
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userId = context.read<AuthProvider>().userId!;
+      context.read<ExpenseProvider>().loadExpenses(userId, 'EUR');
+    });
   }
 
   @override
@@ -47,14 +50,27 @@ class _TransactionScreenState extends State<TransactionsScreen> {
             ),
 
             if (expenses.isNotEmpty)
-              for(final expense in expenses)
+              for (final expense in expenses)
                 Padding(
                   padding: AppPaddings.paddingBottom16,
                   child: TransactionCard(expense: expense),
                 ),
 
-            if (expenses.isEmpty) Text('No expenses found.'),
+            if (expenses.isEmpty)
+              Padding(
+                padding: AppPaddings.paddingAll16,
+                child: Center(child: Text('No expenses found.')),
+              ),
           ],
+        ),
+      ),
+      floatingActionButton: Padding(
+        padding: AppPaddings.paddingBottom106,
+        child: FloatingActionButton(
+          onPressed: () {
+            context.push('/add-expense');
+          },
+          child: const FaIcon(FontAwesomeIcons.plus),
         ),
       ),
     );

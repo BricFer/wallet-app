@@ -5,15 +5,12 @@ import 'package:wallet_app/models/category/category_response.dart';
 
 class CategoryService {
   final String baseUrl =
-      'https://wallet-app-production-db4e.up.railway.app/categories';
+      'https://wallet-app-production-db4e.up.railway.app/api/v1/categories';
 
   Future<List<CategoryResponse>> getAllCategories() async {
-
     final response = await http.get(
       Uri.parse(baseUrl),
-      headers: <String, String>{
-        'Content-type': 'application/json',
-      },
+      headers: <String, String>{'Content-type': 'application/json'},
     );
 
     if (response.statusCode == 200) {
@@ -25,12 +22,9 @@ class CategoryService {
   }
 
   Future<List<CategoryResponse>> getAllCategoriesByType(String type) async {
-
     final response = await http.get(
       Uri.parse('$baseUrl/by-type?type=$type'),
-      headers: <String, String>{
-        'Content-type': 'application/json',
-      },
+      headers: <String, String>{'Content-type': 'application/json'},
     );
 
     if (response.statusCode == 200) {

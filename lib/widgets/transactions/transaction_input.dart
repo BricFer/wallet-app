@@ -5,74 +5,41 @@ import 'package:wallet_app/core/themes/app_decoration.dart';
 class TransactionInput extends StatefulWidget {
   const TransactionInput({
     super.key,
-    this.initialValue,
     this.labelText,
     this.hintText,
     this.keyboardType,
     this.icon,
     this.maxLength,
     this.showCursor,
+    this.controller,
   });
 
-  final String? initialValue;
   final String? labelText;
   final String? hintText;
   final TextInputType? keyboardType;
   final FaIconData? icon;
   final int? maxLength;
   final bool? showCursor;
+  final TextEditingController? controller;
 
   @override
-  State<TransactionInput> createState() => _TransactionnInputState();
+  State<TransactionInput> createState() => _TransactionInputState();
 }
 
-class _TransactionnInputState extends State<TransactionInput> {
-  final _controller = TextEditingController();
-  late String? initialValue;
-  late String? labelText;
-  late String? hintText;
-  late TextInputType? keyboardType;
-  late FaIconData? icon;
-  late int? maxLength;
-  late bool? showCursor;
-
-  @override
-  void initState() {
-    setState(() {
-      super.initState();
-      initialValue = widget.initialValue;
-      labelText = widget.labelText;
-      hintText = widget.hintText;
-      keyboardType = widget.keyboardType;
-      icon = widget.icon;
-      maxLength = widget.maxLength;
-      showCursor = widget.showCursor;
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
+class _TransactionInputState extends State<TransactionInput> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      keyboardType: keyboardType,
-      controller: _controller,
+      keyboardType: widget.keyboardType,
+      controller: widget.controller,
       decoration: AppDecoration.textInput(
         context,
-        labelText: labelText,
-        hintText: hintText,
+        labelText: widget.labelText,
+        hintText: widget.hintText,
       ),
       style: Theme.of(context).textTheme.bodyMedium,
-      initialValue: initialValue,
-      onSaved: (String? value) {
-        // TODO: Agregar validación para los valores que se agregan
-      },
-      maxLength: maxLength ?? 75,
-      showCursor: showCursor,
+      maxLength: widget.maxLength,
+      showCursor: widget.showCursor,
     );
   }
 }

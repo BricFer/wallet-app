@@ -5,7 +5,6 @@ class CustomFormInput extends StatefulWidget {
   const CustomFormInput({
     super.key,
     this.controller,
-    this.initialValue,
     this.labelText,
     this.hintText,
     this.keyboardType,
@@ -14,7 +13,6 @@ class CustomFormInput extends StatefulWidget {
   });
 
   final TextEditingController? controller;
-  final String? initialValue;
   final String? labelText;
   final String? hintText;
   final TextInputType? keyboardType;
@@ -26,43 +24,15 @@ class CustomFormInput extends StatefulWidget {
 }
 
 class _CustomFormInputState extends State<CustomFormInput> {
-  late TextEditingController? controller;
-  late String? initialValue;
-  late String? labelText;
-  late String? hintText;
-  late TextInputType? keyboardType;
-  late bool obscureText;
-  late bool enabled;
-
-  @override
-  void initState() {
-    setState(() {
-      super.initState();
-      controller = widget.controller;
-      initialValue = widget.initialValue;
-      labelText = widget.labelText;
-      hintText = widget.hintText;
-      keyboardType = widget.keyboardType;
-      obscureText = widget.obscureText ?? false;
-      enabled = widget.enabled ?? true;
-    });
-  }
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      keyboardType: keyboardType,
-      controller: controller,
-      decoration: AppDecoration.textInput(context, labelText: labelText),
+      keyboardType: widget.keyboardType,
+      controller: widget.controller,
+      decoration: AppDecoration.textInput(context, labelText: widget.labelText),
       style: Theme.of(context).textTheme.bodyMedium,
-      obscureText: obscureText,
-      enabled: enabled,
+      obscureText: widget.obscureText ?? false,
+      enabled: widget.enabled ?? true,
     );
   }
 }

@@ -1,6 +1,7 @@
 package com.walletapp.demo.service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -108,11 +109,9 @@ public class UserService {
         userRepo.save(user);
     }
 
-    public UserResponseDto getUserByFirebaseUid(String firebaseUid) {
-        User user = userRepo.findByFirebaseUid(firebaseUid)
-                .orElseThrow(() -> new RuntimeException(Message.USER_NOT_FOUND));
+    public Optional<UserResponseDto> getUserByFirebaseUid(String firebaseUid) {
 
-        return toResponseDto(user);
+        return userRepo.findByFirebaseUid(firebaseUid).map(this::toResponseDto);
     }
 
     public UserResponseDto getUserById(Long userId) {

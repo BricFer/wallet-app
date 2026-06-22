@@ -25,30 +25,19 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
-  late String title;
-  late bool isDashboard;
-  late double toolbarHeight;
-
-  @override
-  void initState() {
-    super.initState();
-    title = widget.title ?? "";
-    isDashboard = widget.isDashboard ?? false;
-    toolbarHeight = widget.toolbarHeight ?? AppDimens.height85;
-  }
-
   @override
   PreferredSizeWidget build(BuildContext context) {
     final _colorScheme = Theme.of(context).colorScheme;
-    final fullname = context.watch<AuthProvider>().fullname;
-    final username = context.watch<AuthProvider>().username;
+    final username = context.read<AuthProvider>().username;
 
-    final displayedName = username ?? fullname;
+    final displayedName = (username != null && username.isNotEmpty)
+        ? username
+        : context.read<AuthProvider>().fullname;
 
     return AppBar(
       backgroundColor: _colorScheme.surface,
-      toolbarHeight: toolbarHeight,
-      title: isDashboard
+      toolbarHeight: widget.toolbarHeight ?? AppDimens.height85,
+      title: (widget.isDashboard ?? false)
           ? Row(
               spacing: AppDimens.spacing24,
               children: [
@@ -77,7 +66,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                 ),
               ],
             )
-          : Text(title),
+          : Text(widget.title ?? ""),
       centerTitle: true,
       actions: [
         CircleAvatar(

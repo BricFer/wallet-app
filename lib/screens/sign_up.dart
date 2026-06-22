@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/strings.dart';
@@ -18,11 +19,18 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final _passwordController = TextEditingController();
+  final _emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _emailController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final _passwordController = TextEditingController();
-    final _emailController = TextEditingController();
-
     return Scaffold(
       body: Form(
         child: ListView(
@@ -39,10 +47,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     controller: _emailController,
                   ),
                   SizedBox(height: AppDimens.height24),
-                  CustomFormInput(
-                    labelText: Strings.password,
-                    controller: _passwordController,
-                    obscureText: true,
+                  SensitiveContent(
+                    sensitivity: ContentSensitivity.sensitive,
+                    child: CustomFormInput(
+                      labelText: Strings.password,
+                      controller: _passwordController,
+                      obscureText: true,
+                    ),
                   ),
                   SizedBox(height: AppDimens.height48),
                   SizedBox(

@@ -132,11 +132,14 @@ public class ExpenseService {
     }
 
     public Double getTotalByMonth(Long userId, String currency, int month) {
-        return expenseRepo.sumByCurrencyAndMonth(userId, currency, month);
+        Double total = expenseRepo.sumByCurrencyAndMonth(userId, currency, month);
+
+        return total != null ? total : 0.0;
     }
 
     public Double getTotalByPaymentMethodAndMonth(Long userId, String currency, Long paymentMethodId, int month) {
-        return expenseRepo.sumByCurrencyAndPaymentMethodAndMonth(userId, currency, paymentMethodId, month);
+        Double total = expenseRepo.sumByCurrencyAndPaymentMethodAndMonth(userId, currency, paymentMethodId, month);
+        return total != null ? total : 0.0;
     }
 
     public List<ExpenseResumeResponseDto> getAllByPaymentMethod(Long userId, String currency,
@@ -154,7 +157,9 @@ public class ExpenseService {
     }
 
     public Double getTotalByCategory(Long userId, Long categoryId, String currency) {
-        return expenseRepo.sumByCategoryAndCurrency(userId, categoryId, currency);
+        Double  total = expenseRepo.sumByCategoryAndCurrency(userId, categoryId, currency);
+
+        return total != null ? total : 0.0;
     }
 
     @Transactional

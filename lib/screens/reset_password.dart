@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:wallet_app/core/constants/dimens.dart';
-import 'package:wallet_app/core/constants/paddings.dart';
-import 'package:wallet_app/core/constants/strings.dart';
+import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/core/providers/auth_provider.dart';
-import 'package:wallet_app/widgets/forms/form_button.dart';
-import 'package:wallet_app/widgets/forms/form_input.dart';
-import 'package:wallet_app/widgets/layout/custom_header.dart';
+import 'package:wallet_app/widgets/widgets.dart';
 
-class ResetPasswordScreen extends StatelessWidget {
-  const ResetPasswordScreen({super.key, this.initialValue});
+class ResetPasswordScreen extends StatefulWidget {
+  const ResetPasswordScreen({super.key});
 
-  final String? initialValue;
+  @override
+  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
+}
+
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+  final _passwordController = TextEditingController();
+  final _emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _emailController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final _passwordController = TextEditingController();
-
     return Scaffold(
       body: Form(
         child: ListView(
@@ -28,15 +37,17 @@ class ResetPasswordScreen extends StatelessWidget {
               child: Column(
                 children: [
                   CustomFormInput(
-                    initialValue: initialValue,
+                    controller: _emailController,
                     labelText: 'Email address',
-                    enabled: false,
                   ),
                   SizedBox(height: AppDimens.height24),
-                  CustomFormInput(
-                    controller: _passwordController,
-                    labelText: 'Password',
-                    obscureText: true,
+                  SensitiveContent(
+                    sensitivity: ContentSensitivity.sensitive,
+                    child: CustomFormInput(
+                      controller: _passwordController,
+                      labelText: 'Password',
+                      obscureText: true,
+                    ),
                   ),
                   SizedBox(height: AppDimens.height48),
                   SizedBox(

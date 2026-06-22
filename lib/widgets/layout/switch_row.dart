@@ -20,17 +20,11 @@ class SwitchRow extends StatefulWidget {
 }
 
 class _SwitchRowState extends State<SwitchRow> {
-  late String label;
-  late MainAxisAlignment? mainAxisAlignment;
-  late Color? fontColor;
   late bool? isActive;
 
   @override
   void initState() {
     super.initState();
-    label = widget.label;
-    mainAxisAlignment = widget.mainAxisAlignment;
-    fontColor = widget.fontColor;
     isActive = widget.isActive;
   }
 
@@ -40,11 +34,11 @@ class _SwitchRowState extends State<SwitchRow> {
     final _colorScheme = Theme.of(context).colorScheme;
 
     return Row(
-      mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: widget.mainAxisAlignment ?? MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          label,
-          style: TextStyle(color: fontColor ?? containerTheme.fontColorVariant),
+          widget.label,
+          style: TextStyle(color: widget.fontColor ?? containerTheme.fontColorVariant),
         ),
         Switch(
           value: isActive ?? false,

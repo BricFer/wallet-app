@@ -11,7 +11,12 @@ class GroupService {
 
   Future<String?> _getToken() async {
     final user = FirebaseAuth.instance.currentUser;
-    return await user?.getIdToken();
+
+    if (user == null) {
+      throw Exception('User not found');
+    }
+
+    return await user.getIdToken(true);
   }
 
   Future<GroupResponse> saveGroup(GroupRequest dto, int userId) async {
@@ -93,7 +98,7 @@ class GroupService {
       final List<dynamic> data = jsonDecode(response.body);
       return data.map((json) => GroupResponse.fromJson(json)).toList();
     } else {
-      throw Exception('Failed to get the categories list.');
+      throw Exception('Failed to get the group list.');
     }
   }
 
@@ -113,7 +118,7 @@ class GroupService {
       final List<dynamic> data = jsonDecode(response.body);
       return data.map((json) => GroupResponse.fromJson(json)).toList();
     } else {
-      throw Exception('Failed to get the categories list.');
+      throw Exception('Failed to get the group list.');
     }
   }
 

@@ -1,17 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/core/providers/auth_provider.dart';
+import 'package:wallet_app/core/providers/expense_provider.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
-import 'package:wallet_app/screens/personal_info.dart';
 import 'package:wallet_app/widgets/widgets.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userId = context.read<AuthProvider>().userId!;
+      final expenseProvider = context.read<ExpenseProvider>();
+
+      if (expenseProvider.expenses.isEmpty) {
+        context.read<ExpenseProvider>().loadTotal(userId, 'EUR');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
+    final provider = context.watch<ExpenseProvider>();
 
     return Scaffold(
       appBar: CustomAppBar(title: Strings.settings),
@@ -62,7 +82,7 @@ class SettingsScreen extends StatelessWidget {
                     text: TextSpan(
                       children: <TextSpan>[
                         TextSpan(
-                          text: '€35.00\n',
+                          text: '${provider.total}€\n',
                           style: Theme.of(context).textTheme.bodyLarge
                               ?.copyWith(
                                 fontWeight: FontWeight.bold,
@@ -89,12 +109,7 @@ class SettingsScreen extends StatelessWidget {
                 fontColor: containerTheme.fontColor,
               ),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (_) => const PersonalInfoScreen(),
-                  ),
-                );
+                context.push('/profile');
               },
             ),
             CustomRow(

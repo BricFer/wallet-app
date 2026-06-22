@@ -13,7 +13,6 @@ class PaymentMethodRequest {
     required this.issuer,
     required this.isDefault,
     required this.isActive,
-    required id,
   });
 
   Map<String, dynamic> toJson() => {

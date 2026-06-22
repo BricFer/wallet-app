@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -81,14 +80,10 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
     try {
       await _userService.saveUser(dto);
 
-      if (!mounted) return;
       await authProvider.checkBackendProfile();
 
       if (!mounted) return;
-
-      context.go('/dashboard');
     } catch (e, stacktrace) {
-      debugPrint('>>> Error at _submit: $e');
       debugPrint(e.toString());
       debugPrintStack(stackTrace: stacktrace);
     }
@@ -166,15 +161,14 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
                       ),
                       DropdownRegister(
                         controller: _defaultCurrencyController,
-                        dropdownMenuEntries: DefaultCurrency.currencies.entries
-                            .map((entry) {
-                              return DropdownMenuEntry(
-                                value: entry.value,
-                                label: entry.key,
-                                style: ButtonStyle(),
-                              );
-                            })
-                            .toList(),
+                        dropdownMenuEntries: [
+                          for (final currency in DefaultCurrency.currencies)
+                            DropdownMenuEntry(
+                              value: currency.code,
+                              label: currency.name,
+                              style: ButtonStyle(),
+                            ),
+                        ],
                       ),
                     ],
                   ),

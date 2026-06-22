@@ -12,5 +12,5 @@ public class GroupResponseDto {
     private String name;
     private String description;
     private double budgetLimit;
-    private boolean isActive;
+    private Boolean isActive;
 }

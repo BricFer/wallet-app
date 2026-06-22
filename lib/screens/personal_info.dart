@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wallet_app/core/constants/constants.dart';
-import 'package:wallet_app/screens/account_access.dart';
-import 'package:wallet_app/screens/profile.dart';
 import 'package:wallet_app/widgets/widgets.dart';
 
 class PersonalInfoScreen extends StatelessWidget {
@@ -22,23 +21,13 @@ class PersonalInfoScreen extends StatelessWidget {
                   GestureDetector(
                     child: CustomRow(text: Strings.yourInfo),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                          builder: (_) => const ProfileScreen(),
-                        ),
-                      );
+                      context.push('/profile');
                     },
                   ),
                   GestureDetector(
                     child: CustomRow(text: Strings.accessMethods),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const AccountAccessScreen(),
-                        ),
-                      );
+                      context.push('/account-access');
                     },
                   ),
                 ],

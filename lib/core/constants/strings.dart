@@ -27,7 +27,7 @@ class Strings {
   static const String vibrantTheme = "Vibrant";
   static const String neutralTheme = "Neutral";
 
-    // English variables
+  // English variables
   // ==================== App Strings ====================
   static const String accessMethods = "Access methods";
   static const String address = "Address";
@@ -66,10 +66,18 @@ class Strings {
   static const String back = "Back";
   static const String delete = "Delete";
   static const String register = "Register";
+  static const String addGroup = "Add Group";
+  static const String groupName = "Group name";
+  static const String groupDescription = "Group description";
+  static const String groupBudgetLimit = "Budget limit";
+  static const String addPaymentMethod = "Add Payment Method";
+  static const String methodAlias = "Alias";
+  static const String methodIssuer = "Issuer";
 
   // ==================== Navigation ====================
   static const String aboutUs = "About us";
   static const String addExpense = "Add Expense";
+  static const String editExpense = "Edit Expense";
   static const String currency = "Currency";
   static const String exchange = "Exchange";
   static const String expenses = "Expenses";

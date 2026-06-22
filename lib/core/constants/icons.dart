@@ -23,7 +23,7 @@ class AppIcons {
 
   static const FaIconData euroFaIcon = FontAwesomeIcons.euroSign;
   // Actions
-  static const IconData viewIcon= Icons.remove_red_eye_outlined;
+  static const IconData viewIcon = Icons.remove_red_eye_outlined;
   static const FaIconData editFaIcon = FontAwesomeIcons.marker;
   static const IconData editIcon = Icons.edit;
   // static const IconData delete = Icons.delete;
@@ -45,6 +45,7 @@ class AppIcons {
   static const IconData moreIcon = Icons.more_vert_outlined;
   static const IconData closeIcon = Icons.close_sharp;
   static const IconData calendarIcon = Icons.calendar_month_outlined;
+  static const FaIconData filledCalendarIcon = FontAwesomeIcons.calendarDays;
   static const IconData cameraIcon = Icons.camera_alt_outlined;
   static const FaIconData languageFaIcon = FontAwesomeIcons.language;
   static const IconData expensesIcon = Icons.currency_exchange_outlined;

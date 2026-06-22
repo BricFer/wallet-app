@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/widgets/widgets.dart';
-import 'package:wallet_app/screens/information.dart';
 
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});
@@ -24,12 +24,7 @@ class AboutUsScreen extends StatelessWidget {
                   haveIconColor: true,
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (_) => const InformationScreen(),
-                    ),
-                  );
+                  context.push('/information');
                 },
               ),
             ),
