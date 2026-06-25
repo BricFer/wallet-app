@@ -1,33 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/core/themes/app_decoration.dart';
 
 class EditDialog extends StatefulWidget {
-  const EditDialog({
-    super.key,
-    required this.label,
-    required this.controller,
-    required this.onSave,
-    required this.onCancel,
-  });
+  const EditDialog({super.key, required this.label, this.initialValue});
 
   final String label;
-  final TextEditingController controller;
-  final Future<void> Function(String) onSave;
-  final VoidCallback onCancel;
+  final String? initialValue;
 
   @override
   State<EditDialog> createState() => _EditDialogState();
 }
 
 class _EditDialogState extends State<EditDialog> {
-  bool _isLoading = false;
+  bool _isSubmitting = false;
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.initialValue);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text("Edit ${widget.label.toLowerCase()}"),
       content: TextField(
-        controller: widget.controller,
+        controller: _controller,
         autofocus: true,
         decoration: AppDecoration.textInput(
           context,
@@ -35,13 +42,21 @@ class _EditDialogState extends State<EditDialog> {
         ),
       ),
       actions: [
-        IconButton(
-          onPressed: _isLoading ? null : widget.onCancel,
-          icon: Icon(AppIcons.cancelIcon),
+        TextButton(
+          onPressed: () => context.pop(),
+          child: const Text(Strings.cancel),
         ),
         IconButton(
-          onPressed: _isLoading ? null : _handleSave,
-          icon: _isLoading
+          onPressed: _isSubmitting
+              ? null
+              : () {
+                  final value = _controller.text.trim();
+
+                  if (value.isEmpty) return;
+
+                  context.pop(value);
+                },
+          icon: _isSubmitting
               ? SizedBox(
                   width: AppDimens.width18,
                   height: AppDimens.height18,
@@ -53,18 +68,5 @@ class _EditDialogState extends State<EditDialog> {
         ),
       ],
     );
-  }
-
-  Future<void> _handleSave() async {
-    final newValue = widget.controller.text.trim();
-    if (newValue.isEmpty || newValue == "") return;
-
-    setState(() => _isLoading = true);
-
-    try {
-      await widget.onSave(newValue);
-    } finally {
-      if (mounted) setState(() => _isLoading = false);
-    }
   }
 }

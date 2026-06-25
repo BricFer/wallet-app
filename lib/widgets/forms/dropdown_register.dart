@@ -6,10 +6,12 @@ class DropdownRegister extends StatelessWidget {
     super.key,
     required this.dropdownMenuEntries,
     this.controller,
+    required this.onSelected,
   });
 
   final List<DropdownMenuEntry<String>> dropdownMenuEntries;
   final TextEditingController? controller;
+  final ValueChanged<String?> onSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class DropdownRegister extends StatelessWidget {
         ),
       ),
       controller: controller,
+      onSelected: onSelected,
       dropdownMenuEntries: dropdownMenuEntries,
     );
   }

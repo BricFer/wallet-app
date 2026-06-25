@@ -1,5 +1,5 @@
 name: wallet_app
-description: "A new Flutter project."
+description: "Full-stack personal finance manager built with Flutter and Java Spring Boot. Features Firebase Auth, PostgreSQL on Railway, and Provider-based state management."
 version: 1.0.0+1
 
 environment:
@@ -20,6 +20,8 @@ dependencies:
   fluttertoast: ^9.1.0
   http: ^1.6.0
   intl: ^0.20.2
+  flutter_launcher_icons: ^0.14.4
+  string_capitalize: ^0.0.10
 
 dev_dependencies:
   flutter_test:
@@ -30,3 +32,4 @@ flutter:
   assets:
     - assets/images/default_pic.png
     - assets/images/profile_pic.jpg
+    - assets/images/logo.png

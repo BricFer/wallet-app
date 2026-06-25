@@ -1,4 +1,4 @@
-enum PaymentType { CASH, CREDIT_CARD, DEBIT_CARD, BANK_TRANSFER, WALLET, BIZUM }
+import 'package:wallet_app/models/payment_method/payment_type.dart';
 
 class PaymentMethodRequest {
   final String? alias;

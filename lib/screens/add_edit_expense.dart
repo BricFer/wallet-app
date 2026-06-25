@@ -4,14 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
-import 'package:wallet_app/core/constants/default_currency.dart';
-import 'package:wallet_app/core/providers/auth_provider.dart';
-import 'package:wallet_app/core/providers/category_provider.dart';
-import 'package:wallet_app/core/providers/expense_provider.dart';
+import 'package:wallet_app/core/providers/provider.dart';
 import 'package:wallet_app/core/themes/app_decoration.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
 import 'package:wallet_app/models/expense/expense_request.dart';
-import 'package:wallet_app/widgets/transactions/transaction_group_dropdown.dart';
 import 'package:wallet_app/widgets/widgets.dart';
 
 class AddEditExpenseScreen extends StatefulWidget {
@@ -41,7 +37,6 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<CategoryProvider>().loadCategories();
       if (widget.expenseId != null) {
@@ -51,11 +46,36 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
   }
 
   Future<void> _selectDate() async {
+    final _containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
+
     final picked = await showDatePicker(
       context: context,
       initialDate: _selectedDate ?? DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime.now(),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: Theme.of(context).colorScheme.copyWith(
+              surfaceContainer: _containerTheme
+                  .backgroundColor, // Color de fondo del calendario
+              onSurface: _containerTheme
+                  .fontColorVariant, // Color del texto de los días
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: _containerTheme
+                    .fontColorVariant, // Color de los botones (CANCELAR / ACEPTAR)
+              ),
+            ),
+            datePickerTheme: DatePickerThemeData(
+              backgroundColor: _containerTheme.backgroundColor,
+              headerForegroundColor: _containerTheme.fontColorVariant,
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
 
     if (picked != null) {
@@ -105,7 +125,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
   Future<void> _submit() async {
     if (_isSubmitting) return;
 
-    // Se verifica que el usuario agrego un importe y en caso de no haberlo hecho en lugar de romper la ejecución. Estas líneas previenen que se envíe el formulario
+    // Se verifica que el usuario agregó un importe y en caso de no haberlo hecho en lugar de romper la ejecución estas líneas previenen que se envíe el formulario
     final amount = double.tryParse(_amountController.text);
 
     if (amount == null) {
@@ -158,7 +178,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
+    final _containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
     final _colorScheme = Theme.of(context).colorScheme;
     final Color inputColor = Theme.of(context).colorScheme.primary;
 
@@ -212,7 +232,6 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
             SizedBox(height: AppDimens.height36),
             Row(
               spacing: AppDimens.spacing16,
-              mainAxisSize: MainAxisSize.min,
               children: [
                 DropdownMenu<String>(
                   textAlign: TextAlign.center,
@@ -290,7 +309,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
             CustomContainer(
               decoration: AppDecoration.container(
                 context,
-                containerBackgroud: _colorScheme.tertiary,
+                containerBackgroud: _colorScheme.primary,
                 showGradient: false,
               ),
 
@@ -304,45 +323,47 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
                     child: GestureDetector(
                       onTap: _selectDate,
                       child: _selectedDate != null
-                          ? FaIcon(AppIcons.filledCalendarIcon)
+                          ? FaIcon(
+                              AppIcons.filledCalendarIcon,
+                              color: _containerTheme.iconContainerColor,
+                            )
                           : Icon(
                               AppIcons.calendarIcon,
-                              color: _selectedDate != null
-                                  ? _colorScheme.primary
-                                  : containerTheme.iconColor,
+                              color: _containerTheme.iconContainerColor,
                             ),
                     ),
                   ),
-                  Text(
-                    Strings.paymentMethod,
-                    style: TextStyle(
-                      color: containerTheme.fontColorTransaction,
-                    ),
+                  TransactionPaymentMethodDropdown(
+                    selectedMethodId: _selectedPaymentMethodId,
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedPaymentMethodId = value;
+                      });
+                    },
                   ),
-                  Icon(AppIcons.cameraIcon),
+                  Icon(
+                    AppIcons.cameraIcon,
+                    color: _containerTheme.iconContainerColor,
+                  ),
                 ],
               ),
             ),
+            SizedBox(height: AppDimens.height48),
           ],
         ),
       ),
-      floatingActionButton: Padding(
-        padding: AppPaddings.paddingAll24,
-        child: FloatingActionButton(
-          // Deshabilita el _submit mientras se envía la información al backend
-          onPressed: _isSubmitting ? null : _submit,
+      floatingActionButton: FloatingActionButton(
+        // Deshabilita el _submit mientras se envía la información al backend
+        onPressed: _isSubmitting ? null : _submit,
 
-          // Muestra un circulo de "cargando" mientras se envía la información al backend
-          child: _isSubmitting
-              ? const SizedBox(
-                  width: AppDimens.width20,
-                  height: AppDimens.height20,
-                  child: CircularProgressIndicator(
-                    strokeWidth: AppDimens.width1,
-                  ),
-                )
-              : const FaIcon(FontAwesomeIcons.check),
-        ),
+        // Muestra un circulo de "cargando" mientras se envía la información al backend
+        child: _isSubmitting
+            ? const SizedBox(
+                width: AppDimens.width20,
+                height: AppDimens.height20,
+                child: CircularProgressIndicator(strokeWidth: AppDimens.width1),
+              )
+            : const FaIcon(FontAwesomeIcons.check),
       ),
     );
   }

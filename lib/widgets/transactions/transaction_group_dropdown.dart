@@ -83,9 +83,9 @@ class _TransactionGroupDropdownState extends State<TransactionGroupDropdown> {
 
         Expanded(
           child: DropdownMenu<int>(
-            initialSelection: widget.selectedGroupId,
+            initialSelection: widget.selectedGroupId ?? -1,
             controller: widget.controller,
-            textAlign: TextAlign.center,
+            width: AppDimens.width245,
             textStyle: _textTheme.bodyMedium,
             menuStyle: MenuStyle(
               backgroundColor: WidgetStateProperty.all(_colorScheme.surface),
@@ -100,7 +100,6 @@ class _TransactionGroupDropdownState extends State<TransactionGroupDropdown> {
               ),
             ),
 
-            label: Text('Group', style: _textTheme.bodyMedium),
             dropdownMenuEntries: [
               ...groups.map((g) {
                 return DropdownMenuEntry(value: g.groupId, label: g.name);

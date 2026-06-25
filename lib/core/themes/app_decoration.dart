@@ -52,6 +52,29 @@ class AppDecoration {
     );
   }
 
+  static InputDecorationTheme dropdown(BuildContext context) {
+    final Color inputColor = Theme.of(context).colorScheme.primary;
+    final _textTheme = Theme.of(context).textTheme;
+
+    return InputDecorationTheme(
+      contentPadding: AppPaddings.paddingAll8,
+      labelStyle: _textTheme.bodySmall,
+
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius12)),
+        borderSide: BorderSide(
+          color: Colors.transparent,
+          width: AppDimens.width0,
+        ),
+      ),
+
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius12)),
+        borderSide: BorderSide(color: inputColor, width: AppDimens.width2),
+      ),
+    );
+  }
+
   static InputDecoration textInput(
     BuildContext context, {
     IconData? icon,

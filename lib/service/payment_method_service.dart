@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,7 +12,11 @@ class PaymentMethodService {
 
   Future<String?> _getToken() async {
     final user = FirebaseAuth.instance.currentUser;
-    return await user?.getIdToken();
+
+    if (user == null) {
+      throw Exception('User not found');
+    }
+    return await user.getIdToken(true);
   }
 
   Future<PaymentMethodResponse> getPaymentMethodInfo(
@@ -72,6 +77,7 @@ class PaymentMethodService {
 
     if (response.statusCode == 200) {
       final List<dynamic> data = jsonDecode(response.body);
+      debugPrint(response.body);
       return data.map((json) => PaymentMethodResponse.fromJson(json)).toList();
     } else {
       throw Exception('Failed to get the active payment methods list');

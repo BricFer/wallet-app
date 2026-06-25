@@ -103,7 +103,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         String user = _emailController.text;
                         String pwd = _passwordController.text;
 
-                        context.read<AuthProvider>().signIn(user, pwd);
+                        await context.read<AuthProvider>().signIn(user, pwd);
+
+                        if(!context.mounted) return;
 
                         String? error = context
                             .read<AuthProvider>()

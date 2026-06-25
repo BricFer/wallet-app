@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
+import 'package:wallet_app/core/providers/provider.dart';
 import 'package:wallet_app/models/user/user_response.dart';
-import 'package:wallet_app/service/user_service.dart';
 import 'package:wallet_app/widgets/widgets.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -12,30 +14,24 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final UserService _service = UserService();
-
-  late UserResponse? user;
-
   bool isLoading = true;
+  late UserResponse? user;
 
   @override
   void initState() {
     super.initState();
-    _loadProfile();
-  }
-
-  Future<void> _loadProfile() async {
-    user = await _service.getUserInfo();
-
-    setState(() {
-      isLoading = false;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<UserProvider>().loadUser();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      return const CircularProgressIndicator();
+    final provider = context.watch<UserProvider>();
+    final user = provider.user;
+
+    if (provider.isLoading || user == null) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     return Scaffold(
@@ -53,49 +49,108 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   CustomProfileRow(
                     label: Strings.username,
-                    subtext: '\n${user?.username}',
+                    subtext: '\n${user.username ?? 'No nickname'}',
                     onSave: (value) async {
-                      // TODO: Implementar al tener la base de datos
-                      
+                      final userId = context.read<AuthProvider>().userId!;
+                      await context.read<UserProvider>().updateUsername(
+                        userId,
+                        value,
+                      );
                     },
                   ),
                   CustomProfileRow(
                     label: Strings.fullname,
-                    subtext: '\n${user?.fullname}',
+                    subtext: '\n${user.fullname}',
                     onSave: (value) async {
-                      // TODO: Implementar al tener la base de datos
-                      
+                      final userId = context.read<AuthProvider>().userId!;
+                      await context.read<UserProvider>().updateFullname(
+                        userId,
+                        value,
+                      );
                     },
                   ),
                   CustomProfileRow(
                     label: Strings.address,
-                    subtext: '\n${user?.address}',
-                    onSave: (value) async {},
+                    subtext: '\n${user.address}',
+                    onSave: (value) async {
+                      final userId = context.read<AuthProvider>().userId!;
+                      await context.read<UserProvider>().updateAddress(
+                        userId,
+                        value,
+                      );
+                    },
                   ),
                   CustomProfileRow(
                     label: Strings.phoneNumber,
-                    subtext: '\n${user?.phoneNumber}',
-                    onSave: (value) async {},
+                    subtext: '\n${user.phoneNumber}',
+                    onSave: (value) async {
+                      final userId = context.read<AuthProvider>().userId!;
+                      await context.read<UserProvider>().updatePhoneNumber(
+                        userId,
+                        value,
+                      );
+                    },
                   ),
                   CustomProfileRow(
                     label: Strings.email,
-                    subtext: '\n${user?.email}',
-                    onSave: (value) async {},
+                    subtext: '\n${user.email}',
+                    onSave: (value) async {
+                      final userId = context.read<AuthProvider>().userId!;
+                      //TODO: Implementar el updateEmail en el AuthProvider
+                      await context.read<AuthProvider>().updateEmail(value);
+                      //TODO: Implementar el updateEmail en el UserProvider
+                      if (!context.mounted) return;
+                      // await context.read<UserProvider>().updateEmail(userId, value);
+                    },
                   ),
                   CustomProfileRow(
                     label: Strings.country,
-                    subtext: '\n${user?.country}',
-                    onSave: (value) async {},
+                    subtext: '\n${user.country}',
+                    onSave: (value) async {
+                      final userId = context.read<AuthProvider>().userId!;
+                      await context.read<UserProvider>().updateCountry(
+                        userId,
+                        value,
+                      );
+                    },
                   ),
-                  CustomProfileRow(
-                    label: Strings.birth,
-                    subtext: '\n${user?.dateOfBirth}',
-                    onSave: (value) async {},
+                  GestureDetector(
+                    onTap: () async {
+                      final picked = await showDatePicker(
+                        context: context,
+                        initialDate: user.dateOfBirth,
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                      );
+
+                      if (picked != null && mounted) {
+                        if (!context.mounted) return;
+
+                        final userId = context.read<AuthProvider>().userId!;
+
+                        await context.read<UserProvider>().updateDateOfBirth(
+                          userId,
+                          picked.toIso8601String(),
+                        );
+                      }
+                    },
+                    child: CustomProfileRow(
+                      label: Strings.birth,
+                      subtext:
+                          '\n${DateFormat('dd/MM/yyy').format(user.dateOfBirth)}',
+                      onSave: (value) async {},
+                    ),
                   ),
                   CustomProfileRow(
                     label: Strings.defaultCurrency,
-                    subtext: '\n${user?.defaultCurrency}',
-                    onSave: (value) async {},
+                    subtext: '\n${user.defaultCurrency}',
+                    onSave: (value) async {
+                      final userId = context.read<AuthProvider>().userId!;
+                      await context.read<UserProvider>().updateCurrency(
+                        userId,
+                        value,
+                      );
+                    },
                   ),
                 ],
               ),
@@ -104,7 +159,5 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
-
-    
   }
 }

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/strings.dart';
-import 'package:wallet_app/core/providers/auth_provider.dart';
-import 'package:wallet_app/core/providers/expense_provider.dart';
+import 'package:wallet_app/core/providers/provider.dart';
 import 'package:wallet_app/widgets/layout/custom_appbar.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -18,6 +17,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // addPostFrameCallback espera a que termine el primer build antes de ejecutar el código
+      context.read<UserProvider>().loadUser();
+
       final userId = context.read<AuthProvider>().userId!;
       context.read<ExpenseProvider>().loadExpenses(userId, 'EUR');
     });
@@ -25,8 +26,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final fullname = context.watch<AuthProvider>().fullname;
-    final username = context.watch<AuthProvider>().username;
+    final _user = context.watch<UserProvider>().user;
+
+    final fullname = _user?.fullname ?? '';
     final expenseProvider = context.watch<ExpenseProvider>();
 
     if (expenseProvider.isLoading) {
@@ -36,7 +38,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       appBar: CustomAppBar(title: Strings.home, isDashboard: true),
       body: Center(
         child: Text(
-          'Hola, $fullname\nTotal de gastos: ${expenseProvider.total}\nUsername: $username',
+          'Hola, $fullname\nTotal de gastos: ${expenseProvider.total}',
         ),
       ),
     );

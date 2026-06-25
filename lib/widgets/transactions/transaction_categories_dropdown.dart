@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:string_capitalize/string_capitalize.dart';
 import 'package:wallet_app/core/constants/dimens.dart';
 import 'package:wallet_app/core/providers/category_provider.dart';
 import 'package:wallet_app/core/themes/app_decoration.dart';
@@ -48,7 +49,10 @@ class TransactionCategoriesDropdown extends StatelessWidget {
 
               label: Text('Select category', style: _textTheme.bodyMedium),
               dropdownMenuEntries: categories.map((c) {
-                return DropdownMenuEntry(value: c.categoryId, label: c.name);
+                return DropdownMenuEntry(
+                  value: c.categoryId,
+                  label: c.name.capitalize(),
+                );
               }).toList(),
 
               inputDecorationTheme: AppDecoration.radioInput(context),

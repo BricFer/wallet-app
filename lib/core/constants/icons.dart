@@ -45,7 +45,7 @@ class AppIcons {
   static const IconData moreIcon = Icons.more_vert_outlined;
   static const IconData closeIcon = Icons.close_sharp;
   static const IconData calendarIcon = Icons.calendar_month_outlined;
-  static const FaIconData filledCalendarIcon = FontAwesomeIcons.calendarDays;
+  static const FaIconData filledCalendarIcon = FontAwesomeIcons.calendarCheck;
   static const IconData cameraIcon = Icons.camera_alt_outlined;
   static const FaIconData languageFaIcon = FontAwesomeIcons.language;
   static const IconData expensesIcon = Icons.currency_exchange_outlined;

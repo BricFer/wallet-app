@@ -54,7 +54,7 @@ class AppTheme {
     AppContainerTheme(
       backgroundColor: AppColors.containerColorDark,
       gradientColor: AppGradient.linearGradientContainerDark,
-      containerShadow: AppColors.shadowContainerColorLightDark,
+      containerShadow: AppColors.shadowContainerColorDark,
       fontColor: AppColors.fontColorContainerDark,
       fontColorVariant: AppColors.fontColorContainerVariantDark,
       fontColorTransaction: AppColors.fontColorTransactionDark,
@@ -79,7 +79,7 @@ class AppTheme {
     AppContainerTheme(
       backgroundColor: AppColors.containerColorVibrant,
       gradientColor: AppGradient.linearGradientContainerVibrant,
-      containerShadow: AppColors.shadowContainerColorLightVibrant,
+      containerShadow: AppColors.shadowContainerColorVibrant,
       fontColor: AppColors.fontColorContainerVibrant,
       fontColorVariant: AppColors.fontColorContainerVariantVibrant,
       fontColorTransaction: AppColors.fontColorTransactionVibrant,
@@ -104,7 +104,7 @@ class AppTheme {
     AppContainerTheme(
       backgroundColor: AppColors.containerColorNeutral,
       gradientColor: AppGradient.linearGradientContainerNeutral,
-      containerShadow: AppColors.shadowContainerColorLightNeutral,
+      containerShadow: AppColors.shadowContainerColorNeutral,
       fontColor: AppColors.fontColorContainerNeutral,
       fontColorVariant: AppColors.fontColorContainerVariantNeutral,
       fontColorTransaction: AppColors.fontColorTransactionNeutral,

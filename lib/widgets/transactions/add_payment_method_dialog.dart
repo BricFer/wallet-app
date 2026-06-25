@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wallet_app/core/constants/constants.dart';
+import 'package:wallet_app/core/themes/app_decoration.dart';
 import 'package:wallet_app/models/payment_method/payment_method_request.dart';
+import 'package:wallet_app/models/payment_method/payment_type.dart';
 import 'package:wallet_app/widgets/forms/form_input.dart';
 
 class AddPaymentMethodDialog extends StatefulWidget {
   const AddPaymentMethodDialog({super.key, required this.onSubmit});
 
-  final Future<void> Function(PaymentMethodRequest dto) onSubmit;
+  final Future<int?> Function(PaymentMethodRequest dto) onSubmit;
 
   @override
   State<AddPaymentMethodDialog> createState() => _AddPaymentMethodDialogState();
@@ -50,9 +52,9 @@ class _AddPaymentMethodDialogState extends State<AddPaymentMethodDialog> {
     );
 
     try {
-      await widget.onSubmit(dto);
+      final createdMethodId = await widget.onSubmit(dto);
       if (!mounted) return;
-      context.pop();
+      context.pop(createdMethodId);
     } catch (e) {
       debugPrint(e.toString());
     } finally {
@@ -66,6 +68,9 @@ class _AddPaymentMethodDialogState extends State<AddPaymentMethodDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final _textTheme = Theme.of(context).textTheme;
+    String? label = 'Payment type';
+
     return AlertDialog(
       title: Text(Strings.addPaymentMethod),
       content: SingleChildScrollView(
@@ -77,12 +82,14 @@ class _AddPaymentMethodDialogState extends State<AddPaymentMethodDialog> {
               labelText: Strings.methodAlias,
               controller: _aliasController,
             ),
+            SizedBox(height: AppDimens.height18),
             CustomFormInput(
               labelText: Strings.methodIssuer,
               controller: _issuerController,
             ),
+            SizedBox(height: AppDimens.height18),
             SwitchListTile(
-              title: const Text('Make default?'),
+              title: Text('Make default?', style: _textTheme.bodyMedium),
               value: _isDefault,
               onChanged: (value) {
                 setState(() {
@@ -90,8 +97,12 @@ class _AddPaymentMethodDialogState extends State<AddPaymentMethodDialog> {
                 });
               },
             ),
+            SizedBox(height: AppDimens.height18),
             SwitchListTile(
-              title: const Text('Active payment method?'),
+              title: Text(
+                'Active payment method?',
+                style: _textTheme.bodyMedium,
+              ),
               value: _isActive,
               onChanged: (value) {
                 setState(() {
@@ -99,11 +110,14 @@ class _AddPaymentMethodDialogState extends State<AddPaymentMethodDialog> {
                 });
               },
             ),
+            SizedBox(height: AppDimens.height18),
             DropdownMenu<PaymentType>(
+              expandedInsets: EdgeInsets.zero,
               initialSelection: _selectedType,
-              label: const Text('Payment type'),
+              label: Text(label, style: _textTheme.bodySmall),
+              inputDecorationTheme: AppDecoration.dropdown(context),
               dropdownMenuEntries: PaymentType.values.map((type) {
-                return DropdownMenuEntry(value: type, label: type.name);
+                return DropdownMenuEntry(value: type, label: type.typeName);
               }).toList(),
               onSelected: (value) {
                 if (value != null) {
@@ -113,6 +127,7 @@ class _AddPaymentMethodDialogState extends State<AddPaymentMethodDialog> {
                 }
               },
             ),
+            SizedBox(height: AppDimens.height18),
           ],
         ),
       ),

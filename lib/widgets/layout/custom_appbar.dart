@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
+import 'package:wallet_app/core/providers/user_provider.dart';
 import 'package:wallet_app/widgets/theme/theme_widget.dart';
-import 'package:wallet_app/core/providers/auth_provider.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBar({
@@ -28,11 +28,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   PreferredSizeWidget build(BuildContext context) {
     final _colorScheme = Theme.of(context).colorScheme;
-    final username = context.read<AuthProvider>().username;
+    final username = context.read<UserProvider>().user?.username;
 
     final displayedName = (username != null && username.isNotEmpty)
         ? username
-        : context.read<AuthProvider>().fullname;
+        : context.read<UserProvider>().user?.fullname;
 
     return AppBar(
       backgroundColor: _colorScheme.surface,

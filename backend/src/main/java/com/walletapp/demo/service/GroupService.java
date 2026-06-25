@@ -23,16 +23,16 @@ public class GroupService {
     private WalletAppUserRepository userRepo;
 
     public GroupResponseDto getGroup(Long userId, Long groupId) {
-        Group group = groupRepo.findByIdAndUserId(groupId, userId).orElseThrow(() -> new RuntimeException(Message.GROUP_NOT_FOUND));
+        Group group = groupRepo.findByIdAndUserId(groupId, userId)
+                .orElseThrow(() -> new RuntimeException(Message.GROUP_NOT_FOUND));
 
         return new GroupResponseDto(
-            group.getId(),
-            group.getName(),
-            group.getDescription(),
-            group.getBudgetLimit(),
-            group.isActive()
-        );
-        
+                group.getId(),
+                group.getName(),
+                group.getDescription(),
+                group.getBudgetLimit(),
+                group.isActive());
+
     }
 
     @Transactional

@@ -33,8 +33,9 @@ class PaymentMethodProvider extends ChangeNotifier {
     try {
       _methods = await _service.getAllActivePaymentMethods(userId);
       _byId = {for (final method in methods) method.paymentMethodId: method};
-    } catch (e) {
+    } catch (e, stackTrace) {
       debugPrint(e.toString());
+      debugPrint(stackTrace.toString());
     } finally {
       isLoading = false;
       notifyListeners();
@@ -112,9 +113,11 @@ class PaymentMethodProvider extends ChangeNotifier {
       if (paymentMethodId == null) {
         final createdMethod = await _service.savePaymentMethod(dto, userId);
 
-        _methods.add(createdMethod);
+        _methods.insert(0, createdMethod);
         _byId[createdMethod.paymentMethodId] = createdMethod;
         selectedMethod = createdMethod;
+
+        notifyListeners();
 
         return createdMethod;
       } else {

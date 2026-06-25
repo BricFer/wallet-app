@@ -6,11 +6,8 @@ class AuthProvider extends ChangeNotifier {
   User? firebaseUser;
 
   bool? hasBackendProfile;
-  // bool _checkingProfile = false;
 
   int? userId;
-  String? fullname;
-  String? username;
 
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
@@ -40,10 +37,8 @@ class AuthProvider extends ChangeNotifier {
   Future<void> checkBackendProfile() async {
     if (firebaseUser == null) return;
 
-    // if (_checkingProfile) return;
     if (_loadingProfile) return;
 
-    // _checkingProfile = true;
     _loadingProfile = true;
     notifyListeners();
 
@@ -52,12 +47,9 @@ class AuthProvider extends ChangeNotifier {
 
       hasBackendProfile = response != null;
       userId = response?.userId;
-      fullname = response?.fullname;
-      username = response?.username;
     } catch (e) {
       hasBackendProfile = false;
     } finally {
-      // _checkingProfile = false;
       _loadingProfile = false;
       notifyListeners();
     }
@@ -118,6 +110,10 @@ class AuthProvider extends ChangeNotifier {
       };
       notifyListeners();
     }
+  }
+
+  Future<void> updateEmail(String newEmail) async {
+    await firebaseUser?.verifyBeforeUpdateEmail(newEmail);
   }
 
   Future<void> deleteAccount() async {

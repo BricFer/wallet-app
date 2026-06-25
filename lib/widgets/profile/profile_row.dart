@@ -5,7 +5,7 @@ import 'package:wallet_app/core/constants/icons.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
 import 'package:wallet_app/widgets/profile/edit_dialog.dart';
 
-class CustomProfileRow extends StatelessWidget {
+class CustomProfileRow extends StatefulWidget {
   const CustomProfileRow({
     super.key,
     required this.label,
@@ -18,6 +18,12 @@ class CustomProfileRow extends StatelessWidget {
   final Future<void> Function(String value) onSave;
 
   @override
+  State<CustomProfileRow> createState() => _CustomProfileRowState();
+}
+
+class _CustomProfileRowState extends State<CustomProfileRow> {
+
+  @override
   Widget build(BuildContext context) {
     final _containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
 
@@ -28,47 +34,34 @@ class CustomProfileRow extends StatelessWidget {
           text: TextSpan(
             children: <TextSpan>[
               TextSpan(
-                text: label,
+                text: widget.label,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: _containerTheme.fontColorVariant,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               TextSpan(
-                text: subtext,
+                text: widget.subtext,
                 style: TextStyle(color: _containerTheme.fontColorVariant),
               ),
             ],
           ),
         ),
-        GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () => _showEditDialog(context),
-          child: FaIcon(
+        IconButton(
+          onPressed: () async {
+final result = await showDialog(context: context, builder: (_) => EditDialog(label: widget.label, initialValue: widget.subtext ?? '',));
+
+if(result != null) {
+  await widget.onSave(result);
+}
+          },
+          icon: FaIcon(
             AppIcons.editFaIcon,
             color: _containerTheme.iconContainerColor,
             size: AppDimens.iconSize10,
           ),
         ),
       ],
-    );
-  }
-
-  void _showEditDialog(BuildContext context) {
-    TextEditingController controller = TextEditingController(text: subtext);
-
-    showDialog(
-      barrierDismissible: false,
-      barrierColor: Theme.of(context).colorScheme.primary,
-      context: context,
-      builder: (dialogContext) => EditDialog(
-        label: label,
-        controller: controller,
-        onSave: (value) async {
-          await onSave(value);
-          if (dialogContext.mounted) Navigator.pop(dialogContext);
-        },
-        onCancel: () => Navigator.pop(dialogContext),
-      ),
     );
   }
 }

@@ -32,7 +32,7 @@ class _TransactionScreenState extends State<TransactionsScreen> {
     final expenses = expenseProvider.expenses;
 
     if (expenseProvider.isLoading) {
-      return const CircularProgressIndicator();
+      return Scaffold(body: const Center(child: CircularProgressIndicator()));
     }
 
     return Scaffold(

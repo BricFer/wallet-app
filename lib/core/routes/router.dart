@@ -56,10 +56,6 @@ GoRouter buildRouter(BuildContext context) {
       ),
       GoRoute(path: '/currency', builder: (_, __) => const CurrencyScreen()),
       GoRoute(
-        path: '/edit-profile',
-        builder: (_, __) => const EditProfileScreen(),
-      ),
-      GoRoute(
         path: '/information',
         builder: (_, __) => const InformationScreen(),
       ),

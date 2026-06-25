@@ -65,7 +65,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         String user = _emailController.text;
                         String pwd = _passwordController.text;
 
-                        context.read<AuthProvider>().signUp(user, pwd);
+                        await context.read<AuthProvider>().signUp(user, pwd);
+
+                        if (!context.mounted) return;
 
                         String? error = context
                             .read<AuthProvider>()
@@ -78,6 +80,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             gravity: ToastGravity.SNACKBAR,
                             backgroundColor: AppColors.errorColor,
                             textColor: AppColors.errorFontColor,
+                            webPosition: "center",
                           );
                         }
                       },

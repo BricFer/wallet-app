@@ -3,12 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/strings.dart';
-import 'package:wallet_app/core/providers/auth_provider.dart';
-import 'package:wallet_app/core/providers/category_provider.dart';
-import 'package:wallet_app/core/providers/expense_provider.dart';
-import 'package:wallet_app/core/providers/group_provider.dart';
-import 'package:wallet_app/core/providers/navigation_provider.dart';
-import 'package:wallet_app/core/providers/theme_provider.dart';
+import 'package:wallet_app/core/providers/provider.dart';
 import 'package:wallet_app/core/routes/router.dart';
 import 'firebase_options.dart';
 
@@ -20,12 +15,14 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => NavigationProvider()),
-        ChangeNotifierProvider(create: (_) => ExpenseProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => CategoryProvider()),
+        ChangeNotifierProvider(create: (_) => ExpenseProvider()),
         ChangeNotifierProvider(create: (_) => GroupProvider()),
+        ChangeNotifierProvider(create: (_) => NavigationProvider()),
+        ChangeNotifierProvider(create: (_) => PaymentMethodProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
       child: MyApp(),
     ),

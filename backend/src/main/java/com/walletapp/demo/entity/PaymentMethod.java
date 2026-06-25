@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "payment_methods", uniqueConstraints = @UniqueConstraint(columnNames = { "created_by_id", "alias" }), indexes = {
+@Table(name = "payment_methods", indexes = {
         @Index(name = "idx_payment_method_user_id", columnList = "created_by_id"),
         @Index(name = "idx_payment_method_issuer", columnList = "issuer"),
 

@@ -32,7 +32,8 @@ class TransactionCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute<void>(
-                        builder: (_) => ExpenseDetails(expenseId: expense.expenseId,),
+                        builder: (_) =>
+                            ExpenseDetails(expenseId: expense.expenseId),
                       ),
                     );
                   },
@@ -48,7 +49,10 @@ class TransactionCard extends StatelessWidget {
                   onPressed: (_) {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => AddEditExpenseScreen(expenseId: expense.expenseId,)),
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            AddEditExpenseScreen(expenseId: expense.expenseId),
+                      ),
                     );
                   },
                   backgroundColor: _colorScheme.secondary,
@@ -76,7 +80,7 @@ class TransactionCard extends StatelessWidget {
                   text: TextSpan(
                     children: <TextSpan>[
                       TextSpan(
-                        text: expense.commerce,
+                        text: ('${expense.commerce}\n'),
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
                           fontSize: 20.0,
                           color: containerTheme.fontColorVariant,
@@ -84,7 +88,7 @@ class TransactionCard extends StatelessWidget {
                       ),
                       if (expense.categoryName != null)
                         TextSpan(
-                          text: expense.categoryName,
+                          text: '${expense.categoryName} · ',
                           style: Theme.of(context).textTheme.labelMedium
                               ?.copyWith(
                                 color: containerTheme.fontColorVariant,
@@ -99,7 +103,7 @@ class TransactionCard extends StatelessWidget {
                           ),
                         ),
                       TextSpan(
-                        text: '${expense.date}',
+                        text: '\n${expense.date}',
                         style: TextStyle(
                           color: containerTheme.fontColorVariant,
                         ),

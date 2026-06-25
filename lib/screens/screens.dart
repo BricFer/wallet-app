@@ -5,7 +5,6 @@ export 'package:wallet_app/screens/add_edit_income.dart';
 export 'package:wallet_app/screens/app_shell.dart';
 export 'package:wallet_app/screens/currency.dart';
 export 'package:wallet_app/screens/dashboard.dart';
-export 'package:wallet_app/screens/edit_profile.dart';
 export 'package:wallet_app/screens/expense_details.dart';
 export 'package:wallet_app/screens/information.dart';
 export 'package:wallet_app/screens/login.dart';

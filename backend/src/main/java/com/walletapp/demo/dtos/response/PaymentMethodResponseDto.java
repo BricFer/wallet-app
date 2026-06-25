@@ -14,6 +14,6 @@ public class PaymentMethodResponseDto {
     private String alias;
     private PaymentType type;
     private String issuer;
-    private boolean isDefault;
-    private boolean isActive;
+    private Boolean isDefault;
+    private Boolean isActive;
 }

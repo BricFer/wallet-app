@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'package:wallet_app/core/constants/country.dart';
-import 'package:wallet_app/core/constants/default_currency.dart';
-import 'package:wallet_app/core/constants/dimens.dart';
-import 'package:wallet_app/core/constants/paddings.dart';
-import 'package:wallet_app/core/constants/strings.dart';
+import 'package:wallet_app/core/constants/constants.dart';
+import 'package:wallet_app/core/providers/user_provider.dart';
+import 'package:wallet_app/core/themes/colors.dart';
 import 'package:wallet_app/models/user/user_request.dart';
-import 'package:wallet_app/service/user_service.dart';
-import 'package:wallet_app/widgets/forms/dropdown_register.dart';
-import 'package:wallet_app/widgets/forms/form_button.dart';
-import 'package:wallet_app/widgets/forms/form_input.dart';
-import 'package:wallet_app/widgets/layout/custom_header.dart';
+import 'package:wallet_app/widgets/widgets.dart';
 import 'package:wallet_app/core/providers/auth_provider.dart';
 
 class SignUpDetailsScreen extends StatefulWidget {
@@ -27,11 +22,10 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
   final _fullnameController = TextEditingController();
   final _phoneNumberController = TextEditingController();
   final _addressController = TextEditingController();
-  final _countryController = TextEditingController();
-  final _defaultCurrencyController = TextEditingController();
   DateTime? _selectedDateOfBirth;
 
-  final UserService _userService = UserService();
+  String? _selectedCurrency;
+  String? _selectedCountry;
 
   @override
   void dispose() {
@@ -39,8 +33,6 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
     _fullnameController.dispose();
     _phoneNumberController.dispose();
     _addressController.dispose();
-    _countryController.dispose();
-    _defaultCurrencyController.dispose();
 
     super.dispose();
   }
@@ -64,6 +56,7 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
     }
 
     final authProvider = context.read<AuthProvider>();
+    final userProvider = context.read<UserProvider>();
     final email = authProvider.firebaseUser?.email ?? '';
 
     final dto = UserRequest(
@@ -73,16 +66,29 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
       dateOfBirth: _selectedDateOfBirth!,
       address: _addressController.text,
       email: email,
-      country: _countryController.text,
-      defaultCurrency: _defaultCurrencyController.text,
+      country: _selectedCountry ?? '',
+      defaultCurrency: _selectedCurrency ?? 'EUR',
     );
 
     try {
-      await _userService.saveUser(dto);
+      await userProvider.saveUser(dto);
 
       await authProvider.checkBackendProfile();
 
       if (!mounted) return;
+
+      // TODO: El error tiene que venir del UserProvider
+      String? error = context.read<AuthProvider>().errorMessage;
+
+      if (error != null) {
+        Fluttertoast.showToast(
+          msg: error,
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.SNACKBAR,
+          backgroundColor: AppColors.errorColor,
+          textColor: AppColors.errorFontColor,
+        );
+      }
     } catch (e, stacktrace) {
       debugPrint(e.toString());
       debugPrintStack(stackTrace: stacktrace);
@@ -138,7 +144,9 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
                     children: [
                       Text(Strings.country),
                       DropdownRegister(
-                        controller: _countryController,
+                        onSelected: (value) {
+                          setState(() => _selectedCountry = value);
+                        },
                         dropdownMenuEntries: Country.countries.entries.map((
                           entry,
                         ) {
@@ -160,7 +168,9 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       DropdownRegister(
-                        controller: _defaultCurrencyController,
+                        onSelected: (value) {
+                          setState(() => _selectedCurrency = value);
+                        },
                         dropdownMenuEntries: [
                           for (final currency in DefaultCurrency.currencies)
                             DropdownMenuEntry(

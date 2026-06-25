@@ -1,4 +1,4 @@
-import 'package:wallet_app/models/payment_method/payment_method_request.dart';
+import 'package:wallet_app/models/payment_method/payment_type.dart';
 
 class PaymentMethodResponse {
   final int paymentMethodId;
@@ -23,7 +23,7 @@ class PaymentMethodResponse {
         alias: json['alias'],
         type: PaymentType.values.byName(json['type']),
         issuer: json['issuer'],
-        isDefault: json['isDefault'],
-        isActive: json['isActive'],
+        isDefault: (json['default'] as bool),
+        isActive: (json['active'] as bool),
       );
 }
