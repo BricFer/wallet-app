@@ -1,4 +1,4 @@
-# 💸 Mis Finanzas — Personal Finance Manager
+# 💸 Money Tracker — Personal Finance Manager
 
 A full-stack personal finance application built with **Flutter** and **Java Spring Boot**, developed as the final project for the *Desenvolupament d'aplicacions mòbils per a iOS i Android amb Flutter* course at CIFO L'Hospitalet de Llobregat.
 
