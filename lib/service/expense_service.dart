@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:wallet_app/models/expense/expense_detail_response.dart';
 import 'package:wallet_app/models/expense/expense_request.dart';
@@ -33,7 +32,6 @@ class ExpenseService {
     );
 
     if (response.statusCode == 200) {
-      debugPrint('>>> JSON: ${response.body}');
       return ExpenseDetailResponse.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Error trying to get the expense.');

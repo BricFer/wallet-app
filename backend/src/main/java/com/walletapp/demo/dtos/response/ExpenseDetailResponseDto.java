@@ -20,7 +20,6 @@ public class ExpenseDetailResponseDto {
     private String commerce;
     private String concept;
     private String paymentMethodAlias;
-    private String issuer;
     private PaymentType type;
     private Long paymentMethodId;
     private double amount;

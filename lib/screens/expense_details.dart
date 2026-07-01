@@ -58,7 +58,8 @@ class _ExpenseDetailsState extends State<ExpenseDetails> {
     final _textTheme = Theme.of(context).textTheme;
     final _containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
 
-    final displayedMethod = expense?.paymentMethodAlias ?? expense?.issuer;
+    final alias =
+        expense?.paymentMethodAlias ?? expense?.paymentMethodType?.typeName;
 
     final currencies = DefaultCurrency.currencies;
     final currencySymbol = currencies
@@ -82,8 +83,7 @@ class _ExpenseDetailsState extends State<ExpenseDetails> {
                 children: [
                   TransactionDetailsRow(
                     label: 'Group\n',
-                    //TODO: recuperar el groupName
-                    subtext: '${expense?.groupId ?? 'No group assigned'}',
+                    subtext: expense?.groupName ?? 'No group assigned',
                   ),
                   TransactionDetailsRow(
                     label: 'Category\n',
@@ -102,10 +102,9 @@ class _ExpenseDetailsState extends State<ExpenseDetails> {
                     subtext:
                         '${numberFormat.format(expense?.amount)}$currencySymbol',
                   ),
-                  // TODO: Agregar el issuer si no hay alias
                   TransactionDetailsRow(
                     label: 'Payment Method\n',
-                    subtext: displayedMethod!,
+                    subtext: alias!,
                   ),
                   TransactionDetailsRow(
                     label: 'Note\n',

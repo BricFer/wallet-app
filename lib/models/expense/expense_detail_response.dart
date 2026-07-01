@@ -9,7 +9,6 @@ class ExpenseDetailResponse {
   final String commerce;
   final String? concept;
   final String? paymentMethodAlias;
-  final String? issuer;
   final PaymentType? paymentMethodType;
 
   //TODO: Cambiar a required
@@ -33,7 +32,6 @@ class ExpenseDetailResponse {
     this.groupName,
     this.groupId,
     this.paymentMethodAlias,
-    this.issuer,
     this.paymentMethodType,
     this.paymentMethodId,
     // this.imagePath,
@@ -53,7 +51,6 @@ class ExpenseDetailResponse {
         groupName: json['groupName'],
         groupId: json['groupId'],
         paymentMethodAlias: json['paymentMethodAlias'],
-        issuer: json['issuer'],
         paymentMethodType: json['paymentMethodType'] != null
             ? PaymentType.values.byName(json['paymentMethodType'])
             : null,
