@@ -23,7 +23,7 @@ class PaymentMethodResponse {
         alias: json['alias'],
         type: PaymentType.values.byName(json['type']),
         issuer: json['issuer'],
-        isDefault: (json['default'] as bool),
-        isActive: (json['active'] as bool),
+        isDefault: (json['isDefault'] ?? false),
+        isActive: (json['isActive'] as bool),
       );
 }

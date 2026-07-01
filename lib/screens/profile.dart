@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:string_capitalize/string_capitalize.dart';
 import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/core/providers/provider.dart';
 import 'package:wallet_app/models/user/user_response.dart';
@@ -28,9 +29,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<UserProvider>();
-    final user = provider.user;
+    final _user = provider.user;
 
-    if (provider.isLoading || user == null) {
+    if (provider.isLoading || _user == null) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
@@ -49,7 +50,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   CustomProfileRow(
                     label: Strings.username,
-                    subtext: '\n${user.username ?? 'No nickname'}',
+                    subtext:
+                        '\n${_user.username == '' ? 'No nickname' : _user.username}',
                     onSave: (value) async {
                       final userId = context.read<AuthProvider>().userId!;
                       await context.read<UserProvider>().updateUsername(
@@ -60,7 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   CustomProfileRow(
                     label: Strings.fullname,
-                    subtext: '\n${user.fullname}',
+                    subtext: '\n${_user.fullname}',
                     onSave: (value) async {
                       final userId = context.read<AuthProvider>().userId!;
                       await context.read<UserProvider>().updateFullname(
@@ -71,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   CustomProfileRow(
                     label: Strings.address,
-                    subtext: '\n${user.address}',
+                    subtext: '\n${_user.address}',
                     onSave: (value) async {
                       final userId = context.read<AuthProvider>().userId!;
                       await context.read<UserProvider>().updateAddress(
@@ -82,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   CustomProfileRow(
                     label: Strings.phoneNumber,
-                    subtext: '\n${user.phoneNumber}',
+                    subtext: '\n${_user.phoneNumber}',
                     onSave: (value) async {
                       final userId = context.read<AuthProvider>().userId!;
                       await context.read<UserProvider>().updatePhoneNumber(
@@ -93,9 +95,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   CustomProfileRow(
                     label: Strings.email,
-                    subtext: '\n${user.email}',
+                    subtext: '\n${_user.email}',
                     onSave: (value) async {
-                      final userId = context.read<AuthProvider>().userId!;
+                      // final userId = context.read<AuthProvider>().userId!;
                       //TODO: Implementar el updateEmail en el AuthProvider
                       await context.read<AuthProvider>().updateEmail(value);
                       //TODO: Implementar el updateEmail en el UserProvider
@@ -105,7 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   CustomProfileRow(
                     label: Strings.country,
-                    subtext: '\n${user.country}',
+                    subtext: '\n${_user.country.capitalizeEach()}',
                     onSave: (value) async {
                       final userId = context.read<AuthProvider>().userId!;
                       await context.read<UserProvider>().updateCountry(
@@ -118,7 +120,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onTap: () async {
                       final picked = await showDatePicker(
                         context: context,
-                        initialDate: user.dateOfBirth,
+                        initialDate: _user.dateOfBirth,
                         firstDate: DateTime(1900),
                         lastDate: DateTime.now(),
                       );
@@ -137,13 +139,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: CustomProfileRow(
                       label: Strings.birth,
                       subtext:
-                          '\n${DateFormat('dd/MM/yyy').format(user.dateOfBirth)}',
+                          '\n${DateFormat('dd/MM/yyyy').format(_user.dateOfBirth)}',
                       onSave: (value) async {},
                     ),
                   ),
                   CustomProfileRow(
                     label: Strings.defaultCurrency,
-                    subtext: '\n${user.defaultCurrency}',
+                    subtext: '\n${_user.defaultCurrency}',
                     onSave: (value) async {
                       final userId = context.read<AuthProvider>().userId!;
                       await context.read<UserProvider>().updateCurrency(

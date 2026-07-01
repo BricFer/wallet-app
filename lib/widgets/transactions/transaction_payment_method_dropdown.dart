@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
-import 'package:wallet_app/core/providers/auth_provider.dart';
-import 'package:wallet_app/core/providers/payment_method_provider.dart';
+import 'package:wallet_app/core/providers/provider.dart';
 import 'package:wallet_app/core/themes/app_decoration.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
 import 'package:wallet_app/models/payment_method/payment_method_request.dart';
@@ -78,67 +77,59 @@ class _TransactionPaymentMethodDropdownState
   Widget build(BuildContext context) {
     final _colorScheme = Theme.of(context).colorScheme;
     final _textTheme = Theme.of(context).textTheme;
-    final methods = context.watch<PaymentMethodProvider>().methods;
-    String? label = 'Payment Method';
     final _containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
 
-    return SizedBox(
+    final methods = context.watch<PaymentMethodProvider>().methods;
+
+    return DropdownMenu<int>(
+      initialSelection: widget.selectedMethodId ?? -1,
+      controller: widget.controller,
       width: AppDimens.width245,
-      child: DropdownMenu<int>(
-        initialSelection: widget.selectedMethodId,
-        controller: widget.controller,
-        textAlign: TextAlign.center,
-        textStyle: _textTheme.bodyMedium,
-        trailingIcon: Icon(
-          Icons.arrow_drop_down,
-          color: _containerTheme.fontColorVariant,
-        ),
-        menuStyle: MenuStyle(
-          backgroundColor: WidgetStateProperty.all(_colorScheme.surface),
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppDimens.radius12),
-              side: BorderSide(
-                color: _colorScheme.secondary,
-                width: AppDimens.width2,
-              ),
+      textAlign: TextAlign.center,
+      textStyle: _textTheme.bodyMedium,
+      trailingIcon: Icon(
+        Icons.arrow_drop_down,
+        color: _containerTheme.fontColorVariant,
+      ),
+      menuStyle: MenuStyle(
+        backgroundColor: WidgetStateProperty.all(_colorScheme.surface),
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppDimens.radius12),
+            side: BorderSide(
+              color: _colorScheme.secondary,
+              width: AppDimens.width2,
             ),
           ),
         ),
-        label: Text(
-          label,
-          style: _textTheme.bodyMedium?.copyWith(
-            color: _containerTheme.fontColorVariant,
-          ),
-        ),
-        dropdownMenuEntries: [
-          ...methods.map((method) {
-            final alias = method.alias;
-            final issuer = method.issuer;
-
-            final displayedLabel = (alias != null && alias.isNotEmpty)
-                ? alias
-                : issuer;
-            return DropdownMenuEntry(
-              value: method.paymentMethodId,
-              label: displayedLabel,
-              style: ButtonStyle(),
-            );
-          }),
-          DropdownMenuEntry(value: -1, label: Strings.addPaymentMethod),
-        ],
-
-        inputDecorationTheme: AppDecoration.dropdown(context),
-        onSelected: (value) {
-          if (value == null) return;
-
-          if (value == -1) {
-            _showAddMethodDialog();
-            return;
-          }
-          widget.onChanged(value);
-        },
       ),
+
+      dropdownMenuEntries: [
+        ...methods.map((method) {
+          final alias = method.alias;
+          final issuer = method.issuer;
+
+          final displayedLabel = (alias != null && alias.isNotEmpty)
+              ? alias
+              : issuer;
+          return DropdownMenuEntry(
+            value: method.paymentMethodId,
+            label: displayedLabel,
+          );
+        }),
+        DropdownMenuEntry(value: -1, label: Strings.addPaymentMethod),
+      ],
+
+      inputDecorationTheme: AppDecoration.dropdown(context),
+      onSelected: (value) {
+        if (value == null) return;
+
+        if (value == -1) {
+          _showAddMethodDialog();
+          return;
+        }
+        widget.onChanged(value);
+      },
     );
   }
 }

@@ -65,11 +65,15 @@ class AuthProvider extends ChangeNotifier {
         password: password,
       );
     } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
+      debugPrint(e.toString());
+
       _errorMessage = switch (e.code) {
         'INVALID_LOGIN_CREDENTIALS' => 'Invalid login credentials.',
         'user-not-found' => 'No account found with that email.',
         'wrong-password' => 'password/username invalid.',
-        'invalid-password' => 'password/username invalid.',
+        'invalid-password' => 'Invalid password/username.',
+        'invalid-email' => 'Invalid password/email address.',
         _ => e.message ?? 'An error occurred.',
       };
       notifyListeners();

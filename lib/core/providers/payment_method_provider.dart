@@ -82,7 +82,6 @@ class PaymentMethodProvider extends ChangeNotifier {
       final method = await _service.getPaymentMethodInfo(methodId, userId);
 
       selectedMethod = method;
-
       _byId[methodId] = selectedMethod!;
 
       final index = _methods.indexWhere(

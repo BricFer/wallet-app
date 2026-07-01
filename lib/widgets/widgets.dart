@@ -17,6 +17,8 @@ export 'package:wallet_app/widgets/transactions/add_payment_method_dialog.dart';
 export 'package:wallet_app/widgets/transactions/transaction_boxes.dart';
 export 'package:wallet_app/widgets/transactions/transaction_card.dart';
 export 'package:wallet_app/widgets/transactions/transaction_categories_dropdown.dart';
+export 'package:wallet_app/widgets/transactions/transaction_currency_dropdown.dart';
+export 'package:wallet_app/widgets/transactions/transaction_details.dart';
 export 'package:wallet_app/widgets/transactions/transaction_group_dropdown.dart';
 export 'package:wallet_app/widgets/transactions/transaction_input.dart';
 export 'package:wallet_app/widgets/transactions/transaction_payment_method_dropdown.dart';

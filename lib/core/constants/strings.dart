@@ -34,7 +34,7 @@ class Strings {
   static const String amount = "Amount";
   static const String appDescription =
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit";
-  static const String birth = "Bith";
+  static const String birth = "Date of Birth";
   static const String changePassword = "Change Password";
   static const String country = "Country";
   static const String commerce = "Commerce";
@@ -77,6 +77,7 @@ class Strings {
   // ==================== Navigation ====================
   static const String aboutUs = "About us";
   static const String addExpense = "Add Expense";
+  static const String expenseDetails = "Expense Details";
   static const String editExpense = "Edit Expense";
   static const String currency = "Currency";
   static const String exchange = "Exchange";

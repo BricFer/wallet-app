@@ -15,7 +15,6 @@ class GroupService {
     if (user == null) {
       throw Exception('User not found');
     }
-
     return await user.getIdToken(true);
   }
 

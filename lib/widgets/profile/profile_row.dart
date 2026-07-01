@@ -22,7 +22,6 @@ class CustomProfileRow extends StatefulWidget {
 }
 
 class _CustomProfileRowState extends State<CustomProfileRow> {
-
   @override
   Widget build(BuildContext context) {
     final _containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
@@ -49,11 +48,17 @@ class _CustomProfileRowState extends State<CustomProfileRow> {
         ),
         IconButton(
           onPressed: () async {
-final result = await showDialog(context: context, builder: (_) => EditDialog(label: widget.label, initialValue: widget.subtext ?? '',));
+            final result = await showDialog(
+              context: context,
+              builder: (_) => EditProfileFileDialog(
+                label: widget.label,
+                initialValue: widget.subtext ?? '',
+              ),
+            );
 
-if(result != null) {
-  await widget.onSave(result);
-}
+            if (result != null) {
+              await widget.onSave(result);
+            }
           },
           icon: FaIcon(
             AppIcons.editFaIcon,

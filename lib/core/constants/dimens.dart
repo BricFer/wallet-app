@@ -49,8 +49,9 @@ class AppDimens {
   static const double width1 = 1.0;
   static const double width2 = 2.0;
   static const double width12 = 12.0;
-  static const double width20 = 20.0;
   static const double width18 = 18.0;
+  static const double width20 = 20.0;
+  static const double width72 = 72.0;
   static const double width152 = 152.0;
   static const double width245 = 245.0;
 }

@@ -23,11 +23,11 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
   int? _selectedCategoryId;
   int? _selectedGroupId;
   int? _selectedPaymentMethodId;
+  String? _selectedCurrency;
 
   final _commerceController = TextEditingController();
   final _conceptController = TextEditingController();
   final _amountController = TextEditingController();
-  final _currencyController = TextEditingController();
   final _noteController = TextEditingController();
 
   DateTime? _selectedDate;
@@ -84,10 +84,13 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
   }
 
   Future<void> _loadExpense() async {
-    final userId = context.read<AuthProvider>().userId!;
+    // TODO: Revisar si debería de ser el AuthProvider o el UserProvider
+
+    context.read<UserProvider>().loadUser();
+    final userId = context.read<UserProvider>().user?.userId;
 
     await context.read<ExpenseProvider>().loadExpenseDetail(
-      userId,
+      userId!,
       widget.expenseId!,
     );
 
@@ -101,6 +104,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
       _selectedCategoryId = expense.categoryId;
       _selectedGroupId = expense.groupId;
       _selectedPaymentMethodId = expense.paymentMethodId;
+      _selectedCurrency = expense.currency;
 
       _selectedDate = expense.date;
     });
@@ -108,7 +112,6 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
     _commerceController.text = expense.commerce;
     _conceptController.text = expense.concept ?? '';
     _amountController.text = expense.amount.toString();
-    _currencyController.text = expense.currency;
     _noteController.text = expense.note ?? '';
   }
 
@@ -117,7 +120,6 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
     _commerceController.dispose();
     _conceptController.dispose();
     _amountController.dispose();
-    _currencyController.dispose();
     _noteController.dispose();
     super.dispose();
   }
@@ -138,7 +140,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
       _isSubmitting = true;
     });
 
-    final userId = context.read<AuthProvider>().userId!;
+    final userId = context.read<UserProvider>().user?.userId;
     _isSubmitting = true;
 
     final dto = ExpenseRequest(
@@ -147,7 +149,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
       paymentMethodId: _selectedPaymentMethodId,
       commerce: _commerceController.text.trim(),
       amount: amount,
-      currency: _currencyController.text,
+      currency: _selectedCurrency ?? 'EUR',
       concept: _conceptController.text.trim().isEmpty
           ? null
           : _conceptController.text.trim(),
@@ -159,7 +161,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
 
     try {
       await context.read<ExpenseProvider>().saveExpense(
-        userId,
+        userId!,
         dto,
         widget.expenseId,
       );
@@ -180,9 +182,13 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
   Widget build(BuildContext context) {
     final _containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
     final _colorScheme = Theme.of(context).colorScheme;
-    final Color inputColor = Theme.of(context).colorScheme.primary;
 
     final provider = context.watch<ExpenseProvider>();
+    final userProvider = context.watch<UserProvider>();
+    final defaultCurrency = userProvider.user?.defaultCurrency;
+
+    //TODO: Recuperar el PaymentMethod por defecto
+    final defaultMethod = -1;
 
     // Me permite determinar si estoy creando un gasto o modificandolo
     final isEditMode = widget.expenseId != null;
@@ -233,59 +239,13 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
             Row(
               spacing: AppDimens.spacing16,
               children: [
-                DropdownMenu<String>(
-                  textAlign: TextAlign.center,
-                  textStyle: Theme.of(context).textTheme.bodyMedium,
-                  menuHeight: AppDimens.height150,
-                  menuStyle: MenuStyle(
-                    backgroundColor: WidgetStateProperty.all(
-                      _colorScheme.surface,
-                    ),
-                    shape: WidgetStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppDimens.radius12),
-                        side: BorderSide(
-                          color: _colorScheme.secondary,
-                          width: AppDimens.width2,
-                        ),
-                      ),
-                    ),
-                  ),
-                  inputDecorationTheme: InputDecorationTheme(
-                    disabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(AppDimens.radius12),
-                      ),
-                      borderSide: BorderSide(
-                        color: inputColor,
-                        width: AppDimens.width2,
-                      ),
-                    ),
-
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: inputColor,
-                        width: AppDimens.width2,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(AppDimens.radius12),
-                      ),
-                      borderSide: BorderSide(
-                        color: inputColor,
-                        width: AppDimens.width2,
-                      ),
-                    ),
-                  ),
-                  dropdownMenuEntries: [
-                    for (final currency in DefaultCurrency.currencies)
-                      DropdownMenuEntry(
-                        value: currency.code,
-                        label: currency.symbol,
-                        style: ButtonStyle(),
-                      ),
-                  ],
+                TransactionCurrencyDropdown(
+                  selectedCurrency: _selectedCurrency ?? defaultCurrency,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedCurrency = value;
+                    });
+                  },
                 ),
                 Expanded(
                   child: TransactionInput(
@@ -334,7 +294,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
                     ),
                   ),
                   TransactionPaymentMethodDropdown(
-                    selectedMethodId: _selectedPaymentMethodId,
+                    selectedMethodId: _selectedPaymentMethodId ?? defaultMethod,
                     onChanged: (value) {
                       setState(() {
                         _selectedPaymentMethodId = value;

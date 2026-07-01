@@ -3,11 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
-import 'package:wallet_app/core/providers/auth_provider.dart';
-import 'package:wallet_app/core/providers/expense_provider.dart';
-import 'package:wallet_app/widgets/layout/custom_appbar.dart';
-import 'package:wallet_app/widgets/transactions/transaction_boxes.dart';
-import 'package:wallet_app/widgets/transactions/transaction_card.dart';
+import 'package:wallet_app/core/providers/provider.dart';
+import 'package:wallet_app/widgets/widgets.dart';
 
 class TransactionsScreen extends StatefulWidget {
   const TransactionsScreen({super.key});
@@ -22,7 +19,11 @@ class _TransactionScreenState extends State<TransactionsScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final userId = context.read<AuthProvider>().userId!;
-      context.read<ExpenseProvider>().loadExpenses(userId, 'EUR');
+
+      final userProvider = context.read<UserProvider>();
+      final defaultCurrency = userProvider.user?.defaultCurrency;
+
+      context.read<ExpenseProvider>().loadExpenses(userId, defaultCurrency!);
     });
   }
 
@@ -42,7 +43,7 @@ class _TransactionScreenState extends State<TransactionsScreen> {
         child: ListView(
           padding: AppPaddings.paddingBottom106,
           children: [
-            TransactionBoxes(),
+            TransactionBoxes(expensesTotal: expenseProvider.total),
             SizedBox(height: AppDimens.elevation16),
             Text(
               Strings.transactionsList,

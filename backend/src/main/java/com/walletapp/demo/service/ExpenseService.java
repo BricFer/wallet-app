@@ -181,6 +181,7 @@ public class ExpenseService {
                 expense.getCommerce(),
                 expense.getConcept(),
                 expense.getPaymentMethod() != null ? expense.getPaymentMethod().getAlias() : null,
+                expense.getPaymentMethod() != null ? expense.getPaymentMethod().getIssuer() : null,
                 expense.getPaymentMethod() != null ? expense.getPaymentMethod().getType() : null,
                 expense.getPaymentMethod() != null ? expense.getPaymentMethod().getId() : null,
                 expense.getAmount(),

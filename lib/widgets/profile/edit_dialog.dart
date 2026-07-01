@@ -3,17 +3,21 @@ import 'package:go_router/go_router.dart';
 import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/core/themes/app_decoration.dart';
 
-class EditDialog extends StatefulWidget {
-  const EditDialog({super.key, required this.label, this.initialValue});
+class EditProfileFileDialog extends StatefulWidget {
+  const EditProfileFileDialog({
+    super.key,
+    required this.label,
+    this.initialValue,
+  });
 
   final String label;
   final String? initialValue;
 
   @override
-  State<EditDialog> createState() => _EditDialogState();
+  State<EditProfileFileDialog> createState() => _EditProfileFileDialogState();
 }
 
-class _EditDialogState extends State<EditDialog> {
+class _EditProfileFileDialogState extends State<EditProfileFileDialog> {
   bool _isSubmitting = false;
   late final TextEditingController _controller;
 
@@ -46,7 +50,7 @@ class _EditDialogState extends State<EditDialog> {
           onPressed: () => context.pop(),
           child: const Text(Strings.cancel),
         ),
-        IconButton(
+        TextButton(
           onPressed: _isSubmitting
               ? null
               : () {
@@ -56,7 +60,7 @@ class _EditDialogState extends State<EditDialog> {
 
                   context.pop(value);
                 },
-          icon: _isSubmitting
+          child: _isSubmitting
               ? SizedBox(
                   width: AppDimens.width18,
                   height: AppDimens.height18,
@@ -64,7 +68,7 @@ class _EditDialogState extends State<EditDialog> {
                     strokeWidth: AppDimens.width2,
                   ),
                 )
-              : Icon(AppIcons.saveIcon),
+              : Text(Strings.save),
         ),
       ],
     );

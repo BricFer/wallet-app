@@ -115,9 +115,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           Fluttertoast.showToast(
                             msg: error,
                             toastLength: Toast.LENGTH_LONG,
-                            gravity: ToastGravity.SNACKBAR,
+                            gravity: ToastGravity.CENTER,
                             backgroundColor: AppColors.errorColor,
                             textColor: AppColors.errorFontColor,
+                            webBgColor: AppColors.errorColor,
+                            webPosition: "center",
                           );
                           // ScaffoldMessenger.of(context).showSnackBar(
                           //   SnackBar(

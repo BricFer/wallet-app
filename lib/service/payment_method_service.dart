@@ -37,7 +37,7 @@ class PaymentMethodService {
     if (response.statusCode == 200) {
       return PaymentMethodResponse.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception('Failed to get group.');
+      throw Exception('Failed to get payment method.');
     }
   }
 
@@ -68,7 +68,7 @@ class PaymentMethodService {
 
     final response = await http.get(
       Uri.parse('$baseUrl/active-methods'),
-      headers: {
+      headers: <String, String>{
         'Authorization': 'Bearer $token',
         'userId': userId.toString(),
         'Content-type': 'application/json',
@@ -124,6 +124,7 @@ class PaymentMethodService {
     );
 
     if (response.statusCode == 201) {
+      debugPrint(response.body);
       return PaymentMethodResponse.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to create payment method.');

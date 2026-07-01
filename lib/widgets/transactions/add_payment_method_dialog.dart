@@ -90,6 +90,7 @@ class _AddPaymentMethodDialogState extends State<AddPaymentMethodDialog> {
             SizedBox(height: AppDimens.height18),
             SwitchListTile(
               title: Text('Make default?', style: _textTheme.bodyMedium),
+              // TODO: Al enviar el formulario para crear un nuevo método de pago, si lo marca como default desmarcar cualquier otro que esté como default
               value: _isDefault,
               onChanged: (value) {
                 setState(() {

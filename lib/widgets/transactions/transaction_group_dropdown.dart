@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
-import 'package:wallet_app/core/providers/auth_provider.dart';
-import 'package:wallet_app/core/providers/group_provider.dart';
+import 'package:wallet_app/core/providers/provider.dart';
 import 'package:wallet_app/core/themes/app_decoration.dart';
 import 'package:wallet_app/models/group/group_request.dart';
 import 'package:wallet_app/widgets/transactions/add_group_dialog.dart';
@@ -107,7 +106,7 @@ class _TransactionGroupDropdownState extends State<TransactionGroupDropdown> {
               DropdownMenuEntry(value: -1, label: Strings.addGroup),
             ],
 
-            inputDecorationTheme: AppDecoration.radioInput(context),
+            inputDecorationTheme: AppDecoration.dropdown(context),
             onSelected: (value) {
               if (value == null) return;
 

@@ -43,8 +43,18 @@ GoRouter buildRouter(BuildContext context) {
         builder: (_, __) => const AddEditExpenseScreen(),
       ),
       GoRoute(
-        path: '/edit-expense',
-        builder: (_, __) => const AddEditExpenseScreen(),
+        path: '/edit-expense/:id',
+        builder: (context, state) {
+          final expenseId = int.parse(state.pathParameters['id']!);
+          return AddEditExpenseScreen(expenseId: expenseId);
+        },
+      ),
+      GoRoute(
+        path: '/expense-details/:id',
+        builder: (context, state) {
+          final expenseId = int.parse(state.pathParameters['id']!);
+          return ExpenseDetails(expenseId: expenseId);
+        },
       ),
       GoRoute(
         path: '/add-income',

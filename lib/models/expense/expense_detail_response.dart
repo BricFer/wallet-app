@@ -9,8 +9,11 @@ class ExpenseDetailResponse {
   final String commerce;
   final String? concept;
   final String? paymentMethodAlias;
+  final String? issuer;
   final PaymentType? paymentMethodType;
-  final int paymentMethodId;
+
+  //TODO: Cambiar a required
+  final int? paymentMethodId;
   final double amount;
   final String currency;
   final DateTime? date;
@@ -30,8 +33,9 @@ class ExpenseDetailResponse {
     this.groupName,
     this.groupId,
     this.paymentMethodAlias,
+    this.issuer,
     this.paymentMethodType,
-    required this.paymentMethodId,
+    this.paymentMethodId,
     // this.imagePath,
   });
 
@@ -44,11 +48,12 @@ class ExpenseDetailResponse {
         amount: json['amount'],
         currency: json['currency'],
         date: json['date'] != null ? DateTime.parse(json['date']) : null,
-        categoryName: json['caegoryName'],
+        categoryName: json['categoryName'],
         categoryId: json['categoryId'],
         groupName: json['groupName'],
         groupId: json['groupId'],
         paymentMethodAlias: json['paymentMethodAlias'],
+        issuer: json['issuer'],
         paymentMethodType: json['paymentMethodType'] != null
             ? PaymentType.values.byName(json['paymentMethodType'])
             : null,

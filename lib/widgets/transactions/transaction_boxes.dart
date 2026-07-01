@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/core/constants/dimens.dart';
-import 'package:wallet_app/core/constants/paddings.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:wallet_app/core/constants/constants.dart';
+import 'package:wallet_app/core/providers/provider.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
 
 class TransactionBoxes extends StatefulWidget {
-  const TransactionBoxes({super.key});
+  const TransactionBoxes({super.key, this.expensesTotal});
+
+  final double? expensesTotal;
 
   @override
   State<TransactionBoxes> createState() => _TransactionBoxesState();
@@ -14,7 +18,22 @@ class _TransactionBoxesState extends State<TransactionBoxes> {
   bool _firstContainerActive = true;
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // addPostFrameCallback espera a que termine el primer build antes de ejecutar el código
+      context.read<UserProvider>().loadUser();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final _user = context.watch<UserProvider>().user;
+    final defaultCurrency = _user?.defaultCurrency;
+    final currencies = DefaultCurrency.currencies;
+
+    final numberFormat = NumberFormat('#,##0.00');
+
     final containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
     final _colorScheme = Theme.of(context).colorScheme;
 
@@ -69,7 +88,12 @@ class _TransactionBoxesState extends State<TransactionBoxes> {
                 color: color1,
                 borderRadius: BorderRadius.circular(AppDimens.radius20),
               ),
-              child: Center(child: Text("€53.49+", style: textStyle1)),
+              child: Center(
+                child: Text(
+                  '+53.49${currencies.firstWhere((c) => c.code == defaultCurrency).symbol}',
+                  style: textStyle1,
+                ),
+              ),
             ),
             onTap: () {
               setState(() {
@@ -91,7 +115,12 @@ class _TransactionBoxesState extends State<TransactionBoxes> {
                 color: color2,
                 borderRadius: BorderRadius.circular(AppDimens.radius20),
               ),
-              child: Center(child: Text("€93.25-", style: textStyle2)),
+              child: Center(
+                child: Text(
+                  '-${numberFormat.format(widget.expensesTotal)}${currencies.firstWhere((c) => c.code == defaultCurrency).symbol}',
+                  style: textStyle2,
+                ),
+              ),
             ),
             onTap: () {
               setState(() {

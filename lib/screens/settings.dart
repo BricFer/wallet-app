@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
-import 'package:wallet_app/core/providers/auth_provider.dart';
-import 'package:wallet_app/core/providers/expense_provider.dart';
+import 'package:wallet_app/core/providers/provider.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
 import 'package:wallet_app/widgets/widgets.dart';
 
@@ -22,7 +22,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       final userId = context.read<AuthProvider>().userId!;
       final expenseProvider = context.read<ExpenseProvider>();
 
+      context.read<UserProvider>().loadUser();
+
       if (expenseProvider.expenses.isEmpty) {
+        // TODO: Pasar el defaultCurrency
         context.read<ExpenseProvider>().loadTotal(userId, 'EUR');
       }
     });
@@ -32,6 +35,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     final containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
     final provider = context.watch<ExpenseProvider>();
+    final numberFormat = NumberFormat('#,##0.00');
+
+    final currencies = DefaultCurrency.currencies;
+
+    final userProvider = context.watch<UserProvider>();
+    final defaultCurrency = userProvider.user?.defaultCurrency;
+
+    final currencySymbol = currencies
+        .firstWhere((c) => c.code == defaultCurrency)
+        .symbol;
 
     return Scaffold(
       appBar: CustomAppBar(title: Strings.settings),
@@ -58,7 +71,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     text: TextSpan(
                       children: <TextSpan>[
                         TextSpan(
-                          text: '€15.00\n',
+                          text: '15.00$currencySymbol\n',
                           style: Theme.of(context).textTheme.bodyLarge
                               ?.copyWith(
                                 fontWeight: FontWeight.bold,
@@ -82,7 +95,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     text: TextSpan(
                       children: <TextSpan>[
                         TextSpan(
-                          text: '${provider.total}€\n',
+                          text:
+                              '${numberFormat.format(provider.total)}$currencySymbol\n',
                           style: Theme.of(context).textTheme.bodyLarge
                               ?.copyWith(
                                 fontWeight: FontWeight.bold,
