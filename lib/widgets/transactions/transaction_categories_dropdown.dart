@@ -22,45 +22,40 @@ class TransactionCategoriesDropdown extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme;
     final categories = context.watch<CategoryProvider>().categories;
 
-    return SizedBox(
-      width: AppDimens.width152,
-      child: Row(
-        spacing: AppDimens.spacing16,
-        children: [
-          Text('Categories', style: Theme.of(context).textTheme.bodyMedium),
+    return Row(
+      spacing: AppDimens.spacing16,
+      children: [
+        Text('Category:', style: Theme.of(context).textTheme.bodyMedium),
 
-          Expanded(
-            child: DropdownMenu<int>(
-              initialSelection: selectedCategoryId,
-              textAlign: TextAlign.center,
-              textStyle: _textTheme.labelSmall,
-              menuStyle: MenuStyle(
-                backgroundColor: WidgetStateProperty.all(_colorScheme.surface),
-                shape: WidgetStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppDimens.radius12),
-                    side: BorderSide(
-                      color: _colorScheme.secondary,
-                      width: AppDimens.width2,
-                    ),
-                  ),
+        DropdownMenu<int>(
+          initialSelection: selectedCategoryId,
+          textAlign: TextAlign.center,
+          textStyle: _textTheme.labelSmall,
+          menuStyle: MenuStyle(
+            backgroundColor: WidgetStateProperty.all(_colorScheme.surface),
+            shape: WidgetStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppDimens.radius12),
+                side: BorderSide(
+                  color: _colorScheme.secondary,
+                  width: AppDimens.width2,
                 ),
               ),
-
-              label: Text('Select category', style: _textTheme.bodyMedium),
-              dropdownMenuEntries: categories.map((c) {
-                return DropdownMenuEntry(
-                  value: c.categoryId,
-                  label: c.name.capitalize(),
-                );
-              }).toList(),
-
-              inputDecorationTheme: AppDecoration.radioInput(context),
-              onSelected: onChanged,
             ),
           ),
-        ],
-      ),
+
+          label: Text('Select category', style: _textTheme.bodyMedium),
+          dropdownMenuEntries: categories.map((c) {
+            return DropdownMenuEntry(
+              value: c.categoryId,
+              label: c.name.capitalize(),
+            );
+          }).toList(),
+
+          inputDecorationTheme: AppDecoration.radioInput(context),
+          onSelected: onChanged,
+        ),
+      ],
     );
   }
 }

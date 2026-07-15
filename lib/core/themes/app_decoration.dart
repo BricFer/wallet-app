@@ -53,12 +53,16 @@ class AppDecoration {
   }
 
   static InputDecorationTheme dropdown(BuildContext context) {
-    final Color inputColor = Theme.of(context).colorScheme.primary;
+    // final Color inputColor = Theme.of(context).colorScheme.primary;
     final _textTheme = Theme.of(context).textTheme;
 
     return InputDecorationTheme(
       contentPadding: AppPaddings.paddingAll8,
       labelStyle: _textTheme.bodySmall,
+      disabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius12)),
+        borderSide: BorderSide(width: AppDimens.width2),
+      ),
 
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius12)),
@@ -67,10 +71,9 @@ class AppDecoration {
           width: AppDimens.width0,
         ),
       ),
-
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius12)),
-        borderSide: BorderSide(color: inputColor, width: AppDimens.width2),
+        borderSide: BorderSide(width: AppDimens.width2),
       ),
     );
   }
@@ -81,8 +84,9 @@ class AppDecoration {
     FaIconData? faIcon,
     String? hintText,
     String? labelText,
+    Color? fontColor,
   }) {
-    final Color inputColor = Theme.of(context).colorScheme.primary;
+    final Color inputColor = Theme.of(context).colorScheme.onSurface;
     var displayedIcon;
 
     if (icon != null) displayedIcon = Icon(icon);
@@ -96,15 +100,16 @@ class AppDecoration {
       labelStyle: Theme.of(context).textTheme.bodyMedium,
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius12)),
-        borderSide: BorderSide(color: inputColor, width: AppDimens.width2),
+        borderSide: BorderSide(color: inputColor, width: AppDimens.width1),
       ),
 
-      enabledBorder: UnderlineInputBorder(
-        borderSide: BorderSide(color: inputColor, width: AppDimens.width2),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius12)),
+        borderSide: BorderSide(color: inputColor, width: AppDimens.width1),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius12)),
-        borderSide: BorderSide(color: inputColor, width: AppDimens.width2),
+        borderSide: BorderSide(color: inputColor, width: AppDimens.width1),
       ),
     );
   }

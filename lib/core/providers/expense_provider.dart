@@ -85,6 +85,7 @@ class ExpenseProvider extends ChangeNotifier {
     int userId,
     ExpenseRequest dto,
     int? expenseId,
+    String currency,
   ) async {
     isLoading = true;
     notifyListeners();
@@ -96,7 +97,7 @@ class ExpenseProvider extends ChangeNotifier {
         await _service.updateExpense(dto, userId, expenseId);
       }
 
-      await loadExpenses(userId, 'EUR');
+      await loadExpenses(userId, currency);
     } catch (e) {
       debugPrint(e.toString());
     } finally {
@@ -105,14 +106,15 @@ class ExpenseProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> deleteExpense(int userId, int expenseId) async {
+  Future<void> deleteExpense(int userId, int expenseId, String currency) async {
     isLoading = true;
     notifyListeners();
 
     try {
       await _service.deleteExpense(userId, expenseId);
       // Luego de eliminarlo del backend, lo elimino de mi lista "expenses" y consume menos peticiones HTTP
-      expenses.removeWhere((expense) => expense.expenseId == expenseId);
+      // expenses.removeWhere((expense) => expense.expenseId == expenseId);
+      await loadExpenses(userId, currency);
     } catch (e) {
       debugPrint(e.toString());
       debugPrint('Failed to delete de expense.');

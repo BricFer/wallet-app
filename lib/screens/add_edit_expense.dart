@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/core/providers/provider.dart';
-import 'package:wallet_app/core/themes/app_decoration.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
 import 'package:wallet_app/models/expense/expense_request.dart';
 import 'package:wallet_app/widgets/widgets.dart';
@@ -37,14 +36,24 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       context.read<CategoryProvider>().loadCategories();
+
+      await context.read<UserProvider>().loadUser();
+
+      if (!mounted) return;
+
+      setState(() {
+        _selectedCurrency = context.read<UserProvider>().user?.defaultCurrency;
+      });
+
       if (widget.expenseId != null) {
         _loadExpense();
       }
     });
   }
 
+  // TODO: Ver de extraer _selectDate
   Future<void> _selectDate() async {
     final _containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
 
@@ -84,13 +93,16 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
   }
 
   Future<void> _loadExpense() async {
-    // TODO: Revisar si debería de ser el AuthProvider o el UserProvider
+    await context.read<UserProvider>().loadUser();
 
-    context.read<UserProvider>().loadUser();
+    if (!mounted) return;
+
     final userId = context.read<UserProvider>().user?.userId;
 
+    if (userId == null) return;
+
     await context.read<ExpenseProvider>().loadExpenseDetail(
-      userId!,
+      userId,
       widget.expenseId!,
     );
 
@@ -141,6 +153,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
     });
 
     final userId = context.read<UserProvider>().user?.userId;
+    final currency = context.read<UserProvider>().user?.defaultCurrency;
     _isSubmitting = true;
 
     final dto = ExpenseRequest(
@@ -149,7 +162,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
       paymentMethodId: _selectedPaymentMethodId,
       commerce: _commerceController.text.trim(),
       amount: amount,
-      currency: _selectedCurrency ?? 'EUR',
+      currency: _selectedCurrency ?? currency ?? 'EUR',
       concept: _conceptController.text.trim().isEmpty
           ? null
           : _conceptController.text.trim(),
@@ -164,9 +177,10 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
         userId!,
         dto,
         widget.expenseId,
+        currency!,
       );
       if (!mounted) return;
-      context.go('/transactions');
+      context.pop();
     } catch (e) {
       debugPrint(e.toString());
     } finally {
@@ -181,7 +195,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
   @override
   Widget build(BuildContext context) {
     final _containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
-    final _colorScheme = Theme.of(context).colorScheme;
+    final _textTheme = Theme.of(context).textTheme;
 
     final provider = context.watch<ExpenseProvider>();
     final userProvider = context.watch<UserProvider>();
@@ -201,129 +215,148 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
       appBar: CustomAppBar(
         title: isEditMode ? Strings.editExpense : Strings.addExpense,
       ),
-      body: Form(
-        child: ListView(
-          padding: AppPaddings.paddingLTR16B106,
-          children: [
-            TransactionCategoriesDropdown(
-              selectedCategoryId: _selectedCategoryId,
-              onChanged: (value) {
-                setState(() {
-                  _selectedCategoryId = value;
-                });
-              },
-            ),
-            SizedBox(height: AppDimens.height18),
-            TransactionGroupDropdown(
-              selectedGroupId: _selectedGroupId,
-              onChanged: (value) {
-                setState(() {
-                  _selectedGroupId = value;
-                });
-              },
-            ),
-            SizedBox(height: AppDimens.height18),
-            TransactionInput(
-              labelText: Strings.commerce,
-              hintText: 'Ex. Mercadona',
-              icon: FontAwesomeIcons.basketShopping,
-              controller: _commerceController,
-            ),
-            SizedBox(height: AppDimens.height36),
-            TransactionInput(
-              labelText: Strings.concept,
-              hintText: 'Ex. Weekly buying',
-              controller: _conceptController,
-            ),
-            SizedBox(height: AppDimens.height36),
-            Row(
-              spacing: AppDimens.spacing16,
-              children: [
-                TransactionCurrencyDropdown(
-                  selectedCurrency: _selectedCurrency ?? defaultCurrency,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedCurrency = value;
-                    });
-                  },
-                ),
-                Expanded(
-                  child: TransactionInput(
-                    labelText: Strings.amount,
-                    hintText: 'Ex. 0,00€',
-                    keyboardType: TextInputType.number,
-                    icon: AppIcons.euroFaIcon,
-                    controller: _amountController,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: AppDimens.height18),
-            TransactionInput(
-              labelText: Strings.note,
-              maxLength: 150,
-              showCursor: true,
-              controller: _noteController,
-            ),
-            SizedBox(height: AppDimens.height48),
-            CustomContainer(
-              decoration: AppDecoration.container(
-                context,
-                containerBackgroud: _colorScheme.primary,
-                showGradient: false,
+      body: Padding(
+        padding: AppPaddings.paddingAll16,
+        child: CustomGradientOutlinedContainer(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TransactionCategoriesDropdown(
+                selectedCategoryId: _selectedCategoryId,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedCategoryId = value;
+                  });
+                },
               ),
-
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              SizedBox(height: AppDimens.height18),
+              TransactionGroupDropdown(
+                selectedGroupId: _selectedGroupId,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedGroupId = value;
+                  });
+                },
+              ),
+              SizedBox(height: AppDimens.height18),
+              Row(
+                spacing: AppDimens.spacing16,
                 children: [
-                  Tooltip(
-                    message: _selectedDate == null
-                        ? 'Select date'
-                        : DateFormat('dd/MM/yyyy').format(_selectedDate!),
-                    child: GestureDetector(
-                      onTap: _selectDate,
-                      child: _selectedDate != null
-                          ? FaIcon(
-                              AppIcons.filledCalendarIcon,
-                              color: _containerTheme.iconContainerColor,
-                            )
-                          : Icon(
-                              AppIcons.calendarIcon,
-                              color: _containerTheme.iconContainerColor,
-                            ),
+                  Expanded(
+                    child: TransactionInput(
+                      labelText: Strings.commerce,
+                      hintText: 'Ex. Mercadona',
+                      icon: FontAwesomeIcons.basketShopping,
+                      controller: _commerceController,
                     ),
                   ),
-                  TransactionPaymentMethodDropdown(
-                    selectedMethodId: _selectedPaymentMethodId ?? defaultMethod,
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedPaymentMethodId = value;
-                      });
-                    },
-                  ),
-                  Icon(
-                    AppIcons.cameraIcon,
-                    color: _containerTheme.iconContainerColor,
+                  Expanded(
+                    child: Row(
+                      spacing: AppDimens.spacing8,
+                      children: [
+                        TransactionCurrencyDropdown(
+                          selectedCurrency:
+                              _selectedCurrency ?? defaultCurrency,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedCurrency = value;
+                            });
+                          },
+                        ),
+                        Expanded(
+                          child: TransactionInput(
+                            labelText: Strings.amount,
+                            hintText: 'Ex. 0,00€',
+                            keyboardType: TextInputType.number,
+                            icon: AppIcons.euroFaIcon,
+                            controller: _amountController,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-            ),
-            SizedBox(height: AppDimens.height48),
-          ],
+              SizedBox(height: AppDimens.height18),
+              TransactionInput(
+                labelText: Strings.concept,
+                hintText: 'Ex. Weekly buying',
+                controller: _conceptController,
+              ),
+
+              SizedBox(height: AppDimens.height18),
+              TransactionInput(
+                labelText: Strings.note,
+                maxLength: 150,
+                showCursor: true,
+                controller: _noteController,
+              ),
+              SizedBox(height: AppDimens.height48),
+              CustomOutlinedContainer(
+                padding: AppPaddings.paddingLR8TB16,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Tooltip(
+                      message: _selectedDate == null
+                          ? 'Select date'
+                          : DateFormat('dd/MM/yyyy').format(_selectedDate!),
+                      child: GestureDetector(
+                        onTap: _selectDate,
+                        child: _selectedDate != null
+                            ? FaIcon(
+                                AppIcons.filledCalendarIcon,
+                                color: _containerTheme.iconContainerColor,
+                              )
+                            : Icon(
+                                AppIcons.calendarIcon,
+                                color: _containerTheme.iconColor,
+                              ),
+                      ),
+                    ),
+                    TransactionPaymentMethodDropdown(
+                      selectedMethodId:
+                          _selectedPaymentMethodId ?? defaultMethod,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedPaymentMethodId = value;
+                        });
+                      },
+                    ),
+                    Icon(AppIcons.cameraIcon, color: _containerTheme.iconColor),
+                  ],
+                ),
+              ),
+              // SizedBox(height: AppDimens.height48),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        // Deshabilita el _submit mientras se envía la información al backend
-        onPressed: _isSubmitting ? null : _submit,
 
-        // Muestra un circulo de "cargando" mientras se envía la información al backend
-        child: _isSubmitting
-            ? const SizedBox(
-                width: AppDimens.width20,
-                height: AppDimens.height20,
-                child: CircularProgressIndicator(strokeWidth: AppDimens.width1),
-              )
-            : const FaIcon(FontAwesomeIcons.check),
+      // TODO: Revisar que el FAB funciona al crear/guardar un egasto
+      floatingActionButton: Container(
+        height: AppDimens.height56,
+        width: AppDimens.width96,
+        decoration: BoxDecoration(
+          color: _containerTheme.backgroundColor,
+          borderRadius: BorderRadius.circular(AppDimens.radius8),
+        ),
+        child: OutlinedButton(
+          onPressed: _isSubmitting ? null : _submit,
+          style: OutlinedButton.styleFrom(
+            side: BorderSide.none,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppDimens.radius18),
+            ),
+          ),
+          child: Text(
+            Strings.save,
+            style: _textTheme.bodyMedium?.copyWith(
+              color: _containerTheme.fontColorVariant,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       ),
     );
   }

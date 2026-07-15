@@ -77,8 +77,9 @@ class _SignUpScreenState extends State<SignUpDetailsScreen> {
 
       if (!mounted) return;
 
-      // TODO: El error tiene que venir del UserProvider
-      String? error = context.read<AuthProvider>().errorMessage;
+      String? error =
+          context.read<UserProvider>().errorMessage ??
+          context.read<AuthProvider>().errorMessage;
 
       if (error != null) {
         Fluttertoast.showToast(

@@ -18,7 +18,7 @@ class EditProfileFileDialog extends StatefulWidget {
 }
 
 class _EditProfileFileDialogState extends State<EditProfileFileDialog> {
-  bool _isSubmitting = false;
+  final bool _isSubmitting = false;
   late final TextEditingController _controller;
 
   @override

@@ -124,7 +124,6 @@ class PaymentMethodService {
     );
 
     if (response.statusCode == 201) {
-      debugPrint(response.body);
       return PaymentMethodResponse.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to create payment method.');

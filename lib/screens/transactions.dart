@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/core/providers/provider.dart';
+import 'package:wallet_app/core/themes/colors.dart';
 import 'package:wallet_app/widgets/widgets.dart';
 
 class TransactionsScreen extends StatefulWidget {
@@ -18,10 +19,11 @@ class _TransactionScreenState extends State<TransactionsScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final userId = context.read<AuthProvider>().userId!;
+      final _user = context.read<UserProvider>().user;
+      final userId = _user?.userId;
+      final defaultCurrency = _user?.defaultCurrency;
 
-      final userProvider = context.read<UserProvider>();
-      final defaultCurrency = userProvider.user?.defaultCurrency;
+      if (userId == null) return;
 
       context.read<ExpenseProvider>().loadExpenses(userId, defaultCurrency!);
     });
@@ -44,12 +46,13 @@ class _TransactionScreenState extends State<TransactionsScreen> {
           padding: AppPaddings.paddingBottom106,
           children: [
             TransactionBoxes(expensesTotal: expenseProvider.total),
-            SizedBox(height: AppDimens.elevation16),
+            SizedBox(height: AppDimens.height36),
             Text(
               Strings.transactionsList,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-
+            Divider(color: AppColors.shadowColor),
+            SizedBox(height: AppDimens.height18),
             if (expenses.isNotEmpty)
               for (final expense in expenses)
                 Padding(

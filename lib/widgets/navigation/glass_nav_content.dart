@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wallet_app/core/constants/dimens.dart';
-import 'package:wallet_app/core/constants/icons.dart';
-import 'package:wallet_app/core/constants/paddings.dart';
-import 'package:wallet_app/core/constants/strings.dart';
+import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/core/providers/navigation_provider.dart';
 
 class GlassNavContent extends StatelessWidget {

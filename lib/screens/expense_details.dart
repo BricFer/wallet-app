@@ -3,8 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
-import 'package:wallet_app/core/providers/user_provider.dart';
-import 'package:wallet_app/core/themes/container_theme.dart';
+import 'package:wallet_app/core/providers/provider.dart';
 import 'package:wallet_app/models/expense/expense_detail_response.dart';
 import 'package:wallet_app/service/expense_service.dart';
 import 'package:wallet_app/widgets/widgets.dart';
@@ -56,7 +55,6 @@ class _ExpenseDetailsState extends State<ExpenseDetails> {
       return const Center(child: CircularProgressIndicator.adaptive());
     }
     final _textTheme = Theme.of(context).textTheme;
-    final _containerTheme = Theme.of(context).extension<AppContainerTheme>()!;
 
     final alias =
         expense?.paymentMethodAlias ?? expense?.paymentMethodType?.typeName;
@@ -77,7 +75,7 @@ class _ExpenseDetailsState extends State<ExpenseDetails> {
           spacing: AppDimens.spacing24,
           children: [
             SizedBox(height: AppDimens.spacing16),
-            CustomContainer(
+            CustomGradientOutlinedContainer(
               child: Column(
                 spacing: AppDimens.spacing16,
                 children: [
@@ -104,7 +102,7 @@ class _ExpenseDetailsState extends State<ExpenseDetails> {
                   ),
                   TransactionDetailsRow(
                     label: 'Payment Method\n',
-                    subtext: alias!,
+                    subtext: alias ?? '',
                   ),
                   TransactionDetailsRow(
                     label: 'Note\n',
@@ -113,28 +111,57 @@ class _ExpenseDetailsState extends State<ExpenseDetails> {
                 ],
               ),
             ),
-            // TODO: Agregar estilos al boton y redirigir a /add-expense
-            SizedBox(
-              width: AppDimens.width152,
-              height: AppDimens.height56,
-              child: ElevatedButton(
-                style: TextButton.styleFrom(
-                  shadowColor: _containerTheme.containerShadow,
-                ),
-                onPressed: () => (_) {
-                  context.push(
-                    '/edit-expense/${widget.expenseId}',
-                    extra: widget.expenseId,
-                  );
-                },
-                child: Text(
-                  Strings.edit,
-                  style: _textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onSurface,
+            Row(
+              spacing: AppDimens.spacing16,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                CustomGradientOutlinedButton(
+                  onPressed: () {
+                    context.push('/edit-expense/${expense?.expenseId}');
+                  },
+                  child: Text(
+                    Strings.edit,
+                    style: _textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
+                CustomGradientOutlinedButton(
+                  onPressed: () async {
+                    final confirmed = await showConfirmDeleteDialog(context);
+
+                    if (!confirmed) return;
+                    if (!context.mounted) return;
+
+                    final userId = context.read<UserProvider>().user?.userId;
+
+                    if (userId == null) return;
+
+                    final expenseId = expense?.expenseId;
+                    final currency = expense?.currency;
+
+                    if (expenseId != null && currency != null) {
+                      await context.read<ExpenseProvider>().deleteExpense(
+                        userId,
+                        expenseId,
+                        currency,
+                      );
+
+                      // Sin la comprobación, context.go intentaría usar un context de un widget que ya no existe en el árbol, lo que causaría un error en runtime.
+                      if (!context.mounted) return;
+
+                      context.pop();
+                    }
+                  },
+                  child: Text(
+                    Strings.delete,
+                    style: _textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

@@ -78,45 +78,43 @@ class _TransactionGroupDropdownState extends State<TransactionGroupDropdown> {
     return Row(
       spacing: AppDimens.spacing8,
       children: [
-        Text('Groups', style: Theme.of(context).textTheme.bodyMedium),
+        Text('Group:', style: Theme.of(context).textTheme.bodyMedium),
 
-        Expanded(
-          child: DropdownMenu<int>(
-            initialSelection: widget.selectedGroupId ?? -1,
-            controller: widget.controller,
-            width: AppDimens.width245,
-            textStyle: _textTheme.bodyMedium,
-            menuStyle: MenuStyle(
-              backgroundColor: WidgetStateProperty.all(_colorScheme.surface),
-              shape: WidgetStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppDimens.radius12),
-                  side: BorderSide(
-                    color: _colorScheme.secondary,
-                    width: AppDimens.width2,
-                  ),
+        DropdownMenu<int>(
+          initialSelection: widget.selectedGroupId ?? -1,
+          controller: widget.controller,
+          width: AppDimens.width245,
+          textStyle: _textTheme.bodyMedium,
+          menuStyle: MenuStyle(
+            backgroundColor: WidgetStateProperty.all(_colorScheme.surface),
+            shape: WidgetStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppDimens.radius12),
+                side: BorderSide(
+                  color: _colorScheme.secondary,
+                  width: AppDimens.width2,
                 ),
               ),
             ),
-
-            dropdownMenuEntries: [
-              ...groups.map((g) {
-                return DropdownMenuEntry(value: g.groupId, label: g.name);
-              }),
-              DropdownMenuEntry(value: -1, label: Strings.addGroup),
-            ],
-
-            inputDecorationTheme: AppDecoration.dropdown(context),
-            onSelected: (value) {
-              if (value == null) return;
-
-              if (value == -1) {
-                _showAddGroupDialog();
-                return;
-              }
-              widget.onChanged(value);
-            },
           ),
+
+          dropdownMenuEntries: [
+            ...groups.map((g) {
+              return DropdownMenuEntry(value: g.groupId, label: g.name);
+            }),
+            DropdownMenuEntry(value: -1, label: Strings.addGroup),
+          ],
+
+          inputDecorationTheme: AppDecoration.dropdown(context),
+          onSelected: (value) {
+            if (value == null) return;
+
+            if (value == -1) {
+              _showAddGroupDialog();
+              return;
+            }
+            widget.onChanged(value);
+          },
         ),
       ],
     );

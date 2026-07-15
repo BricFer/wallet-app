@@ -40,8 +40,8 @@ class UserService {
     if (response.statusCode == 201) {
       return UserResponse.fromJson(jsonDecode(response.body));
     } else {
-      debugPrint('STATUS CODE: ${response.statusCode}');
-      debugPrint('BODY: ${response.body}');
+      // debugPrint('STATUS CODE: ${response.statusCode}');
+      // debugPrint('BODY: ${response.body}');
 
       throw Exception(
         'Failed to create profile. '

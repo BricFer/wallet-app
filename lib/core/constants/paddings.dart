@@ -18,4 +18,8 @@ class AppPaddings {
     16.0,
     106.0,
   );
+  static const EdgeInsetsGeometry paddingLR8TB16 = EdgeInsetsGeometry.symmetric(
+    vertical: 8.0,
+    horizontal: 16.0,
+  );
 }

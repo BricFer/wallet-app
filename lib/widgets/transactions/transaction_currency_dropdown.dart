@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/core/constants/constants.dart';
+import 'package:wallet_app/core/themes/app_decoration.dart';
 
 class TransactionCurrencyDropdown extends StatefulWidget {
   const TransactionCurrencyDropdown({
@@ -21,7 +22,6 @@ class _TransactionCurrencyDropdownState
   @override
   Widget build(BuildContext context) {
     final _colorScheme = Theme.of(context).colorScheme;
-    final Color inputColor = Theme.of(context).colorScheme.primary;
     final _textTheme = Theme.of(context).textTheme;
     final currencies = DefaultCurrency.currencies;
 
@@ -30,7 +30,7 @@ class _TransactionCurrencyDropdownState
       textAlign: TextAlign.center,
       textStyle: _textTheme.bodyMedium,
       menuHeight: AppDimens.height150,
-      width: AppDimens.width72,
+      width: AppDimens.width78,
       menuStyle: MenuStyle(
         backgroundColor: WidgetStateProperty.all(_colorScheme.surface),
         shape: WidgetStateProperty.all(
@@ -43,20 +43,7 @@ class _TransactionCurrencyDropdownState
           ),
         ),
       ),
-      inputDecorationTheme: InputDecorationTheme(
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius12)),
-          borderSide: BorderSide(color: inputColor, width: AppDimens.width2),
-        ),
-
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: inputColor, width: AppDimens.width2),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius12)),
-          borderSide: BorderSide(color: inputColor, width: AppDimens.width2),
-        ),
-      ),
+      inputDecorationTheme: AppDecoration.dropdown(context),
 
       dropdownMenuEntries: currencies.map((c) {
         return DropdownMenuEntry(value: c.code, label: c.symbol);

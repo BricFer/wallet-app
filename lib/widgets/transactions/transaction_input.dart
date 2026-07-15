@@ -27,18 +27,11 @@ class TransactionInput extends StatefulWidget {
 }
 
 class _TransactionInputState extends State<TransactionInput> {
-  late final TextEditingController? _controller;
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController(text: widget.controller?.text ?? '');
-  }
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: widget.keyboardType,
-      controller: _controller,
+      controller: widget.controller,
       decoration: AppDecoration.textInput(
         context,
         labelText: widget.labelText,

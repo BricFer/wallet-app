@@ -37,8 +37,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
       appBar: CustomAppBar(title: Strings.home, isDashboard: true),
       body: Center(
-        child: Text(
-          'Hola, $fullname\nTotal de gastos: ${expenseProvider.total}',
+        child: Column(
+          children: [
+            Text('Cuadro: Balance'),
+            Text(
+              'Spending performance: Grafico de barras por mes, visualización de un año',
+            ),
+            Text('Lista con las ultimas 5-10 transacciones'),
+            Text('Hola, $fullname\nTotal de gastos: ${expenseProvider.total}'),
+          ],
         ),
       ),
     );

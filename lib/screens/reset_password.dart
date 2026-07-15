@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/core/providers/auth_provider.dart';
+import 'package:wallet_app/core/themes/colors.dart';
 import 'package:wallet_app/widgets/widgets.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
@@ -60,19 +62,19 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
                         context.read<AuthProvider>().updateUserPassword(pwd);
 
-                        //   String? error = context
-                        //       .read<AuthProvider>()
-                        //       .errorMessage;
+                        String? error = context
+                            .read<AuthProvider>()
+                            .errorMessage;
 
-                        //   if (error != null) {
-                        //     Fluttertoast.showToast(
-                        //       msg: error,
-                        //       toastLength: Toast.LENGTH_LONG,
-                        //       gravity: ToastGravity.SNACKBAR,
-                        //       backgroundColor: AppColors.errorColor,
-                        //       textColor: AppColors.errorFontColor,
-                        //     );
-                        //   }
+                        if (error != null) {
+                          Fluttertoast.showToast(
+                            msg: error,
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.SNACKBAR,
+                            backgroundColor: AppColors.errorColor,
+                            textColor: AppColors.errorFontColor,
+                          );
+                        }
                       },
                     ),
                   ),

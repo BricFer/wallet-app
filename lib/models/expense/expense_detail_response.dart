@@ -10,9 +10,7 @@ class ExpenseDetailResponse {
   final String? concept;
   final String? paymentMethodAlias;
   final PaymentType? paymentMethodType;
-
-  //TODO: Cambiar a required
-  final int? paymentMethodId;
+  final int paymentMethodId;
   final double amount;
   final String currency;
   final DateTime? date;
@@ -33,7 +31,7 @@ class ExpenseDetailResponse {
     this.groupId,
     this.paymentMethodAlias,
     this.paymentMethodType,
-    this.paymentMethodId,
+    required this.paymentMethodId,
     // this.imagePath,
   });
 

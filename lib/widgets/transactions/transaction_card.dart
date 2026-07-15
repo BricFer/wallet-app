@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:string_capitalize/string_capitalize.dart';
 import 'package:wallet_app/core/constants/constants.dart';
+import 'package:wallet_app/core/providers/provider.dart';
 import 'package:wallet_app/core/themes/colors.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
 import 'package:wallet_app/models/expense/expense_resume_response.dart';
+import 'package:wallet_app/widgets/transactions/confirm_delete_dialog.dart';
 
 class TransactionCard extends StatelessWidget {
   const TransactionCard({super.key, required this.expense});
@@ -46,7 +49,7 @@ class TransactionCard extends StatelessWidget {
               SizedBox(width: AppDimens.width12),
               SlidableAction(
                 onPressed: (_) {
-                  context.push('/edit-expense', extra: expense.expenseId);
+                  context.push('/edit-expense/${expense.expenseId}');
                 },
                 backgroundColor: _colorScheme.secondary,
                 foregroundColor: containerTheme.iconColor,
@@ -57,9 +60,23 @@ class TransactionCard extends StatelessWidget {
 
               SizedBox(width: AppDimens.width12),
               SlidableAction(
-                onPressed: (_) {
-                  //TODO: implementar eliminación de gasto
+                onPressed: (_) async {
+                  final confirmed = await showConfirmDeleteDialog(context);
+
+                  if (!confirmed) return;
+                  if (!context.mounted) return;
+
+                  final userId = context.read<UserProvider>().user?.userId;
+
+                  if (userId == null) return;
+
+                  await context.read<ExpenseProvider>().deleteExpense(
+                    userId,
+                    expense.expenseId,
+                    expense.currency,
+                  );
                 },
+
                 backgroundColor: AppColors.alertColor,
                 foregroundColor: containerTheme.iconColor,
                 icon: AppIcons.deleteIcon,
@@ -70,7 +87,6 @@ class TransactionCard extends StatelessWidget {
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            spacing: AppDimens.spacing4,
             children: [
               RichText(
                 text: TextSpan(
@@ -84,21 +100,24 @@ class TransactionCard extends StatelessWidget {
                     ),
                     if (expense.categoryName != null)
                       TextSpan(
-                        text: '${expense.categoryName?.capitalize} · ',
+                        text: '${expense.categoryName?.capitalizeEach()} · ',
                         style: Theme.of(context).textTheme.labelMedium
                             ?.copyWith(color: containerTheme.fontColorVariant),
                       ),
-
                     if (expense.concept != null)
                       TextSpan(
                         text: expense.concept,
                         style: TextStyle(
                           color: containerTheme.fontColorVariant,
+                          height: AppDimens.height2,
                         ),
                       ),
                     TextSpan(
                       text: '\n${dateFormat.format(expense.date!)}',
-                      style: TextStyle(color: containerTheme.fontColorVariant),
+                      style: TextStyle(
+                        color: containerTheme.fontColorVariant,
+                        height: AppDimens.height2,
+                      ),
                     ),
                   ],
                 ),

@@ -11,6 +11,9 @@ class UserProvider extends ChangeNotifier {
 
   UserResponse? get user => _user;
 
+  String? _errorMessage;
+  String? get errorMessage => _errorMessage;
+
   Future<void> loadUser() async {
     isLoading = true;
     notifyListeners();
@@ -26,11 +29,13 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> saveUser(UserRequest dto) async {
+    _errorMessage = null;
     isLoading = true;
     notifyListeners();
     try {
       _user = await _service.saveUser(dto);
-    } catch (e) {
+    } on Error catch (e) {
+      _errorMessage = 'Something went wrong.';
       debugPrint(e.toString());
       rethrow; // El rethrow relanza el error desde UserProvider a la pantalla que lo llamó, si no se hace el catch de la pantalla "llamada" nunca se ejecutará y no se sabrá si falló.
     } finally {
@@ -40,6 +45,7 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> updateUsername(int userId, String username) async {
+    _errorMessage = null;
     isLoading = true;
     notifyListeners();
     try {
@@ -58,7 +64,8 @@ class UserProvider extends ChangeNotifier {
             )
           : null;
       notifyListeners();
-    } catch (e) {
+    } on Error catch (e) {
+      _errorMessage = 'It was not possible to update the nickname';
       debugPrint(e.toString());
     } finally {
       isLoading = false;

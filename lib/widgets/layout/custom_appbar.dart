@@ -1,9 +1,7 @@
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/core/providers/user_provider.dart';
-import 'package:wallet_app/widgets/theme/theme_widget.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBar({
@@ -66,15 +64,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
                 ),
               ],
             )
-          : Text(widget.title ?? ""),
+          : Text(widget.title ?? ''),
       centerTitle: true,
-      actions: [
-        CircleAvatar(
-          backgroundColor: Colors.transparent,
-          maxRadius: AppDimens.radius35,
-          child: ThemeWidget(),
-        ),
-      ],
       elevation: AppDimens.elevation0,
       scrolledUnderElevation: AppDimens.elevation4,
       shadowColor: _colorScheme.shadow,
