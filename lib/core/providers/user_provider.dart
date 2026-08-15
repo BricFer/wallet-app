@@ -15,6 +15,9 @@ class UserProvider extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
 
   Future<void> loadUser() async {
+    // Si el user ya está cargado no hace falta volver a hacer la llamada al notifyListener
+    if(_user != null) return; 
+    
     isLoading = true;
     notifyListeners();
 
@@ -50,20 +53,7 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
     try {
       await _service.updateUsername(userId, username);
-      _user = _user != null
-          ? UserResponse(
-              userId: _user!.userId,
-              username: username,
-              fullname: _user!.fullname,
-              phoneNumber: _user!.phoneNumber,
-              dateOfBirth: _user!.dateOfBirth,
-              address: _user!.address,
-              email: _user!.email,
-              country: _user!.country,
-              defaultCurrency: _user!.defaultCurrency,
-            )
-          : null;
-      notifyListeners();
+      _user = _user?.copyWith(username: username);
     } on Error catch (e) {
       _errorMessage = 'It was not possible to update the nickname';
       debugPrint(e.toString());
@@ -74,25 +64,14 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> updateFullname(int userId, String fullname) async {
+    _errorMessage = null;
     isLoading = true;
     notifyListeners();
     try {
       await _service.updateFullname(userId, fullname);
-      _user = _user != null
-          ? UserResponse(
-              userId: _user!.userId,
-              username: _user!.username,
-              fullname: fullname,
-              phoneNumber: _user!.phoneNumber,
-              dateOfBirth: _user!.dateOfBirth,
-              address: _user!.address,
-              email: _user!.email,
-              country: _user!.country,
-              defaultCurrency: _user!.defaultCurrency,
-            )
-          : null;
-      notifyListeners();
+      _user = _user?.copyWith(fullname: fullname);
     } catch (e) {
+      _errorMessage = 'It was not possible to update the fullname';
       debugPrint(e.toString());
     } finally {
       isLoading = false;
@@ -101,25 +80,14 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> updatePhoneNumber(int userId, String phoneNumber) async {
+    _errorMessage = null;
     isLoading = true;
     notifyListeners();
     try {
       await _service.updatePhoneNumber(userId, phoneNumber);
-      _user = _user != null
-          ? UserResponse(
-              userId: _user!.userId,
-              username: _user!.username,
-              fullname: _user!.fullname,
-              phoneNumber: phoneNumber,
-              dateOfBirth: _user!.dateOfBirth,
-              address: _user!.address,
-              email: _user!.email,
-              country: _user!.country,
-              defaultCurrency: _user!.defaultCurrency,
-            )
-          : null;
-      notifyListeners();
+      _user = _user?.copyWith(phoneNumber: phoneNumber);
     } catch (e) {
+      _errorMessage = 'It was not possible to update the phone number';
       debugPrint(e.toString());
     } finally {
       isLoading = false;
@@ -128,25 +96,14 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> updateDateOfBirth(int userId, String date) async {
+    _errorMessage = null;
     isLoading = true;
     notifyListeners();
     try {
       await _service.updateDateOfBirth(userId, date);
-      _user = _user != null
-          ? UserResponse(
-              userId: _user!.userId,
-              username: _user!.username,
-              fullname: _user!.fullname,
-              phoneNumber: _user!.phoneNumber,
-              dateOfBirth: DateTime.parse(date),
-              address: _user!.address,
-              email: _user!.email,
-              country: _user!.country,
-              defaultCurrency: _user!.defaultCurrency,
-            )
-          : null;
-      notifyListeners();
+      _user = _user?.copyWith(dateOfBirth: DateTime.parse(date));
     } catch (e) {
+      _errorMessage = 'It was not possible to update the date of birth';
       debugPrint(e.toString());
     } finally {
       isLoading = false;
@@ -155,25 +112,14 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> updateAddress(int userId, String address) async {
+    _errorMessage = null;
     isLoading = true;
     notifyListeners();
     try {
       await _service.updateAddress(userId, address);
-      _user = _user != null
-          ? UserResponse(
-              userId: _user!.userId,
-              username: _user!.username,
-              fullname: _user!.fullname,
-              phoneNumber: _user!.phoneNumber,
-              dateOfBirth: _user!.dateOfBirth,
-              address: address,
-              email: _user!.email,
-              country: _user!.country,
-              defaultCurrency: _user!.defaultCurrency,
-            )
-          : null;
-      notifyListeners();
+      _user = _user?.copyWith(address: address);
     } catch (e) {
+      _errorMessage = 'It was not possible to update the address';
       debugPrint(e.toString());
     } finally {
       isLoading = false;
@@ -182,25 +128,14 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> updateCountry(int userId, String country) async {
+    _errorMessage = null;
     isLoading = true;
     notifyListeners();
     try {
       await _service.updateCountry(userId, country);
-      _user = _user != null
-          ? UserResponse(
-              userId: _user!.userId,
-              username: _user!.username,
-              fullname: _user!.fullname,
-              phoneNumber: _user!.phoneNumber,
-              dateOfBirth: _user!.dateOfBirth,
-              address: _user!.address,
-              email: _user!.email,
-              country: country,
-              defaultCurrency: _user!.defaultCurrency,
-            )
-          : null;
-      notifyListeners();
+      _user = _user?.copyWith(country: country);
     } catch (e) {
+      _errorMessage = 'It was not possible to update the country';
       debugPrint(e.toString());
     } finally {
       isLoading = false;
@@ -209,25 +144,14 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> updateCurrency(int userId, String currency) async {
+    _errorMessage = null;
     isLoading = true;
     notifyListeners();
     try {
       await _service.updateDefaultCurrency(userId, currency);
-      _user = _user != null
-          ? UserResponse(
-              userId: _user!.userId,
-              username: _user!.username,
-              fullname: _user!.fullname,
-              phoneNumber: _user!.phoneNumber,
-              dateOfBirth: _user!.dateOfBirth,
-              address: _user!.address,
-              email: _user!.email,
-              country: _user!.country,
-              defaultCurrency: currency,
-            )
-          : null;
-      notifyListeners();
+      _user = _user?.copyWith(defaultCurrency: currency);
     } catch (e) {
+      _errorMessage = 'It was not possible to update the default currency';
       debugPrint(e.toString());
     } finally {
       isLoading = false;

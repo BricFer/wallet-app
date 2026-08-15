@@ -32,4 +32,27 @@ class UserResponse {
     country: json['country'],
     defaultCurrency: json['defaultCurrency'],
   );
+
+  UserResponse copyWith({
+    String? username,
+    String? fullname,
+    String? phoneNumber,
+    DateTime? dateOfBirth,
+    String? address,
+    String? email,
+    String? country,
+    String? defaultCurrency,
+  }) {
+    return UserResponse(
+      userId: userId,
+      username: username ?? this.username,
+      fullname: fullname ?? this.fullname,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+      address: address ?? this.address,
+      email: email ?? this.email,
+      country: country ?? this.country,
+      defaultCurrency: defaultCurrency ?? this.defaultCurrency,
+    );
+  }
 }

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:wallet_app/core/constants/constants.dart';
-import 'package:wallet_app/core/providers/provider.dart';
 import 'package:wallet_app/core/themes/container_theme.dart';
 
 class TransactionBoxes extends StatefulWidget {
-  const TransactionBoxes({super.key, this.expensesTotal});
+  const TransactionBoxes({
+    super.key,
+    required this.total,
+    required this.defaultCurrency,
+  });
 
-  final double? expensesTotal;
+  final double total;
+  final String defaultCurrency;
 
   @override
   State<TransactionBoxes> createState() => _TransactionBoxesState();
@@ -20,17 +23,13 @@ class _TransactionBoxesState extends State<TransactionBoxes> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // addPostFrameCallback espera a que termine el primer build antes de ejecutar el código
-      context.read<UserProvider>().loadUser();
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final _user = context.watch<UserProvider>().user;
-    final defaultCurrency = _user?.defaultCurrency;
-    final currencies = DefaultCurrency.currencies;
+    final currencySymbol = DefaultCurrency.byCode(
+      widget.defaultCurrency,
+    )?.symbol;
 
     final numberFormat = NumberFormat('#,##0.00');
 
@@ -89,10 +88,7 @@ class _TransactionBoxesState extends State<TransactionBoxes> {
                 borderRadius: BorderRadius.circular(AppDimens.radius20),
               ),
               child: Center(
-                child: Text(
-                  '+53.49${currencies.firstWhere((c) => c.code == defaultCurrency).symbol}',
-                  style: textStyle1,
-                ),
+                child: Text('+53.49$currencySymbol', style: textStyle1),
               ),
             ),
             onTap: () {
@@ -117,7 +113,7 @@ class _TransactionBoxesState extends State<TransactionBoxes> {
               ),
               child: Center(
                 child: Text(
-                  '-${numberFormat.format(widget.expensesTotal)}${currencies.firstWhere((c) => c.code == defaultCurrency).symbol}',
+                  '-${numberFormat.format(widget.total)}$currencySymbol',
                   style: textStyle2,
                 ),
               ),

@@ -18,25 +18,33 @@ class _TransactionScreenState extends State<TransactionsScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await context.read<UserProvider>().loadUser();
+
+      if (!mounted) return;
+
       final _user = context.read<UserProvider>().user;
-      final userId = _user?.userId;
-      final defaultCurrency = _user?.defaultCurrency;
 
-      if (userId == null) return;
+      if (_user == null) return;
 
-      context.read<ExpenseProvider>().loadExpenses(userId, defaultCurrency!);
+      final userId = _user.userId;
+      final defaultCurrency = _user.defaultCurrency;
+
+      context.read<ExpenseProvider>().loadExpenses(userId, defaultCurrency);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final expenseProvider = context.watch<ExpenseProvider>();
-    final expenses = expenseProvider.expenses;
+    final userProvider = context.watch<UserProvider>();
 
-    if (expenseProvider.isLoading) {
-      return Scaffold(body: const Center(child: CircularProgressIndicator()));
+    if (userProvider.user == null || expenseProvider.isLoading) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
+
+    final defaultCurrency = userProvider.user?.defaultCurrency;
+    final expenses = expenseProvider.expenses;
 
     return Scaffold(
       appBar: CustomAppBar(title: Strings.transaction),
@@ -45,7 +53,10 @@ class _TransactionScreenState extends State<TransactionsScreen> {
         child: ListView(
           padding: AppPaddings.paddingBottom106,
           children: [
-            TransactionBoxes(expensesTotal: expenseProvider.total),
+            TransactionBoxes(
+              total: expenseProvider.total,
+              defaultCurrency: defaultCurrency ?? 'EUR',
+            ),
             SizedBox(height: AppDimens.height36),
             Text(
               Strings.transactionsList,

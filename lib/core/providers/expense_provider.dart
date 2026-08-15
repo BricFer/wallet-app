@@ -92,12 +92,16 @@ class ExpenseProvider extends ChangeNotifier {
 
     try {
       if (expenseId == null) {
-        await _service.saveExpense(dto, userId);
+        final created = await _service.saveExpense(dto, userId);
+        expenses.insert(0, _toResume(created));
       } else {
+        final updated = await _service.updateExpense(dto, userId, expenseId);
+        final index = expenses.indexWhere((e) => e.expenseId == expenseId);
+        if (index != -1) expenses[index] = _toResume(updated);
         await _service.updateExpense(dto, userId, expenseId);
       }
 
-      await loadExpenses(userId, currency);
+      total = await _service.getExpensesTotal(userId, currency);
     } catch (e) {
       debugPrint(e.toString());
     } finally {
@@ -122,5 +126,17 @@ class ExpenseProvider extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
     }
+  }
+
+  ExpenseResumeResponse _toResume(ExpenseDetailResponse expense) {
+    return ExpenseResumeResponse(
+      expenseId: expense.expenseId,
+      categoryName: expense.categoryName,
+      commerce: expense.commerce,
+      amount: expense.amount,
+      currency: expense.currency,
+      concept: expense.concept,
+      date: expense.date,
+    );
   }
 }

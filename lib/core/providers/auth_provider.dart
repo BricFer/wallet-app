@@ -30,7 +30,7 @@ class AuthProvider extends ChangeNotifier {
 
       await user.getIdToken(true);
       await checkBackendProfile();
-      // notifyListeners();
+      notifyListeners();
     });
   }
 

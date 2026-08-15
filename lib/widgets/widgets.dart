@@ -1,3 +1,4 @@
+export 'package:wallet_app/widgets/dashboard/dashboard_resume_card.dart';
 export 'package:wallet_app/widgets/forms/dropdown_register.dart';
 export 'package:wallet_app/widgets/forms/form_button.dart';
 export 'package:wallet_app/widgets/forms/form_input.dart';

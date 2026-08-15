@@ -9,4 +9,13 @@ class DefaultCurrency {
     Currency(name: 'Pound', code: 'GBP', symbol: '£'),
     Currency(name: 'Zloty', code: 'PLN', symbol: 'zł'),
   ];
+
+  static Currency? byCode(String? code) {
+    final currencies = DefaultCurrency.currencies;
+    try {
+      return currencies.firstWhere((c) => c.code == code);
+    } catch (_) {
+      return null;
+    }
+  }
 }

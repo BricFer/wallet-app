@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wallet_app/core/constants/strings.dart';
+import 'package:wallet_app/core/constants/constants.dart';
 import 'package:wallet_app/core/providers/provider.dart';
-import 'package:wallet_app/widgets/layout/custom_appbar.dart';
+import 'package:wallet_app/widgets/widgets.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -15,36 +15,69 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // addPostFrameCallback espera a que termine el primer build antes de ejecutar el código
-      context.read<UserProvider>().loadUser();
 
-      final userId = context.read<AuthProvider>().userId!;
-      context.read<ExpenseProvider>().loadExpenses(userId, 'EUR');
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await context.read<UserProvider>().loadUser();
+
+      if (!mounted) return;
+
+      final _user = context.read<UserProvider>().user;
+
+      if (_user == null) return;
+
+      await context.read<ExpenseProvider>().loadExpenses(
+        _user.userId,
+        _user.defaultCurrency,
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final _user = context.watch<UserProvider>().user;
-
-    final fullname = _user?.fullname ?? '';
     final expenseProvider = context.watch<ExpenseProvider>();
+    final userProvider = context.watch<UserProvider>();
 
-    if (expenseProvider.isLoading) {
-      return const Center(child: CircularProgressIndicator());
+    if (userProvider.user == null || expenseProvider.isLoading) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
+
+    final expenses = expenseProvider.expenses;
+
+    final int maxNumberOfExpenseShown = expenses.length > 5
+        ? 5
+        : expenses.length;
+    final total = expenseProvider.total;
+
+    final defaultCurrency = userProvider.user?.defaultCurrency;
+
     return Scaffold(
       appBar: CustomAppBar(title: Strings.home, isDashboard: true),
-      body: Center(
+      body: Padding(
+        padding: AppPaddings.paddingAll16,
         child: Column(
           children: [
-            Text('Cuadro: Balance'),
-            Text(
-              'Spending performance: Grafico de barras por mes, visualización de un año',
+            SizedBox(
+              width: double.infinity,
+              child: DashboardResumeCard(
+                total: total,
+                defaultCurrency: defaultCurrency ?? 'EUR',
+              ),
             ),
-            Text('Lista con las ultimas 5-10 transacciones'),
-            Text('Hola, $fullname\nTotal de gastos: ${expenseProvider.total}'),
+            Text(
+              '\nSpending performance: Grafico de barras por mes, visualización de un año',
+            ),
+            if (expenses.isNotEmpty)
+              for (int i = 0; i < maxNumberOfExpenseShown; i++)
+                Padding(
+                  padding: AppPaddings.paddingBottom16,
+                  child: TransactionCard(expense: expenses[i]),
+                ),
+
+            if (expenses.isEmpty)
+              Padding(
+                padding: AppPaddings.paddingAll16,
+                child: Center(child: Text('No expenses found.')),
+              ),
           ],
         ),
       ),
