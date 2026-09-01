@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,23 +31,23 @@ public class PaymentMethodController {
 
     @GetMapping("/{methodId}")
     public ResponseEntity<PaymentMethodResponseDto> getPaymentMethod(
-            @RequestHeader Long userId,
+            @RequestAttribute Long userId,
             @PathVariable Long methodId) {
         return ResponseEntity.ok(methodService.getPaymentMethod(userId, methodId));
     }
 
     @GetMapping
-    public ResponseEntity<List<PaymentMethodResponseDto>> getAllMethods(@RequestHeader Long userId) {
+    public ResponseEntity<List<PaymentMethodResponseDto>> getAllMethods(@RequestAttribute Long userId) {
         return ResponseEntity.ok(methodService.getAllPaymentMethods(userId));
     }
 
     @GetMapping("/active-methods")
-    public ResponseEntity<List<PaymentMethodResponseDto>> getAllActiveMethods(@RequestHeader Long userId) {
+    public ResponseEntity<List<PaymentMethodResponseDto>> getAllActiveMethods(@RequestAttribute Long userId) {
         return ResponseEntity.ok(methodService.getAllActivePaymentMethods(userId));
     }
 
     @GetMapping("/by-type")
-    public ResponseEntity<List<PaymentMethodResponseDto>> getAllMethodsByType(@RequestHeader Long userId,
+    public ResponseEntity<List<PaymentMethodResponseDto>> getAllMethodsByType(@RequestAttribute Long userId,
             @RequestParam String type) {
         return ResponseEntity
                 .ok(methodService.getAllPaymentMethodsByType(userId, PaymentType.valueOf(type.toUpperCase())));
@@ -55,20 +55,20 @@ public class PaymentMethodController {
 
     @PostMapping
     public ResponseEntity<PaymentMethodResponseDto> savePaymentMethod(@RequestBody PaymentMethodRequestDto dto,
-            @RequestHeader Long userId) {
+            @RequestAttribute Long userId) {
         return ResponseEntity.status(HttpStatus.CREATED).body(methodService.savePaymentMethod(dto, userId));
     }
 
     @PutMapping("/{methodId}")
     public ResponseEntity<PaymentMethodResponseDto> updatePaymentMethod(
             @RequestBody PaymentMethodRequestDto dto,
-            @RequestHeader Long userId,
+            @RequestAttribute Long userId,
             @PathVariable Long methodId) {
         return ResponseEntity.ok(methodService.updatePaymentMethod(dto, userId, methodId));
     }
 
     @DeleteMapping("/{methodId}")
-    public ResponseEntity<Void> deletePaymentMethod(@RequestHeader Long userId, @PathVariable Long methodId) {
+    public ResponseEntity<Void> deletePaymentMethod(@RequestAttribute Long userId, @PathVariable Long methodId) {
         methodService.deleteMethod(userId, methodId);
 
         return ResponseEntity.noContent().build();

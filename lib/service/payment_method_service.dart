@@ -29,7 +29,6 @@ class PaymentMethodService {
       Uri.parse('$baseUrl/$methodId'),
       headers: {
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
@@ -48,7 +47,6 @@ class PaymentMethodService {
       Uri.parse(baseUrl),
       headers: {
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
@@ -70,7 +68,6 @@ class PaymentMethodService {
       Uri.parse('$baseUrl/active-methods'),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
@@ -94,7 +91,6 @@ class PaymentMethodService {
       Uri.parse('$baseUrl/by-type?type=$type'),
       headers: {
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
@@ -117,7 +113,6 @@ class PaymentMethodService {
       Uri.parse(baseUrl),
       headers: {
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
       body: jsonEncode(dto.toJson()),
@@ -141,7 +136,6 @@ class PaymentMethodService {
       Uri.parse('$baseUrl/$methodId'),
       headers: {
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
       body: jsonEncode(dto.toJson()),

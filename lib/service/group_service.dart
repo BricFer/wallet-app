@@ -25,7 +25,6 @@ class GroupService {
       Uri.parse(baseUrl),
       headers: {
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
       body: jsonEncode(dto.toJson()),
@@ -49,7 +48,6 @@ class GroupService {
       Uri.parse('$baseUrl/$groupId'),
       headers: {
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
       body: jsonEncode(dto.toJson()),
@@ -69,7 +67,6 @@ class GroupService {
       Uri.parse('$baseUrl/$groupId'),
       headers: {
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
@@ -88,7 +85,6 @@ class GroupService {
       Uri.parse(baseUrl),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
@@ -108,7 +104,6 @@ class GroupService {
       Uri.parse('$baseUrl/active-groups'),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );

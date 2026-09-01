@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -60,7 +60,7 @@ public class UserController {
 
     @PatchMapping("/user-info/username")
     public ResponseEntity<String> updateUserUsername(@RequestBody UserRequestUsernameDto dto,
-            @RequestHeader Long userId) {
+            @RequestAttribute Long userId) {
 
         String username = dto.getUsername();
         userService.updateUserUsername(userId, username);
@@ -70,7 +70,7 @@ public class UserController {
 
     @PatchMapping("/user-info/fullname")
     public ResponseEntity<String> updateUserFullname(@RequestBody UserRequestFullnameDto dto,
-            @RequestHeader Long userId) {
+            @RequestAttribute Long userId) {
 
         String fullname = dto.getFullname();
         userService.updateUserFullname(userId, fullname);
@@ -80,7 +80,7 @@ public class UserController {
 
     @PatchMapping("/user-info/phone")
     public ResponseEntity<String> updateUserPhoneNumber(@RequestBody UserRequestPhoneNumberDto dto,
-            @RequestHeader Long userId) {
+            @RequestAttribute Long userId) {
 
         String phoneNumber = dto.getPhoneNumber();
         userService.updateUserPhoneNumber(userId, phoneNumber);
@@ -90,7 +90,7 @@ public class UserController {
 
     @PatchMapping("/user-info/birth")
     public ResponseEntity<String> updateUserDateOfBirth(@RequestBody UserRequestDateOfBirthDto dto,
-            @RequestHeader Long userId) {
+            @RequestAttribute Long userId) {
 
         LocalDateTime dateOfBirth = dto.getDateOfBirth();
         userService.updateUserDateOfBirth(userId, dateOfBirth);
@@ -100,7 +100,7 @@ public class UserController {
 
     @PatchMapping("/user-info/address")
     public ResponseEntity<String> updateUserAddress(@RequestBody UserRequestAddressDto dto,
-            @RequestHeader Long userId) {
+            @RequestAttribute Long userId) {
 
         String address = dto.getAddress();
         userService.updateUserAddress(userId, address);
@@ -109,7 +109,7 @@ public class UserController {
     }
 
     @PatchMapping("/user-info/email")
-    public ResponseEntity<String> updateUserEmail(@RequestBody UserRequestEmailDto dto, @RequestHeader Long userId) {
+    public ResponseEntity<String> updateUserEmail(@RequestBody UserRequestEmailDto dto, @RequestAttribute Long userId) {
 
         String email = dto.getEmail();
         userService.updateUserEmail(userId, email);
@@ -119,7 +119,7 @@ public class UserController {
 
     @PatchMapping("/user-info/country")
     public ResponseEntity<String> updateUserCountry(@RequestBody UserRequestCountryDto dto,
-            @RequestHeader Long userId) {
+            @RequestAttribute Long userId) {
 
         String country = dto.getCountry();
         userService.updateUserCountry(userId, country);
@@ -129,7 +129,7 @@ public class UserController {
 
     @PatchMapping("/user-info/currency")
     public ResponseEntity<String> updateUserDefaultCurrency(@RequestBody UserRequestDefaultCurrencyDto dto,
-            @RequestHeader Long userId) {
+            @RequestAttribute Long userId) {
 
         String defaultCurrency = dto.getDefaultCurrency();
         userService.updateDefaultCurrency(userId, defaultCurrency);
@@ -138,7 +138,7 @@ public class UserController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> deleteUser(@RequestHeader Long userId) {
+    public ResponseEntity<Void> deleteUser(@RequestAttribute Long userId) {
         userService.deleteUser(userId);
 
         return ResponseEntity.noContent().build();

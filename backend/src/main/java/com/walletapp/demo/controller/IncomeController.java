@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,54 +32,54 @@ public class IncomeController {
     @GetMapping("/{incomeId}")
     public ResponseEntity<IncomeDetailResponseDto> getIncome(
             @PathVariable Long incomeId,
-            @RequestHeader Long userId) {
+            @RequestAttribute Long userId) {
         return ResponseEntity.ok(incomeService.getIncome(userId, incomeId));
     }
 
     @PostMapping
     public ResponseEntity<IncomeDetailResponseDto> saveIncome(
             @RequestBody IncomeRequestDto dto,
-            @RequestHeader Long userId) {
+            @RequestAttribute Long userId) {
         return ResponseEntity.status(HttpStatus.CREATED).body(incomeService.saveIncome(dto, userId));
     }
 
     @PutMapping("/{incomeId}")
     public ResponseEntity<IncomeDetailResponseDto> updateIncome(
             @RequestBody IncomeRequestDto dto,
-            @RequestHeader Long userId,
+            @RequestAttribute Long userId,
             @PathVariable Long incomeId) {
         return ResponseEntity.ok(incomeService.updateIncome(dto, userId, incomeId));
     }
 
     @GetMapping
-    public ResponseEntity<List<IncomeResumeResponseDto>> getAllIncomes(@RequestHeader Long userId) {
+    public ResponseEntity<List<IncomeResumeResponseDto>> getAllIncomes(@RequestAttribute Long userId) {
         return ResponseEntity.ok(incomeService.getAllIncomes(userId));
     }
 
     @GetMapping("/by-currency")
     public ResponseEntity<List<IncomeResumeResponseDto>> getAllIncomesByCurrency(
-            @RequestHeader Long userId,
+            @RequestAttribute Long userId,
             @RequestParam String currency) {
         return ResponseEntity.ok(incomeService.getAllByCurrency(userId, currency));
     }
 
     @GetMapping("/by-category")
     public ResponseEntity<List<IncomeResumeResponseDto>> getAllIncomesByCategory(
-            @RequestHeader Long userId,
+            @RequestAttribute Long userId,
             @RequestParam Long categoryId) {
         return ResponseEntity.ok(incomeService.getAllByCategory(userId, categoryId));
     }
 
     @GetMapping("/total")
     public ResponseEntity<Double> getIncomesTotal(
-            @RequestHeader Long userId,
+            @RequestAttribute Long userId,
             @RequestParam String currency) {
         return ResponseEntity.ok(incomeService.getTotalAmount(userId, currency));
     }
 
     @GetMapping("/monthly-total")
     public ResponseEntity<Double> getIncomesTotalByMonth(
-            @RequestHeader Long userId,
+            @RequestAttribute Long userId,
             @RequestParam String currency,
             @RequestParam int month) {
         return ResponseEntity.ok(incomeService.getTotalByMonth(userId, currency, month));
@@ -87,7 +87,7 @@ public class IncomeController {
 
     @GetMapping("/by-payment-method")
     public ResponseEntity<List<IncomeResumeResponseDto>> getAllIncomesByPaymentMethod(
-            @RequestHeader Long userId,
+            @RequestAttribute Long userId,
             @RequestParam Long paymentMethodId,
             @RequestParam String currency) {
         return ResponseEntity.ok(incomeService.getAllByPaymentMethod(userId, currency, paymentMethodId));
@@ -95,7 +95,7 @@ public class IncomeController {
 
     @GetMapping("/by-date")
     public ResponseEntity<List<IncomeResumeResponseDto>> getAllIncomesByPeriodOfTime(
-            @RequestHeader Long userId,
+            @RequestAttribute Long userId,
             @RequestParam String start,
             @RequestParam String end) {
         return ResponseEntity
@@ -103,7 +103,7 @@ public class IncomeController {
     }
 
     @DeleteMapping("/{incomeId}")
-    public ResponseEntity<Void> deleteIncome(@RequestHeader Long userId, @PathVariable Long incomeId) {
+    public ResponseEntity<Void> deleteIncome(@RequestAttribute Long userId, @PathVariable Long incomeId) {
         incomeService.deleteIncome(userId, incomeId);
 
         return ResponseEntity.noContent().build();

@@ -126,7 +126,7 @@ class UserService {
 
     final response = await http.delete(
       Uri.parse(baseUrl),
-      headers: {'Authorization': 'Bearer $token', 'userId': userId.toString()},
+      headers: {'Authorization': 'Bearer $token'},
     );
 
     if (response.statusCode != 204) {
@@ -144,7 +144,6 @@ class UserService {
       Uri.parse(path),
       headers: {
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
       body: jsonEncode(body),

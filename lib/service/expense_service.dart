@@ -26,7 +26,6 @@ class ExpenseService {
       Uri.parse('$baseUrl/$expenseId'),
       headers: {
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
@@ -48,7 +47,6 @@ class ExpenseService {
       Uri.parse(baseUrl),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
       body: jsonEncode(dto.toJson()),
@@ -72,7 +70,6 @@ class ExpenseService {
       Uri.parse('$baseUrl/$expenseId'),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
       body: jsonEncode(dto.toJson()),
@@ -92,7 +89,6 @@ class ExpenseService {
       Uri.parse(baseUrl),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
@@ -115,7 +111,6 @@ class ExpenseService {
       Uri.parse('$baseUrl/by-currency?currency=$currency'),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
@@ -138,7 +133,6 @@ class ExpenseService {
       Uri.parse('$baseUrl/by-category?categoryId=$categoryId'),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
@@ -158,7 +152,6 @@ class ExpenseService {
       Uri.parse('$baseUrl/total?currency=$currency'),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
@@ -181,7 +174,6 @@ class ExpenseService {
       Uri.parse('$baseUrl/monthly-total?currency=$currency&month=$month'),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
@@ -207,7 +199,6 @@ class ExpenseService {
       ),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
@@ -230,7 +221,6 @@ class ExpenseService {
       Uri.parse('$baseUrl/payment-method/$paymentMethodId?currency=$currency'),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
@@ -253,7 +243,6 @@ class ExpenseService {
       Uri.parse('$baseUrl/by-group?groupId=$groupId'),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
@@ -277,7 +266,6 @@ class ExpenseService {
       Uri.parse('$baseUrl/by-date?start=$startDate&end=$endDate'),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
@@ -305,7 +293,6 @@ class ExpenseService {
       ),
       headers: <String, String>{
         'Authorization': 'Bearer $token',
-        'userId': userId.toString(),
         'Content-type': 'application/json',
       },
     );
